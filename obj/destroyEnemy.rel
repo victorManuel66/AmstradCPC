@@ -1,0 +1,22 @@
+XL2
+H 1 areas E global symbols
+M destroyEnemy
+S update_enemy Ref0000
+S finOleada Ref0000
+S num_enemigos Ref0000
+S erase_enemy Ref0000
+S enemy2 Ref0000
+S enemy3 Ref0000
+S enemy Ref0000
+S .__.ABS. Def0000
+S oleada Ref0000
+S calXenemy Ref0000
+S draw_enemy Ref0000
+S posXenemyPtr Ref0000
+S posYenemyPtr Ref0000
+A _CODE size 9 flags 0 addr 0
+S destruyeEnemigo Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 DD 36 06 00 DD 36 08 01 C9
+R 00 00 00 00

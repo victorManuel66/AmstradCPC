@@ -1,0 +1,42 @@
+XL2
+H 1 areas F global symbols
+S update_enemy Ref0000
+S cpct_setPALColour_asm Ref0000
+S num_enemigos Ref0000
+S erase_enemy Ref0000
+S enemy2 Ref0000
+S enemy3 Ref0000
+S enemy Ref0000
+S .__.ABS. Def0000
+S oleada Ref0000
+S calXenemy Ref0000
+S draw_enemy Ref0000
+S posXenemyPtr Ref0000
+S posYenemyPtr Ref0000
+A _CODE size 32 flags 0 addr 0
+S reloj Def0017
+S situaEnemigos Def0002
+T 00 00 00 00
+R 00 00 00 00
+T 02 00
+R 00 00 00 00
+T 02 00 3A 00 00
+R 00 00 00 00 02 03 02 00
+T 05 00
+R 00 00 00 00
+T 05 00 CD 11 00 3D C8 01 14 00 DD 09 18 F4
+R 00 00 00 00 00 03 00 00
+T 11 00
+R 00 00 00 00
+T 11 00 F5 CD 00 00 F1 C9
+R 00 00 00 00 02 04 09 00
+T 17 00
+R 00 00 00 00
+T 17 00 2A 00 00 7C FE 0B 20 0E 7D FE B8 20 09 21
+R 00 00 00 00 00 03 00 00
+T 25 00 10 00 CD 00 00 36 00 C9
+R 00 00 00 00 02 05 01 00
+T 2D 00
+R 00 00 00 00
+T 2D 00 23 22 00 00 C9
+R 00 00 00 00 00 04 00 00

@@ -1,0 +1,100 @@
+XL2
+H 1 areas 28 global symbols
+M Player
+S cpct_setInterruptHandler_asm Ref0000
+S cpct_isKeyPressed_asm Ref0000
+S cpct_setPalette_asm Ref0000
+S erase_laser Ref0000
+S cpct_akp_SFXInit_asm Ref0000
+S cpct_akp_stop_asm Ref0000
+S cpct_drawStringM0_asm Ref0000
+S cpct_akp_SFXPlay_asm Ref0000
+S cpct_drawSprite_asm Ref0000
+S cpct_etm_drawTileBox2x4_asm Ref0000
+S cpct_drawCharM0_asm Ref0000
+S cpct_etm_setTileset2x4_asm Ref0000
+S cpct_akp_SFXStop_asm Ref0000
+S .__.ABS. Def0000
+S draw_laser Ref0000
+S cpct_isAnyKeyPressed_asm Ref0000
+S cpct_waitVSYNC_asm Ref0000
+S cpct_setVideoMode_asm Ref0000
+S _spr Ref0000
+S cpct_getRandom_xsp40_u8_asm Ref0000
+S posXlaserPtr Ref0000
+S posYlaserPtr Ref0000
+S update_laser Ref0000
+S cpct_akp_musicInit_asm Ref0000
+S cpct_disableFirmware_asm Ref0000
+S cpct_akp_musicPlay_asm Ref0000
+S cpct_drawSolidBox_asm Ref0000
+S cpct_setDrawCharM0_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
+S cpct_getScreenPtr_asm Ref0000
+A _CODE size A3 flags 0 addr 0
+S TeclaDe Def0007
+S TeclaDi Def000B
+S draw_player Def0055
+S disparando Def0090
+S TeclaIz Def0009
+S posXplayerPtr Def008C
+S Player Def0000
+S teclaSpc Def0037
+S update_player Def000E
+S erase_player Def0076
+T 00 00
+R 00 00 00 00
+T 00 00 26 C1 06 05 00 00 03 07 20 08 20 05 80 00
+R 00 00 00 00 02 06 12 00
+T 0E 00
+R 00 00 00 00
+T 0E 00 CD 00 00 2A 07 00 CD 00 00 28 0B DD 7E 00
+R 00 00 00 00 02 03 1C 00 00 06 00 00 02 09 01 00
+T 1C 00 FE 2C 28 04 3C DD 77 00
+R 00 00 00 00
+T 24 00
+R 00 00 00 00
+T 24 00 2A 09 00 CD 00 00 28 0B DD 7E 00 3D FE 04
+R 00 00 00 00 00 03 00 00 02 06 01 00
+T 32 00 28 03 DD 77 00
+R 00 00 00 00
+T 37 00
+R 00 00 00 00
+T 37 00 2A 0B 00 CD 00 00 C8 3A 0D 00 B7 C0 3E 01
+R 00 00 00 00 00 03 00 00 02 06 01 00 00 0A 00 00
+T 45 00 32 0D 00 DD 7E 00 CD 00 00 3C 3C 77 CD
+R 00 00 00 00 00 03 00 00 02 09 14 00
+T 52 00 94 00 C9
+R 00 00 00 00 00 02 00 00
+T 55 00
+R 00 00 00 00
+T 55 00 CD 59 00 C9
+R 00 00 00 00 00 03 00 00
+T 59 00
+R 00 00 00 00
+T 59 00 11 00 C0 DD 4E 00 DD 46 01 CD 00 00 EB DD
+R 00 00 00 00 02 0C 1D 00
+T 67 00 6E 04 DD 66 05 DD 46 02 DD 4E 03 CD 00 00
+R 00 00 00 00 02 0E 08 00
+T 75 00 C9
+R 00 00 00 00
+T 76 00
+R 00 00 00 00
+T 76 00 11 00 C0 DD 4E 00 DD 46 01 CD 00 00 EB 3E
+R 00 00 00 00 02 0C 1D 00
+T 84 00 00 01 06 06 CD 00 00 C9
+R 00 00 00 00 02 07 1A 00
+T 8C 00
+R 00 00 00 00
+T 8C 00 21 00 00 C9
+R 00 00 00 00 00 03 00 00
+T 90 00
+R 00 00 00 00
+T 90 00 21 0D 00 C9
+R 00 00 00 00 00 03 00 00
+T 94 00
+R 00 00 00 00
+T 94 00 3E 02 21 02 0F 11 47 00 01 00 00 CD 00 00
+R 00 00 00 00 02 0E 07 00
+T A2 00 C9
+R 00 00 00 00

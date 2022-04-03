@@ -1,0 +1,429 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 .module enemy
+                              2 .area _CODE
+                              3 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              4 .include "cpctelera.h.s"
+                              1 .globl cpct_disableFirmware_asm
+                              2 .globl cpct_setVideoMode_asm
+                              3 .globl cpct_setPalette_asm
+                              4 .globl cpct_drawSprite_asm
+                              5 .globl cpct_getScreenPtr_asm
+                              6 .globl cpct_scanKeyboard_asm
+                              7 .globl cpct_isKeyPressed_asm
+                              8 .globl cpct_waitVSYNC_asm
+                              9 .globl cpct_drawSolidBox_asm
+                             10 .globl cpct_etm_setTileset2x4_asm
+                             11 .globl cpct_etm_drawTileBox2x4_asm
+                             12 .globl cpct_getRandom_xsp40_u8_asm
+                             13 .globl cpct_akp_SFXInit_asm
+                             14 .globl cpct_akp_musicInit_asm
+                             15 .globl cpct_akp_musicPlay_asm
+                             16 .globl cpct_akp_SFXPlay_asm
+                             17 .globl cpct_akp_SFXStop_asm
+                             18 .globl cpct_akp_stop_asm
+                             19 .globl cpct_drawStringM0_asm
+                             20 .globl cpct_setDrawCharM0_asm
+                             21 .globl cpct_isAnyKeyPressed_asm
+                             22 .globl cpct_drawCharM0_asm
+                             23 .globl cpct_setInterruptHandler_asm
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "datos.h.s"
+                     0014     1 tamagno_enemy =            0x14                               ;; Tamaño del array de entidades
+                              2 
+                              3 
+                              4 
+                              5 ;; Constantes del array del enemigo
+                     0000     6 .equ enemiX,      0
+                     0001     7 .equ enemiY,      1
+                     0002     8 .equ enemiAlto,   2
+                     0003     9 .equ enemiAncho,  3
+                     0004    10 .equ SpriteBajo,  4
+                     0005    11 .equ SpriteAlto,  5
+                     0006    12 .equ enemiVelo,   6
+                     0007    13 .equ temporiza,   7
+                     0008    14 .equ StatusAni,   8
+                     0009    15 .equ frame1Bajo,  9
+                     000A    16 .equ frame1Alto, 10
+                     000B    17 .equ frame2Bajo, 11
+                     000C    18 .equ frame2Alto, 12
+                     000D    19 .equ frame3Bajo, 13
+                     000E    20 .equ frame3Alto, 14
+                     000F    21 .equ frame4Bajo, 15
+                     0010    22 .equ frame4Alto, 16
+                     0011    23 .equ frame5Bajo, 17
+                     0012    24 .equ frame5Alto, 18
+                     0013    25 .equ conVida,    19 
+                             26 
+                             27 ;; Constantes del Player
+                     0000    28 .equ PlayX,      0
+                     0001    29 .equ PlayY,      1
+                     0002    30 .equ PlayAlto,   2
+                     0003    31 .equ PlayAncho,  3
+                     0004    32 .equ SprPlayLo,  4
+                     0005    33 .equ SprPlayHi,  5
+                     0006    34 .equ PlayVidas,  6
+                     0007    35 .equ FPS,        7
+                             36 
+                             37 
+                             38 
+                             39 
+                             40 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                              6 
+                              7 .globl _enemigo
+                              8 .globl _explo1
+                              9 .globl _explo2
+                             10 .globl _explo3
+                             11 .globl _explo4
+                             12 .globl _explo5
+                             13 
+                             14 .macro EntEnemigas name, x, y, h, w, _enemigo, velo, tiem, sta, animac1, animac2, animac3, animac4, animac5, alive
+                             15   name::
+                             16     name'X:      .db x                      ;; Coordenada X del enemigo
+                             17     name'Y:      .db y                      ;; Coordenada Y del enemigo
+                             18     name'H:      .db h                      ;; Altura del sprite del enemigo
+                             19     name'W:      .db w                      ;; Ancho del sprite del enemigo
+                             20     name'spr:    .dw _enemigo               ;; Dirección del sprite del enemigo
+                             21     name'vel:    .db velo                   ;; Velocidad del enemigo
+                             22     name'tiemp:  .db tiem                   ;; Tiempo entre fotográmas
+                             23     name'status: .db sta                    ;; Estado de la animación al explotar
+                             24     name'ani1:   .dw animac1                ;; Direccion sprite animación 1
+                             25     name'ani2:   .dw animac2                ;; Direccion sprite animación 2 
+                             26     name'ani3:   .dw animac3                ;; Direccion sprite animación 3
+                             27     name'ani4:   .dw animac4                ;; Direccion sprite animación 4
+                             28     name'ani5:   .dw animac5                ;; Direccion sprite animación 5
+                             29     name'vivo:   .db alive                  ;; 00 indica que esta muerto, 01 indica que esta viva
+                             30 .endm
+                             31 
+   0000                      32 EntEnemigas enemy,  0x00, 0x09, 0x08, 0x03, _enemigo, 0x01, 0x00, 0x00, _explo1, _explo2, _explo3, _explo4, _explo5, 0x01
+   0000                       1   enemy::
+   0000 00                    2     enemyX:      .db 0x00                      ;; Coordenada X del enemigo
+   0001 09                    3     enemyY:      .db 0x09                      ;; Coordenada Y del enemigo
+   0002 08                    4     enemyH:      .db 0x08                      ;; Altura del sprite del enemigo
+   0003 03                    5     enemyW:      .db 0x03                      ;; Ancho del sprite del enemigo
+   0004 00 00                 6     enemyspr:    .dw _enemigo               ;; Dirección del sprite del enemigo
+   0006 01                    7     enemyvel:    .db 0x01                   ;; Velocidad del enemigo
+   0007 00                    8     enemytiemp:  .db 0x00                   ;; Tiempo entre fotográmas
+   0008 00                    9     enemystatus: .db 0x00                    ;; Estado de la animación al explotar
+   0009 00 00                10     enemyani1:   .dw _explo1                ;; Direccion sprite animación 1
+   000B 00 00                11     enemyani2:   .dw _explo2                ;; Direccion sprite animación 2 
+   000D 00 00                12     enemyani3:   .dw _explo3                ;; Direccion sprite animación 3
+   000F 00 00                13     enemyani4:   .dw _explo4                ;; Direccion sprite animación 4
+   0011 00 00                14     enemyani5:   .dw _explo5                ;; Direccion sprite animación 5
+   0013 01                   15     enemyvivo:   .db 0x01                  ;; 00 indica que esta muerto, 01 indica que esta viva
+   0014                      33 EntEnemigas enemy2, 0x00, 0x09, 0x08, 0x03, _enemigo, 0x01, 0x00, 0x00, _explo1, _explo2, _explo3, _explo4, _explo5, 0x01
+   0014                       1   enemy2::
+   0014 00                    2     enemy2X:      .db 0x00                      ;; Coordenada X del enemigo
+   0015 09                    3     enemy2Y:      .db 0x09                      ;; Coordenada Y del enemigo
+   0016 08                    4     enemy2H:      .db 0x08                      ;; Altura del sprite del enemigo
+   0017 03                    5     enemy2W:      .db 0x03                      ;; Ancho del sprite del enemigo
+   0018 00 00                 6     enemy2spr:    .dw _enemigo               ;; Dirección del sprite del enemigo
+   001A 01                    7     enemy2vel:    .db 0x01                   ;; Velocidad del enemigo
+   001B 00                    8     enemy2tiemp:  .db 0x00                   ;; Tiempo entre fotográmas
+   001C 00                    9     enemy2status: .db 0x00                    ;; Estado de la animación al explotar
+   001D 00 00                10     enemy2ani1:   .dw _explo1                ;; Direccion sprite animación 1
+   001F 00 00                11     enemy2ani2:   .dw _explo2                ;; Direccion sprite animación 2 
+   0021 00 00                12     enemy2ani3:   .dw _explo3                ;; Direccion sprite animación 3
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+   0023 00 00                13     enemy2ani4:   .dw _explo4                ;; Direccion sprite animación 4
+   0025 00 00                14     enemy2ani5:   .dw _explo5                ;; Direccion sprite animación 5
+   0027 01                   15     enemy2vivo:   .db 0x01                  ;; 00 indica que esta muerto, 01 indica que esta viva
+   0028                      34 EntEnemigas enemy3, 0x00, 0x09, 0x08, 0x03, _enemigo, 0x01, 0x00, 0x00, _explo1, _explo2, _explo3, _explo4, _explo5, 0x01
+   0028                       1   enemy3::
+   0028 00                    2     enemy3X:      .db 0x00                      ;; Coordenada X del enemigo
+   0029 09                    3     enemy3Y:      .db 0x09                      ;; Coordenada Y del enemigo
+   002A 08                    4     enemy3H:      .db 0x08                      ;; Altura del sprite del enemigo
+   002B 03                    5     enemy3W:      .db 0x03                      ;; Ancho del sprite del enemigo
+   002C 00 00                 6     enemy3spr:    .dw _enemigo               ;; Dirección del sprite del enemigo
+   002E 01                    7     enemy3vel:    .db 0x01                   ;; Velocidad del enemigo
+   002F 00                    8     enemy3tiemp:  .db 0x00                   ;; Tiempo entre fotográmas
+   0030 00                    9     enemy3status: .db 0x00                    ;; Estado de la animación al explotar
+   0031 00 00                10     enemy3ani1:   .dw _explo1                ;; Direccion sprite animación 1
+   0033 00 00                11     enemy3ani2:   .dw _explo2                ;; Direccion sprite animación 2 
+   0035 00 00                12     enemy3ani3:   .dw _explo3                ;; Direccion sprite animación 3
+   0037 00 00                13     enemy3ani4:   .dw _explo4                ;; Direccion sprite animación 4
+   0039 00 00                14     enemy3ani5:   .dw _explo5                ;; Direccion sprite animación 5
+   003B 01                   15     enemy3vivo:   .db 0x01                  ;; 00 indica que esta muerto, 01 indica que esta viva
+   003C                      35 EntEnemigas enemy4, 0x00, 0x09, 0x08, 0x03, _enemigo, 0x01, 0x00, 0x00, _explo1, _explo2, _explo3, _explo4, _explo5, 0x01
+   003C                       1   enemy4::
+   003C 00                    2     enemy4X:      .db 0x00                      ;; Coordenada X del enemigo
+   003D 09                    3     enemy4Y:      .db 0x09                      ;; Coordenada Y del enemigo
+   003E 08                    4     enemy4H:      .db 0x08                      ;; Altura del sprite del enemigo
+   003F 03                    5     enemy4W:      .db 0x03                      ;; Ancho del sprite del enemigo
+   0040 00 00                 6     enemy4spr:    .dw _enemigo               ;; Dirección del sprite del enemigo
+   0042 01                    7     enemy4vel:    .db 0x01                   ;; Velocidad del enemigo
+   0043 00                    8     enemy4tiemp:  .db 0x00                   ;; Tiempo entre fotográmas
+   0044 00                    9     enemy4status: .db 0x00                    ;; Estado de la animación al explotar
+   0045 00 00                10     enemy4ani1:   .dw _explo1                ;; Direccion sprite animación 1
+   0047 00 00                11     enemy4ani2:   .dw _explo2                ;; Direccion sprite animación 2 
+   0049 00 00                12     enemy4ani3:   .dw _explo3                ;; Direccion sprite animación 3
+   004B 00 00                13     enemy4ani4:   .dw _explo4                ;; Direccion sprite animación 4
+   004D 00 00                14     enemy4ani5:   .dw _explo5                ;; Direccion sprite animación 5
+   004F 01                   15     enemy4vivo:   .db 0x01                  ;; 00 indica que esta muerto, 01 indica que esta viva
+   0050                      36 EntEnemigas enemy5, 0x00, 0x09, 0x08, 0x03, _enemigo, 0x01, 0x00, 0x00, _explo1, _explo2, _explo3, _explo4, _explo5, 0x01
+   0050                       1   enemy5::
+   0050 00                    2     enemy5X:      .db 0x00                      ;; Coordenada X del enemigo
+   0051 09                    3     enemy5Y:      .db 0x09                      ;; Coordenada Y del enemigo
+   0052 08                    4     enemy5H:      .db 0x08                      ;; Altura del sprite del enemigo
+   0053 03                    5     enemy5W:      .db 0x03                      ;; Ancho del sprite del enemigo
+   0054 00 00                 6     enemy5spr:    .dw _enemigo               ;; Dirección del sprite del enemigo
+   0056 01                    7     enemy5vel:    .db 0x01                   ;; Velocidad del enemigo
+   0057 00                    8     enemy5tiemp:  .db 0x00                   ;; Tiempo entre fotográmas
+   0058 00                    9     enemy5status: .db 0x00                    ;; Estado de la animación al explotar
+   0059 00 00                10     enemy5ani1:   .dw _explo1                ;; Direccion sprite animación 1
+   005B 00 00                11     enemy5ani2:   .dw _explo2                ;; Direccion sprite animación 2 
+   005D 00 00                12     enemy5ani3:   .dw _explo3                ;; Direccion sprite animación 3
+   005F 00 00                13     enemy5ani4:   .dw _explo4                ;; Direccion sprite animación 4
+   0061 00 00                14     enemy5ani5:   .dw _explo5                ;; Direccion sprite animación 5
+   0063 01                   15     enemy5vivo:   .db 0x01                  ;; 00 indica que esta muerto, 01 indica que esta viva
+                             37 
+   0064 05                   38 num_enemigos::             .db 0x05                           ;; Número de enemigos en pantalla a la vez
+   0065 14                   39 oleada::                   .db 0x14                           ;; Número total de la primera oleada de enemigos
+   0066 00                   40 finOleada::                .db 0x00                           ;; Se mataron todos los enemigos de la oleada
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                             41  
+                             42 
+                             43 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             44 ;;          ESTA RUTINA NECESITA EN IX LA DIRECCIÓN DE INICIO DE LOS DATOS DE LA ENTIDAD ENEMIGO            ;;
+                             45 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                   
+   0067                      46 calXenemy::
+   0067 CD 00 00      [17]   47     call cpct_getRandom_xsp40_u8_asm                   ;; Devuelve en A un numero pseudo aleatorio de 8 bits
+   006A FE 05         [ 7]   48     cp #0x05                                           ;; Comparo con el valor mímimo
+   006C 38 06         [12]   49     jr c, menorCuatro                                  ;; Si es menor que cuatro salta a menorCuatro
+   006E FE 2F         [ 7]   50     cp #0x2f                                           ;; Comparo con 48 decimal
+   0070 30 06         [12]   51     jr nc, mayor47                                     ;; Si no hay acarreo es que es mayor de 48
+   0072 18 06         [12]   52     jr fin                                             ;; Si llego aquí es porque es mayor que 4 y menor de 48                         
+   0074                      53 menorCuatro:
+   0074 C6 05         [ 7]   54     add a,#0x05
+   0076 18 02         [12]   55     jr fin
+   0078                      56 mayor47:
+   0078 18 ED         [12]   57     jr calXenemy
+   007A                      58 fin:
+   007A DD 77 00      [19]   59     ld enemiX(ix), a                                   ;; Guarda la nueva coordenada X para el enemigo
+   007D C9            [10]   60     ret
+                             61 
+   007E                      62 draw_enemy::
+   007E FD 21 64 00   [14]   63     ld  iy, #num_enemigos
+   0082 FD 5E 00      [19]   64     ld  e, 0(iy)
+   0085                      65 sigui_enemy_draw:                         
+   0085 D5            [11]   66     push de                                            ;; draw_enemy_sprite corrompe DE
+   0086 CD 94 00      [17]   67     call draw_enemy_sprite                             ;; Dibujar una entidad enemigo
+   0089 D1            [10]   68     pop de                                             ;; Recuperar DE con el total de entidades enemigas restantes
+   008A 1D            [ 4]   69     dec e                                              ;; Resta uno al total de entidades enemigas
+   008B C8            [11]   70     ret z                                              ;; Si no quedan enemigos vuelve
+   008C 01 14 00      [10]   71     ld bc, #tamagno_enemy                              ;; El tamaño de los datos de un enemigo
+   008F DD 09         [15]   72     add ix,bc                                          ;; Se suma a Ix oara deslazar el puntero
+   0091 18 F2         [12]   73     jr sigui_enemy_draw                                ;; Siguiente enemigo a dibujar
+   0093 C9            [10]   74     ret
+                             75 
+   0094                      76 draw_enemy_sprite:
+   0094 DD 7E 13      [19]   77     ld  a, conVida(ix)                                 ;; Ver si el enemigo esta vivo
+   0097 FE 00         [ 7]   78     cp #0x00                                           ;; si no lo está
+   0099 C8            [11]   79     ret z                                              ;; vuelve para no imprimirlo                           
+   009A 11 00 C0      [10]   80     ld de, #0xC000                                     ;; Inicio de la memoria de video                                
+   009D DD 46 01      [19]   81     ld  b, enemiY(ix)                                  ;; Coordenada Y del enemigo en B
+   00A0 DD 4E 00      [19]   82     ld  c, enemiX(ix)                                  ;; Coordenada X del enemigo en C
+   00A3 CD 00 00      [17]   83     call cpct_getScreenPtr_asm
+                             84 
+   00A6 EB            [ 4]   85     ex de, hl
+   00A7 3E 00         [ 7]   86     ld  a, #0x00                                       ;; El Sprite de la nave 
+   00A9 DD BE 08      [19]   87     cp StatusAni(ix)                                   ;; El estatus de la animación 
+   00AC 20 08         [12]   88     jr nz, frameExplo1                                 ;; Si no es el sprite de la nave, ve a explosion 1
+   00AE DD 6E 04      [19]   89     ld  l, SpriteBajo(ix)
+   00B1 DD 66 05      [19]   90     ld  h, SpriteAlto(ix)                              ;; En HL direccion del Sprite del enemigo
+   00B4 18 3E         [12]   91     jr dibuja                                          ;; Dibuja el sprite de la nave 
+   00B6                      92 frameExplo1:
+   00B6 3C            [ 4]   93     inc  a                                             ;; Ver si el el fotograma 1 de a animación
+   00B7 DD BE 08      [19]   94     cp StatusAni(ix)                                   ;; El estatus de la animación
+   00BA 20 08         [12]   95     jr nz, frameExplo2                                 ;; Si no es explosión 1 ver si es explosión 2
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+   00BC DD 6E 09      [19]   96     ld  l, frame1Bajo(ix)                              ;; Byte bajo de la dirección del sprite
+   00BF DD 66 0A      [19]   97     ld  h, frame1Alto(ix)                              ;; Byte alto de la dirección del sprite
+   00C2 18 30         [12]   98     jr dibuja
+   00C4                      99 frameExplo2:
+   00C4 3C            [ 4]  100     inc  a                                             ;; Ver si es el fotograma 2 de la animación
+   00C5 DD BE 08      [19]  101     cp StatusAni(ix)                                   ;; El estatus de la animación
+   00C8 20 08         [12]  102     jr nz, frameExplo3                                 ;; Si no es explosión 2 ver si es explosión 3
+   00CA DD 6E 0B      [19]  103     ld  l, frame2Bajo(ix)                              ;; Byte bajo de la dirección del sprite
+   00CD DD 66 0C      [19]  104     ld  h, frame2Alto(ix)                              ;; Byte alto de la dirección del sprite
+   00D0 18 22         [12]  105     jr dibuja
+   00D2                     106 frameExplo3:
+   00D2 3C            [ 4]  107     inc  a                                             ;; Ver si es el fotograma 3 de la animación
+   00D3 DD BE 08      [19]  108     cp StatusAni(ix)                                   ;; El estatus de la animación
+   00D6 20 08         [12]  109     jr nz, frameExplo4                                 ;; Si no es la explosión 3 ver si es la 5 
+   00D8 DD 6E 0D      [19]  110     ld  l, frame3Bajo(ix)                              ;; Byte bajo de la dirección del sprite 
+   00DB DD 66 0E      [19]  111     ld  h, frame3Alto(ix)                              ;; Byte alto de la dirección del sprite 
+   00DE 18 14         [12]  112     jr dibuja
+   00E0                     113 frameExplo4:
+   00E0 3C            [ 4]  114     inc  a                                             ;; Ver si es el fotograma 4 de la animación 
+   00E1 DD BE 08      [19]  115     cp StatusAni(ix)                                   ;; El estatus de la animación   
+   00E4 20 08         [12]  116     jr nz, frameExplo5                                 ;; Si no es la explosión 4 ver si es la 5 
+   00E6 DD 6E 0F      [19]  117     ld  l, frame4Bajo(ix)                              ;; Byte bajo de la dirección del sprite 
+   00E9 DD 66 10      [19]  118     ld  h, frame4Alto(ix)                              ;; Byte alto de la dirección del sprite 
+   00EC 18 06         [12]  119     jr dibuja
+   00EE                     120 frameExplo5:
+   00EE DD 6E 11      [19]  121     ld  l, frame5Bajo(ix)                              ;; Byte bajo de la dirección del sprite
+   00F1 DD 66 12      [19]  122     ld  h, frame5Alto(ix)                              ;; Byte alto de la dirección del sprite
+   00F4                     123 dibuja:
+   00F4 DD 46 02      [19]  124     ld  b, enemiAlto(ix)                               ;; Alto enemigo en B (en bytes)
+   00F7 DD 4E 03      [19]  125     ld  c, enemiAncho(ix)                              ;; Ancho enemigo en C (en bytes)
+   00FA CD 00 00      [17]  126     call cpct_drawSprite_asm                           ;; Borra el último frame de la animación de la explosión
+                            127 
+   00FD C9            [10]  128     ret                                                ;; Aquí acaba draeçw_enemy_sprite
+                            129 
+   00FE                     130 erase_enemy::
+   00FE FD 21 64 00   [14]  131     ld iy, #num_enemigos
+   0102 FD 5E 00      [19]  132     ld  e, 0(iy)                                      ;; En E el número de enemigos                       
+   0105                     133 sigui_enemy:
+   0105 D5            [11]  134     push de
+   0106 CD 14 01      [17]  135     call erase_enemy_sprite                           ;; Borrar una entidad enemigo enemigo
+   0109 D1            [10]  136     pop  de   
+   010A 1D            [ 4]  137     dec e                                             ;; Resta uno al total de entidades enemigas
+   010B C8            [11]  138     ret z                                             ;; Si no quedan enemigos vuelve
+   010C 01 14 00      [10]  139     ld bc, #tamagno_enemy                             ;; El tamaño de los datos de un enemigo
+   010F DD 09         [15]  140     add ix,bc                                         ;; Se suma a Ix oara deslazar el puntero
+   0111 18 F2         [12]  141     jr sigui_enemy                                    ;; Siguiente enemigo a borrar
+   0113 C9            [10]  142     ret
+                            143 
+   0114                     144 erase_enemy_sprite:
+   0114 DD 7E 13      [19]  145     ld  a, conVida(ix)                                ;; Ver si el enemigo esta vivo
+   0117 FE 00         [ 7]  146     cp #0x00                                          ;; Si no lo esta
+   0119 C8            [11]  147     ret z                                             ;; vuelve 
+   011A 11 00 C0      [10]  148     ld de, #0xC000                                    ;; Inicio de la memoria de video
+   011D DD 46 01      [19]  149     ld  b, enemiY(ix)                                 ;; Coordenada Y del enemigo
+   0120 DD 4E 00      [19]  150     ld  c, enemiX(ix)                                 ;; Coordenada X del enemigo
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+   0123 CD 00 00      [17]  151     call cpct_getScreenPtr_asm
+                            152 
+   0126 EB            [ 4]  153     ex de,hl                                          ;; Necesario por que la dirección de video debe estar en DE
+   0127 3E 00         [ 7]  154     ld  a, #0x00                                      ;; Pintar con color cero
+   0129 DD 46 02      [19]  155     ld  b, enemiAlto(ix)                              ;; Alto del Sprite del enemigo en B (en bytes)
+   012C DD 4E 03      [19]  156     ld  c, enemiAncho(ix)                             ;; Ancho del Sprite del enemigo en C (en bytes)
+   012F CD 00 00      [17]  157     call cpct_drawSolidBox_asm                        ;; Dibujar una caja con el color del fondo
+                            158 
+   0132 C9            [10]  159     ret
+                            160 
+   0133                     161 update_enemy::
+   0133 FD 21 64 00   [14]  162     ld iy, #num_enemigos
+   0137 FD 5E 00      [19]  163     ld  e, 0(iy)                                      ;; En E el números de enemigos          
+   013A                     164 sigui_update:   
+   013A D5            [11]  165     push de                                           ;; Preservo E
+   013B CD 4F 01      [17]  166     call update_spr_enemy                             ;; Actualiza posición X e Y de los enemigos
+   013E CD 71 01      [17]  167     call update_tempo_enemy                           ;; Actualiza el tiempo que se ve el fotograma
+   0141 CD B6 01      [17]  168     call contadorEnemigos                             ;; Actualizar el contador de enemigos aparecidos**************
+   0144 D1            [10]  169     pop  de                                           ;; Recupero número de entidades enemigas
+   0145 1D            [ 4]  170     dec e                                             ;; Resta uno al total de entidades enemigas
+   0146 C8            [11]  171     ret z                                             ;; Si no quedan enemigos vuelve
+   0147 01 14 00      [10]  172     ld bc, #tamagno_enemy                             ;; El tamaño de los datos de un enemigo
+   014A DD 09         [15]  173     add ix,bc                                         ;; Se suma a IX para deslazar el puntero
+   014C 18 EC         [12]  174     jr sigui_update                                   ;; Siguiente enemigo a actualizar posición
+   014E C9            [10]  175     ret
+                            176 
+   014F                     177 update_spr_enemy:
+   014F DD 7E 01      [19]  178     ld  a, enemiY(ix)                                 ;; En el acumulador la coordenada Y del enemigo
+   0152 DD 46 06      [19]  179     ld  b, enemiVelo(ix)                              ;; El valor de la velocidad del enemigo
+   0155 80            [ 4]  180     add a, b                                          ;; Se suma resultado en A
+   0156 FE C8         [ 7]  181     cp  #200
+   0158 28 06         [12]  182     jr z, otroAlien                                   ;; Si A == 0
+   015A 30 04         [12]  183     jr nc, otroAlien                                  ;; || A > 200 que se cree otro alien
+   015C DD 77 01      [19]  184     ld enemiY(ix), a                                  ;; Se guarda la nueva posición Y del enemigo
+   015F C9            [10]  185     ret
+   0160                     186 otroAlien:
+   0160 3E 09         [ 7]  187     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
+   0162 DD 77 01      [19]  188     ld  enemiY(ix), a                                 ;; Se guarda
+   0165 CD 67 00      [17]  189     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
+   0168 21 65 00      [10]  190     ld hl, #oleada                                    ;; ****** Número total de enemigos dibujados
+   016B AF            [ 4]  191     xor  a                                            ;; ****** Acumulador a cero
+   016C BE            [ 7]  192     cp (hl)                                           ;; ****** Ver si ha llegado a cero el número total de enemigos dibujados
+   016D 28 01         [12]  193     jr z, escero                                      ;; ****** Si no es cero
+   016F 35            [11]  194     dec (hl)                                          ;; ****** decrementa
+   0170                     195 escero:
+   0170 C9            [10]  196     ret
+                            197 
+   0171                     198 update_tempo_enemy:
+   0171 DD 7E 08      [19]  199     ld  a, StatusAni(ix)                              ;;  Comprobar el estado de la animación
+   0174 FE 00         [ 7]  200     cp #0x00                                          ;;  Si es cero, no esta explotando 
+   0176 C8            [11]  201     ret z                                             ;;  Por lo tanto vuelve 
+   0177 DD 7E 07      [19]  202     ld  a, temporiza(ix)                              ;;  Valor actual del temporizador
+   017A FE 02         [ 7]  203     cp  #0x02                                         ;;  Ver si han pasado el número de ciclosa
+   017C 20 2A         [12]  204     jr nz, masCiclos                                  ;;  Si no ha llegado sigue sumando ciclos
+   017E DD 36 07 00   [19]  205     ld  temporiza(ix), #0x00                          ;;  El temporizador a cero
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+   0182 DD 34 08      [23]  206     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
+   0185 DD 7E 08      [19]  207     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
+   0188 FE 05         [ 7]  208     cp #0x05                                          ;;  Ver si es la 6 animación
+   018A 20 1B         [12]  209     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
+   018C 11 00 C0      [10]  210     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
+   018F DD 46 01      [19]  211     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
+   0192 3E 09         [ 7]  212     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
+   0194 DD 77 01      [19]  213     ld  enemiY(ix), a                                 ;;  Se guarda en la coordenada Y del enemigo
+   0197 CD 67 00      [17]  214     call calXenemy                                    ;;  Nueva coordenada X aleatoria para el enemigo
+   019A CD 00 00      [17]  215     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
+   019D DD 36 08 00   [19]  216     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
+                            217     ;;ld hl, #oleada                                    ;;  ******Número total de enemigos que han aparecido
+                            218     ;;ld a, (hl)                                        ;;  ******Al acumulador
+                            219     ;;cp #0x00                                          ;;  ******Si es cero
+                            220     ;;jr z, acaba                                       ;;  ******No aparecen más enemigos *************************
+   01A1 DD 36 06 01   [19]  221     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
+   01A5 18 00         [12]  222     jr vuelve                                         ;; 
+   01A7                     223 acaba:                                                ;; 
+                            224     ;ld conVida(ix), #0x00                             ;;  *****El enemigo esta muerto
+                            225     
+   01A7                     226 vuelve:
+   01A7 C9            [10]  227     ret
+   01A8                     228 masCiclos:
+   01A8 DD 34 07      [23]  229     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
+   01AB C9            [10]  230     ret
+                            231 
+   01AC                     232 posXenemyPtr::
+   01AC DD 21 00 00   [14]  233     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
+   01B0 C9            [10]  234     ret
+                            235 
+   01B1                     236 posYenemyPtr::
+   01B1 DD 21 01 00   [14]  237     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
+   01B5 C9            [10]  238     ret
+                            239 
+   01B6                     240 contadorEnemigos:
+   01B6 21 65 00      [10]  241     ld hl, #oleada
+   01B9 7E            [ 7]  242     ld  a, (hl)
+   01BA FE 00         [ 7]  243     cp #0x00
+   01BC C0            [11]  244     ret nz
+   01BD DD 36 13 00   [19]  245     ld conVida(ix), #0x00
+   01C1 C9            [10]  246     ret
