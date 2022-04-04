@@ -75,12 +75,12 @@ Hexadecimal [16-Bits]
    4DD4 4F            [ 4]   16     ld  c, a
    4DD5 3A CD 4D      [13]   17     ld  a,(laserY)
    4DD8 47            [ 4]   18     ld  b, a
-   4DD9 CD F9 60      [17]   19     call cpct_getScreenPtr_asm
+   4DD9 CD 04 61      [17]   19     call cpct_getScreenPtr_asm
                              20 
    4DDC EB            [ 4]   21     ex de,hl
    4DDD 21 46 49      [10]   22     ld hl, #_laser
    4DE0 01 01 04      [10]   23     ld bc, #0x0401
-   4DE3 CD 48 5E      [17]   24     call cpct_drawSprite_asm
+   4DE3 CD 53 5E      [17]   24     call cpct_drawSprite_asm
                              25 
    4DE6 C9            [10]   26     ret
                              27 
@@ -90,12 +90,12 @@ Hexadecimal [16-Bits]
    4DED 4F            [ 4]   31     ld  c, a
    4DEE 3A CD 4D      [13]   32     ld  a,(laserY)
    4DF1 47            [ 4]   33     ld  b, a
-   4DF2 CD F9 60      [17]   34     call cpct_getScreenPtr_asm
+   4DF2 CD 04 61      [17]   34     call cpct_getScreenPtr_asm
                              35 
    4DF5 EB            [ 4]   36     ex de, hl
    4DF6 3E 00         [ 7]   37     ld a, #0x00
    4DF8 01 01 04      [10]   38     ld bc, #0x0401
-   4DFB CD 11 60      [17]   39     call cpct_drawSolidBox_asm
+   4DFB CD 1C 60      [17]   39     call cpct_drawSolidBox_asm
                              40 
    4DFE C9            [10]   41     ret
                              42 

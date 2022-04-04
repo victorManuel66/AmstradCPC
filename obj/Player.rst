@@ -313,9 +313,9 @@ Hexadecimal [16-Bits]
    4995 00                   28 disparo:       .db 0x00                     ;; Si hay un cero no se esta disparando, si hay un 1 se esta disparando
                              29 
    4996                      30 update_player::
-   4996 CD 0D 61      [17]   31     call cpct_scanKeyboard_asm
+   4996 CD 18 61      [17]   31     call cpct_scanKeyboard_asm
    4999 2A 8F 49      [16]   32     ld hl,(TeclaDe)
-   499C CD 7F 55      [17]   33     call cpct_isKeyPressed_asm
+   499C CD 8A 55      [17]   33     call cpct_isKeyPressed_asm
    499F 28 0B         [12]   34     jr z, teclaA
    49A1 DD 7E 00      [19]   35     ld  a, PlayX(ix)
    49A4 FE 2C         [ 7]   36     cp  #50-anchoSprite                                 
@@ -324,7 +324,7 @@ Hexadecimal [16-Bits]
    49A9 DD 77 00      [19]   39     ld PlayX(ix), a
    49AC                      40 teclaA:
    49AC 2A 91 49      [16]   41     ld hl,(TeclaIz)
-   49AF CD 7F 55      [17]   42     call cpct_isKeyPressed_asm
+   49AF CD 8A 55      [17]   42     call cpct_isKeyPressed_asm
    49B2 28 0B         [12]   43     jr z,teclaSpc
    49B4 DD 7E 00      [19]   44     ld  a, PlayX(ix)
    49B7 3D            [ 4]   45     dec a
@@ -334,7 +334,7 @@ Hexadecimal [16-Bits]
                              49     
    49BF                      50 teclaSpc::
    49BF 2A 93 49      [16]   51     ld hl, (TeclaDi)
-   49C2 CD 7F 55      [17]   52     call cpct_isKeyPressed_asm
+   49C2 CD 8A 55      [17]   52     call cpct_isKeyPressed_asm
    49C5 C8            [11]   53     ret z
    49C6 3A 95 49      [13]   54     ld  a, (disparo)
    49C9 B7            [ 4]   55     or  a
@@ -363,7 +363,7 @@ Hexadecimal [16-Bits]
    49E1 11 00 C0      [10]   73     ld de, #0xC000
    49E4 DD 4E 00      [19]   74     ld  c, PlayX(ix)                          ;; En C la coordenada X del player
    49E7 DD 46 01      [19]   75     ld  b, PlayY(ix)                          ;; En B la coordenada Y del player 
-   49EA CD F9 60      [17]   76     call cpct_getScreenPtr_asm                ;; Devuelve en HL la posición de memoria
+   49EA CD 04 61      [17]   76     call cpct_getScreenPtr_asm                ;; Devuelve en HL la posición de memoria
                              77 
                              78     ;; Dibujamos el Sprite en pantalla
    49ED EB            [ 4]   79     ex de, hl                                 ;; Por que la dirección esta en HL pero se necesita en DE
@@ -371,7 +371,7 @@ Hexadecimal [16-Bits]
    49F1 DD 66 05      [19]   81     ld  h, SprPlayHi(ix)                      ;; Parte alta de la dirección de memoria donde esta el sprite
    49F4 DD 46 02      [19]   82     ld  b, PlayAlto(ix)                       ;; El alto del sprite en B
    49F7 DD 4E 03      [19]   83     ld  c, PlayAncho(ix)                      ;; el ancho del sprite en C
-   49FA CD 48 5E      [17]   84     call cpct_drawSprite_asm
+   49FA CD 53 5E      [17]   84     call cpct_drawSprite_asm
    49FD C9            [10]   85     ret
                              86 
    49FE                      87 erase_player::
@@ -379,12 +379,12 @@ Hexadecimal [16-Bits]
    49FE 11 00 C0      [10]   89     ld de, #0xC000
    4A01 DD 4E 00      [19]   90     ld  c, PlayX(ix)                          ;; Coordenada X del sprite en C
    4A04 DD 46 01      [19]   91     ld  b, PlayY(ix)                          ;; Coordenada Y del sprite en B
-   4A07 CD F9 60      [17]   92     call cpct_getScreenPtr_asm                ;; Devuelve en HL la posición de memoria
+   4A07 CD 04 61      [17]   92     call cpct_getScreenPtr_asm                ;; Devuelve en HL la posición de memoria
                              93 
    4A0A EB            [ 4]   94     ex de,hl                                  ;; Necesario por que la dirección de video debe estar en DE
    4A0B 3E 00         [ 7]   95     ld  a, #0x00                              ;; Pintar con color cero
    4A0D 01 06 06      [10]   96     ld bc, #0x0606                            ;; 12 x 6 píxeles
-   4A10 CD 11 60      [17]   97     call cpct_drawSolidBox_asm
+   4A10 CD 1C 60      [17]   97     call cpct_drawSolidBox_asm
    4A13 C9            [10]   98     ret
                              99 
    4A14                     100 posXplayerPtr::
@@ -404,7 +404,7 @@ Hexadecimal [16-Bits]
    4A1E 21 02 0F      [10]  114     ld hl, #0x0F02
    4A21 11 47 00      [10]  115     ld de, #0x0047
    4A24 01 00 00      [10]  116     ld bc, #0x0000
-   4A27 CD 53 5D      [17]  117     call cpct_akp_SFXPlay_asm
+   4A27 CD 5E 5D      [17]  117     call cpct_akp_SFXPlay_asm
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
 Hexadecimal [16-Bits]
 

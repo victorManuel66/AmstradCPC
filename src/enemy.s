@@ -184,15 +184,18 @@ update_spr_enemy:
     ld enemiY(ix), a                                  ;; Se guarda la nueva posición Y del enemigo
     ret
 otroAlien:
+    ld  a, (finOleada)                                ;; ***** Ver si el final de la oleada ****
+    cp  #0x01                                         ;; ***************************************
+    jr  z, final                                     ;; ***** Si esta a uno no dibujes más enemigos **********
     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
     ld  enemiY(ix), a                                 ;; Se guarda
     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
     ld hl, #oleada                                    ;; ****** Número total de enemigos dibujados
     xor  a                                            ;; ****** Acumulador a cero
     cp (hl)                                           ;; ****** Ver si ha llegado a cero el número total de enemigos dibujados
-    jr z, escero                                      ;; ****** Si no es cero
+    jr z, final                                       ;; ****** Si no es cero
     dec (hl)                                          ;; ****** decrementa
-escero:
+final:
     ret
 
 update_tempo_enemy:
@@ -214,14 +217,10 @@ update_tempo_enemy:
     call calXenemy                                    ;;  Nueva coordenada X aleatoria para el enemigo
     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
-    ;;ld hl, #oleada                                    ;;  ******Número total de enemigos que han aparecido
-    ;;ld a, (hl)                                        ;;  ******Al acumulador
-    ;;cp #0x00                                          ;;  ******Si es cero
-    ;;jr z, acaba                                       ;;  ******No aparecen más enemigos *************************
     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
     jr vuelve                                         ;; 
-acaba:                                                ;; 
-    ;ld conVida(ix), #0x00                             ;;  *****El enemigo esta muerto
+;acaba:                                                ;; 
+    ;ld conVida(ix), #0x00                            ;;  *****El enemigo esta muerto
     
 vuelve:
     ret
@@ -238,9 +237,14 @@ posYenemyPtr::
     ret
 
 contadorEnemigos:
-    ld hl, #oleada
+    ld hl, #oleada                                    ;; ******* La dirección con el número de enemigos abatidos *******
     ld  a, (hl)
-    cp #0x00
-    ret nz
-    ld conVida(ix), #0x00
+    cp #0x00                                         
+    ret nz                                            ;; ******* Si no ha llegado a cero es que todavia quedan enemigos por abatir *******
+    ;ld conVida(ix), #0x00
+    ld hl, #finOleada
+    ld  a, (hl)
+    cp  #0x01
+    ret z
+    inc (hl)                                          ;; ******* Indicamos que ya se acabo la oleada ****************
     ret

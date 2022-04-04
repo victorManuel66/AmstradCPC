@@ -212,7 +212,7 @@ Hexadecimal [16-Bits]
                              44 ;;          ESTA RUTINA NECESITA EN IX LA DIRECCIÓN DE INICIO DE LOS DATOS DE LA ENTIDAD ENEMIGO            ;;
                              45 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                   
    4E8D                      46 calXenemy::
-   4E8D CD DC 5F      [17]   47     call cpct_getRandom_xsp40_u8_asm                   ;; Devuelve en A un numero pseudo aleatorio de 8 bits
+   4E8D CD E7 5F      [17]   47     call cpct_getRandom_xsp40_u8_asm                   ;; Devuelve en A un numero pseudo aleatorio de 8 bits
    4E90 FE 05         [ 7]   48     cp #0x05                                           ;; Comparo con el valor mímimo
    4E92 38 06         [12]   49     jr c, menorCuatro                                  ;; Si es menor que cuatro salta a menorCuatro
    4E94 FE 2F         [ 7]   50     cp #0x2f                                           ;; Comparo con 48 decimal
@@ -248,7 +248,7 @@ Hexadecimal [16-Bits]
    4EC0 11 00 C0      [10]   80     ld de, #0xC000                                     ;; Inicio de la memoria de video                                
    4EC3 DD 46 01      [19]   81     ld  b, enemiY(ix)                                  ;; Coordenada Y del enemigo en B
    4EC6 DD 4E 00      [19]   82     ld  c, enemiX(ix)                                  ;; Coordenada X del enemigo en C
-   4EC9 CD F9 60      [17]   83     call cpct_getScreenPtr_asm
+   4EC9 CD 04 61      [17]   83     call cpct_getScreenPtr_asm
                              84 
    4ECC EB            [ 4]   85     ex de, hl
    4ECD 3E 00         [ 7]   86     ld  a, #0x00                                       ;; El Sprite de la nave 
@@ -296,7 +296,7 @@ Hexadecimal [16-Bits]
    4F1A                     123 dibuja:
    4F1A DD 46 02      [19]  124     ld  b, enemiAlto(ix)                               ;; Alto enemigo en B (en bytes)
    4F1D DD 4E 03      [19]  125     ld  c, enemiAncho(ix)                              ;; Ancho enemigo en C (en bytes)
-   4F20 CD 48 5E      [17]  126     call cpct_drawSprite_asm                           ;; Borra el último frame de la animación de la explosión
+   4F20 CD 53 5E      [17]  126     call cpct_drawSprite_asm                           ;; Borra el último frame de la animación de la explosión
                             127 
    4F23 C9            [10]  128     ret                                                ;; Aquí acaba draeçw_enemy_sprite
                             129 
@@ -326,13 +326,13 @@ Hexadecimal [16-Bits]
 
 
 
-   4F49 CD F9 60      [17]  151     call cpct_getScreenPtr_asm
+   4F49 CD 04 61      [17]  151     call cpct_getScreenPtr_asm
                             152 
    4F4C EB            [ 4]  153     ex de,hl                                          ;; Necesario por que la dirección de video debe estar en DE
    4F4D 3E 00         [ 7]  154     ld  a, #0x00                                      ;; Pintar con color cero
    4F4F DD 46 02      [19]  155     ld  b, enemiAlto(ix)                              ;; Alto del Sprite del enemigo en B (en bytes)
    4F52 DD 4E 03      [19]  156     ld  c, enemiAncho(ix)                             ;; Ancho del Sprite del enemigo en C (en bytes)
-   4F55 CD 11 60      [17]  157     call cpct_drawSolidBox_asm                        ;; Dibujar una caja con el color del fondo
+   4F55 CD 1C 60      [17]  157     call cpct_drawSolidBox_asm                        ;; Dibujar una caja con el color del fondo
                             158 
    4F58 C9            [10]  159     ret
                             160 
@@ -342,8 +342,8 @@ Hexadecimal [16-Bits]
    4F60                     164 sigui_update:   
    4F60 D5            [11]  165     push de                                           ;; Preservo E
    4F61 CD 75 4F      [17]  166     call update_spr_enemy                             ;; Actualiza posición X e Y de los enemigos
-   4F64 CD 97 4F      [17]  167     call update_tempo_enemy                           ;; Actualiza el tiempo que se ve el fotograma
-   4F67 CD DC 4F      [17]  168     call contadorEnemigos                             ;; Actualizar el contador de enemigos aparecidos**************
+   4F64 CD 9E 4F      [17]  167     call update_tempo_enemy                           ;; Actualiza el tiempo que se ve el fotograma
+   4F67 CD E3 4F      [17]  168     call contadorEnemigos                             ;; Actualizar el contador de enemigos aparecidos**************
    4F6A D1            [10]  169     pop  de                                           ;; Recupero número de entidades enemigas
    4F6B 1D            [ 4]  170     dec e                                             ;; Resta uno al total de entidades enemigas
    4F6C C8            [11]  171     ret z                                             ;; Si no quedan enemigos vuelve
@@ -362,68 +362,72 @@ Hexadecimal [16-Bits]
    4F82 DD 77 01      [19]  184     ld enemiY(ix), a                                  ;; Se guarda la nueva posición Y del enemigo
    4F85 C9            [10]  185     ret
    4F86                     186 otroAlien:
-   4F86 3E 09         [ 7]  187     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
-   4F88 DD 77 01      [19]  188     ld  enemiY(ix), a                                 ;; Se guarda
-   4F8B CD 8D 4E      [17]  189     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
-   4F8E 21 8B 4E      [10]  190     ld hl, #oleada                                    ;; ****** Número total de enemigos dibujados
-   4F91 AF            [ 4]  191     xor  a                                            ;; ****** Acumulador a cero
-   4F92 BE            [ 7]  192     cp (hl)                                           ;; ****** Ver si ha llegado a cero el número total de enemigos dibujados
-   4F93 28 01         [12]  193     jr z, escero                                      ;; ****** Si no es cero
-   4F95 35            [11]  194     dec (hl)                                          ;; ****** decrementa
-   4F96                     195 escero:
-   4F96 C9            [10]  196     ret
-                            197 
-   4F97                     198 update_tempo_enemy:
-   4F97 DD 7E 08      [19]  199     ld  a, StatusAni(ix)                              ;;  Comprobar el estado de la animación
-   4F9A FE 00         [ 7]  200     cp #0x00                                          ;;  Si es cero, no esta explotando 
-   4F9C C8            [11]  201     ret z                                             ;;  Por lo tanto vuelve 
-   4F9D DD 7E 07      [19]  202     ld  a, temporiza(ix)                              ;;  Valor actual del temporizador
-   4FA0 FE 02         [ 7]  203     cp  #0x02                                         ;;  Ver si han pasado el número de ciclosa
-   4FA2 20 2A         [12]  204     jr nz, masCiclos                                  ;;  Si no ha llegado sigue sumando ciclos
-   4FA4 DD 36 07 00   [19]  205     ld  temporiza(ix), #0x00                          ;;  El temporizador a cero
+   4F86 3A 8C 4E      [13]  187     ld  a, (finOleada)                                ;; ***** Ver si el final de la oleada ****
+   4F89 FE 01         [ 7]  188     cp  #0x01                                         ;; ***************************************
+   4F8B 28 10         [12]  189     jr  z, final                                     ;; ***** Si esta a uno no dibujes más enemigos **********
+   4F8D 3E 09         [ 7]  190     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
+   4F8F DD 77 01      [19]  191     ld  enemiY(ix), a                                 ;; Se guarda
+   4F92 CD 8D 4E      [17]  192     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
+   4F95 21 8B 4E      [10]  193     ld hl, #oleada                                    ;; ****** Número total de enemigos dibujados
+   4F98 AF            [ 4]  194     xor  a                                            ;; ****** Acumulador a cero
+   4F99 BE            [ 7]  195     cp (hl)                                           ;; ****** Ver si ha llegado a cero el número total de enemigos dibujados
+   4F9A 28 01         [12]  196     jr z, final                                       ;; ****** Si no es cero
+   4F9C 35            [11]  197     dec (hl)                                          ;; ****** decrementa
+   4F9D                     198 final:
+   4F9D C9            [10]  199     ret
+                            200 
+   4F9E                     201 update_tempo_enemy:
+   4F9E DD 7E 08      [19]  202     ld  a, StatusAni(ix)                              ;;  Comprobar el estado de la animación
+   4FA1 FE 00         [ 7]  203     cp #0x00                                          ;;  Si es cero, no esta explotando 
+   4FA3 C8            [11]  204     ret z                                             ;;  Por lo tanto vuelve 
+   4FA4 DD 7E 07      [19]  205     ld  a, temporiza(ix)                              ;;  Valor actual del temporizador
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
 Hexadecimal [16-Bits]
 
 
 
-   4FA8 DD 34 08      [23]  206     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
-   4FAB DD 7E 08      [19]  207     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
-   4FAE FE 05         [ 7]  208     cp #0x05                                          ;;  Ver si es la 6 animación
-   4FB0 20 1B         [12]  209     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
-   4FB2 11 00 C0      [10]  210     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
-   4FB5 DD 46 01      [19]  211     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
-   4FB8 3E 09         [ 7]  212     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
-   4FBA DD 77 01      [19]  213     ld  enemiY(ix), a                                 ;;  Se guarda en la coordenada Y del enemigo
-   4FBD CD 8D 4E      [17]  214     call calXenemy                                    ;;  Nueva coordenada X aleatoria para el enemigo
-   4FC0 CD F9 60      [17]  215     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
-   4FC3 DD 36 08 00   [19]  216     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
-                            217     ;;ld hl, #oleada                                    ;;  ******Número total de enemigos que han aparecido
-                            218     ;;ld a, (hl)                                        ;;  ******Al acumulador
-                            219     ;;cp #0x00                                          ;;  ******Si es cero
-                            220     ;;jr z, acaba                                       ;;  ******No aparecen más enemigos *************************
-   4FC7 DD 36 06 01   [19]  221     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
-   4FCB 18 00         [12]  222     jr vuelve                                         ;; 
-   4FCD                     223 acaba:                                                ;; 
-                            224     ;ld conVida(ix), #0x00                             ;;  *****El enemigo esta muerto
-                            225     
-   4FCD                     226 vuelve:
-   4FCD C9            [10]  227     ret
-   4FCE                     228 masCiclos:
-   4FCE DD 34 07      [23]  229     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
-   4FD1 C9            [10]  230     ret
-                            231 
-   4FD2                     232 posXenemyPtr::
-   4FD2 DD 21 26 4E   [14]  233     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
-   4FD6 C9            [10]  234     ret
-                            235 
-   4FD7                     236 posYenemyPtr::
-   4FD7 DD 21 27 4E   [14]  237     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
-   4FDB C9            [10]  238     ret
-                            239 
-   4FDC                     240 contadorEnemigos:
-   4FDC 21 8B 4E      [10]  241     ld hl, #oleada
-   4FDF 7E            [ 7]  242     ld  a, (hl)
-   4FE0 FE 00         [ 7]  243     cp #0x00
-   4FE2 C0            [11]  244     ret nz
-   4FE3 DD 36 13 00   [19]  245     ld conVida(ix), #0x00
-   4FE7 C9            [10]  246     ret
+   4FA7 FE 02         [ 7]  206     cp  #0x02                                         ;;  Ver si han pasado el número de ciclosa
+   4FA9 20 2A         [12]  207     jr nz, masCiclos                                  ;;  Si no ha llegado sigue sumando ciclos
+   4FAB DD 36 07 00   [19]  208     ld  temporiza(ix), #0x00                          ;;  El temporizador a cero
+   4FAF DD 34 08      [23]  209     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
+   4FB2 DD 7E 08      [19]  210     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
+   4FB5 FE 05         [ 7]  211     cp #0x05                                          ;;  Ver si es la 6 animación
+   4FB7 20 1B         [12]  212     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
+   4FB9 11 00 C0      [10]  213     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
+   4FBC DD 46 01      [19]  214     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
+   4FBF 3E 09         [ 7]  215     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
+   4FC1 DD 77 01      [19]  216     ld  enemiY(ix), a                                 ;;  Se guarda en la coordenada Y del enemigo
+   4FC4 CD 8D 4E      [17]  217     call calXenemy                                    ;;  Nueva coordenada X aleatoria para el enemigo
+   4FC7 CD 04 61      [17]  218     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
+   4FCA DD 36 08 00   [19]  219     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
+   4FCE DD 36 06 01   [19]  220     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
+   4FD2 18 00         [12]  221     jr vuelve                                         ;; 
+                            222 ;acaba:                                                ;; 
+                            223     ;ld conVida(ix), #0x00                            ;;  *****El enemigo esta muerto
+                            224     
+   4FD4                     225 vuelve:
+   4FD4 C9            [10]  226     ret
+   4FD5                     227 masCiclos:
+   4FD5 DD 34 07      [23]  228     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
+   4FD8 C9            [10]  229     ret
+                            230 
+   4FD9                     231 posXenemyPtr::
+   4FD9 DD 21 26 4E   [14]  232     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
+   4FDD C9            [10]  233     ret
+                            234 
+   4FDE                     235 posYenemyPtr::
+   4FDE DD 21 27 4E   [14]  236     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
+   4FE2 C9            [10]  237     ret
+                            238 
+   4FE3                     239 contadorEnemigos:
+   4FE3 21 8B 4E      [10]  240     ld hl, #oleada                                    ;; ******* La dirección con el número de enemigos abatidos *******
+   4FE6 7E            [ 7]  241     ld  a, (hl)
+   4FE7 FE 00         [ 7]  242     cp #0x00                                         
+   4FE9 C0            [11]  243     ret nz                                            ;; ******* Si no ha llegado a cero es que todavia quedan enemigos por abatir *******
+                            244     ;ld conVida(ix), #0x00
+   4FEA 21 8C 4E      [10]  245     ld hl, #finOleada
+   4FED 7E            [ 7]  246     ld  a, (hl)
+   4FEE FE 01         [ 7]  247     cp  #0x01
+   4FF0 C8            [11]  248     ret z
+   4FF1 34            [11]  249     inc (hl)                                          ;; ******* Indicamos que ya se acabo la oleada ****************
+   4FF2 C9            [10]  250     ret

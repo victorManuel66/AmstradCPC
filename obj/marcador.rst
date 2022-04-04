@@ -85,13 +85,13 @@ Hexadecimal [16-Bits]
    4B93 C6 30         [ 7]   47     add #0x30                            ;; El codigo ASCII de '0'
    4B95 F5            [11]   48     push af
    4B96 21 02 00      [10]   49     ld hl, #0x0002
-   4B99 CD D6 60      [17]   50     call cpct_setDrawCharM0_asm
+   4B99 CD E1 60      [17]   50     call cpct_setDrawCharM0_asm
    4B9C 11 00 C0      [10]   51     ld de, #0xC000
    4B9F 01 43 5C      [10]   52     ld bc, #0x5C43
-   4BA2 CD F9 60      [17]   53     call cpct_getScreenPtr_asm
+   4BA2 CD 04 61      [17]   53     call cpct_getScreenPtr_asm
    4BA5 F1            [10]   54     pop af
    4BA6 5F            [ 4]   55     ld  e, a
-   4BA7 CD 78 5F      [17]   56     call cpct_drawCharM0_asm
+   4BA7 CD 83 5F      [17]   56     call cpct_drawCharM0_asm
    4BAA C9            [10]   57     ret
                              58 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
@@ -103,37 +103,37 @@ Hexadecimal [16-Bits]
    4BAB C6 30         [ 7]   60     add #0x30                            ;; El codigo ASCII de '0'
    4BAD F5            [11]   61     push af
    4BAE 21 02 00      [10]   62     ld hl, #0x0002
-   4BB1 CD D6 60      [17]   63     call cpct_setDrawCharM0_asm
+   4BB1 CD E1 60      [17]   63     call cpct_setDrawCharM0_asm
    4BB4 11 00 C0      [10]   64     ld de, #0xC000
    4BB7 01 3F 5C      [10]   65     ld bc, #0x5C3F
-   4BBA CD F9 60      [17]   66     call cpct_getScreenPtr_asm
+   4BBA CD 04 61      [17]   66     call cpct_getScreenPtr_asm
    4BBD F1            [10]   67     pop af
    4BBE 5F            [ 4]   68     ld  e, a
-   4BBF CD 78 5F      [17]   69     call cpct_drawCharM0_asm
+   4BBF CD 83 5F      [17]   69     call cpct_drawCharM0_asm
    4BC2 C9            [10]   70     ret
                              71 
    4BC3                      72 printmillares:
    4BC3 C6 30         [ 7]   73     add #0x30                            ;; El codigo ASCII de '0'
    4BC5 F5            [11]   74     push af
    4BC6 21 02 00      [10]   75     ld hl, #0x0002
-   4BC9 CD D6 60      [17]   76     call cpct_setDrawCharM0_asm
+   4BC9 CD E1 60      [17]   76     call cpct_setDrawCharM0_asm
    4BCC 11 00 C0      [10]   77     ld de, #0xC000
    4BCF 01 3B 5C      [10]   78     ld bc, #0x5C3B
-   4BD2 CD F9 60      [17]   79     call cpct_getScreenPtr_asm
+   4BD2 CD 04 61      [17]   79     call cpct_getScreenPtr_asm
    4BD5 F1            [10]   80     pop af
    4BD6 5F            [ 4]   81     ld  e, a
-   4BD7 CD 78 5F      [17]   82     call cpct_drawCharM0_asm
+   4BD7 CD 83 5F      [17]   82     call cpct_drawCharM0_asm
    4BDA C9            [10]   83     ret
                              84 
    4BDB                      85 printdiezmil:
    4BDB C6 30         [ 7]   86     add #0x30                            ;; El codigo ASCII de '0'
    4BDD F5            [11]   87     push af
    4BDE 21 02 00      [10]   88     ld hl, #0x0002
-   4BE1 CD D6 60      [17]   89     call cpct_setDrawCharM0_asm
+   4BE1 CD E1 60      [17]   89     call cpct_setDrawCharM0_asm
    4BE4 11 00 C0      [10]   90     ld de, #0xC000
    4BE7 01 37 5C      [10]   91     ld bc, #0x5C37
-   4BEA CD F9 60      [17]   92     call cpct_getScreenPtr_asm
+   4BEA CD 04 61      [17]   92     call cpct_getScreenPtr_asm
    4BED F1            [10]   93     pop af
    4BEE 5F            [ 4]   94     ld  e, a
-   4BEF CD 78 5F      [17]   95     call cpct_drawCharM0_asm
+   4BEF CD 83 5F      [17]   95     call cpct_drawCharM0_asm
    4BF2 C9            [10]   96     ret

@@ -79,7 +79,7 @@ Hexadecimal [16-Bits]
    4A89 21 03 0F      [10]   26     ld hl, #0x0F03
    4A8C 11 14 00      [10]   27     ld de, #0x0014
    4A8F 01 00 00      [10]   28     ld bc, #0x0000
-   4A92 CD 53 5D      [17]   29     call cpct_akp_SFXPlay_asm
+   4A92 CD 5E 5D      [17]   29     call cpct_akp_SFXPlay_asm
                              30 
                              31 
    4A95 11 00 C0      [10]   32     ld de, #0xC000                                  ;; Inicio de la memoria de video                          
@@ -87,7 +87,7 @@ Hexadecimal [16-Bits]
    4A9B 4E            [ 7]   34     ld  c,(hl)                                      ;; Coordenada X en C
    4A9C 3E C1         [ 7]   35     ld  a, #0xC1
    4A9E 47            [ 4]   36     ld  b, a                                        ;; Coordenada Y en B
-   4A9F CD F9 60      [17]   37     call cpct_getScreenPtr_asm
+   4A9F CD 04 61      [17]   37     call cpct_getScreenPtr_asm
                              38 
    4AA2 EB            [ 4]   39     ex de, hl
    4AA3 21 2A 48      [10]   40     ld hl, #_playerexplo2                                 ;; Siguiente sprite
@@ -138,7 +138,7 @@ Hexadecimal [16-Bits]
                              80 
    4AF6                      81 anima:
    4AF6 01 05 06      [10]   82     ld bc, #0x0605                                        ;; Medidas en bytes del player
-   4AF9 CD 48 5E      [17]   83     call cpct_drawSprite_asm
+   4AF9 CD 53 5E      [17]   83     call cpct_drawSprite_asm
    4AFC C9            [10]   84     ret
                              85 
    4AFD                      86 espera:
@@ -152,9 +152,9 @@ Hexadecimal [16-Bits]
    4B04                      94 borraNave:
    4B04 11 00 C0      [10]   95     ld de, #0xC000
    4B07 06 A6         [ 7]   96     ld  b, #0xA6
-   4B09 CD F9 60      [17]   97     call cpct_getScreenPtr_asm
+   4B09 CD 04 61      [17]   97     call cpct_getScreenPtr_asm
    4B0C EB            [ 4]   98     ex de,hl
    4B0D 3E 00         [ 7]   99     ld  a, #0x00
    4B0F 01 05 06      [10]  100     ld bc, #0x0605
-   4B12 CD 11 60      [17]  101     call cpct_drawSolidBox_asm
+   4B12 CD 1C 60      [17]  101     call cpct_drawSolidBox_asm
    4B15 C9            [10]  102     ret

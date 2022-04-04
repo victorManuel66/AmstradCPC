@@ -10,65 +10,65 @@ Symbol Table
     SpriteAl=  0005     |     SpriteBa=  0004     |     StatusAn=  0008 
     _enemigo   **** GX  |     _explo1    **** GX  |     _explo2    **** GX
     _explo3    **** GX  |     _explo4    **** GX  |     _explo5    **** GX
-  0 acaba      01A7 R   |   0 calXenem   0067 GR  |     conVida =  0013 
-  0 contador   01B6 R   |     cpct_akp   **** GX  |     cpct_akp   **** GX
+  0 calXenem   0067 GR  |     conVida =  0013     |   0 contador   01BD R
     cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
-    cpct_akp   **** GX  |     cpct_dis   **** GX  |     cpct_dra   **** GX
-    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
-    cpct_etm   **** GX  |     cpct_etm   **** GX  |     cpct_get   **** GX
-    cpct_get   **** GX  |     cpct_isA   **** GX  |     cpct_isK   **** GX
-    cpct_sca   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
-    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_wai   **** GX
-  0 dibuja     00F4 R   |   0 draw_ene   007E GR  |   0 draw_ene   0094 R
-    enemiAlt=  0002     |     enemiAnc=  0003     |     enemiVel=  0006 
-    enemiX  =  0000     |     enemiY  =  0001     |   0 enemy      0000 GR
-  0 enemy2     0014 GR  |   0 enemy2H    0016 R   |   0 enemy2W    0017 R
-  0 enemy2X    0014 R   |   0 enemy2Y    0015 R   |   0 enemy2an   001D R
-  0 enemy2an   001F R   |   0 enemy2an   0021 R   |   0 enemy2an   0023 R
-  0 enemy2an   0025 R   |   0 enemy2sp   0018 R   |   0 enemy2st   001C R
-  0 enemy2ti   001B R   |   0 enemy2ve   001A R   |   0 enemy2vi   0027 R
-  0 enemy3     0028 GR  |   0 enemy3H    002A R   |   0 enemy3W    002B R
-  0 enemy3X    0028 R   |   0 enemy3Y    0029 R   |   0 enemy3an   0031 R
-  0 enemy3an   0033 R   |   0 enemy3an   0035 R   |   0 enemy3an   0037 R
-  0 enemy3an   0039 R   |   0 enemy3sp   002C R   |   0 enemy3st   0030 R
-  0 enemy3ti   002F R   |   0 enemy3ve   002E R   |   0 enemy3vi   003B R
-  0 enemy4     003C GR  |   0 enemy4H    003E R   |   0 enemy4W    003F R
-  0 enemy4X    003C R   |   0 enemy4Y    003D R   |   0 enemy4an   0045 R
-  0 enemy4an   0047 R   |   0 enemy4an   0049 R   |   0 enemy4an   004B R
-  0 enemy4an   004D R   |   0 enemy4sp   0040 R   |   0 enemy4st   0044 R
-  0 enemy4ti   0043 R   |   0 enemy4ve   0042 R   |   0 enemy4vi   004F R
-  0 enemy5     0050 GR  |   0 enemy5H    0052 R   |   0 enemy5W    0053 R
-  0 enemy5X    0050 R   |   0 enemy5Y    0051 R   |   0 enemy5an   0059 R
-  0 enemy5an   005B R   |   0 enemy5an   005D R   |   0 enemy5an   005F R
-  0 enemy5an   0061 R   |   0 enemy5sp   0054 R   |   0 enemy5st   0058 R
-  0 enemy5ti   0057 R   |   0 enemy5ve   0056 R   |   0 enemy5vi   0063 R
-  0 enemyH     0002 R   |   0 enemyW     0003 R   |   0 enemyX     0000 R
-  0 enemyY     0001 R   |   0 enemyani   0009 R   |   0 enemyani   000B R
-  0 enemyani   000D R   |   0 enemyani   000F R   |   0 enemyani   0011 R
-  0 enemyspr   0004 R   |   0 enemysta   0008 R   |   0 enemytie   0007 R
-  0 enemyvel   0006 R   |   0 enemyviv   0013 R   |   0 erase_en   00FE GR
-  0 erase_en   0114 R   |   0 escero     0170 R   |   0 fin        007A R
-  0 finOlead   0066 GR  |     frame1Al=  000A     |     frame1Ba=  0009 
-    frame2Al=  000C     |     frame2Ba=  000B     |     frame3Al=  000E 
-    frame3Ba=  000D     |     frame4Al=  0010     |     frame4Ba=  000F 
-    frame5Al=  0012     |     frame5Ba=  0011     |   0 frameExp   00B6 R
-  0 frameExp   00C4 R   |   0 frameExp   00D2 R   |   0 frameExp   00E0 R
-  0 frameExp   00EE R   |   0 masCiclo   01A8 R   |   0 mayor47    0078 R
-  0 menorCua   0074 R   |   0 num_enem   0064 GR  |   0 oleada     0065 GR
-  0 otroAlie   0160 R   |   0 posXenem   01AC GR  |   0 posYenem   01B1 GR
-  0 sigui_en   0105 R   |   0 sigui_en   0085 R   |   0 sigui_up   013A R
-    tamagno_=  0014     |     temporiz=  0007     |   0 update_e   0133 GR
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_dis   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_etm   **** GX
+    cpct_etm   **** GX  |     cpct_get   **** GX  |     cpct_get   **** GX
+    cpct_isA   **** GX  |     cpct_isK   **** GX  |     cpct_sca   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_wai   **** GX  |   0 dibuja     00F4 R
+  0 draw_ene   007E GR  |   0 draw_ene   0094 R   |     enemiAlt=  0002 
+    enemiAnc=  0003     |     enemiVel=  0006     |     enemiX  =  0000 
+    enemiY  =  0001     |   0 enemy      0000 GR  |   0 enemy2     0014 GR
+  0 enemy2H    0016 R   |   0 enemy2W    0017 R   |   0 enemy2X    0014 R
+  0 enemy2Y    0015 R   |   0 enemy2an   001D R   |   0 enemy2an   001F R
+  0 enemy2an   0021 R   |   0 enemy2an   0023 R   |   0 enemy2an   0025 R
+  0 enemy2sp   0018 R   |   0 enemy2st   001C R   |   0 enemy2ti   001B R
+  0 enemy2ve   001A R   |   0 enemy2vi   0027 R   |   0 enemy3     0028 GR
+  0 enemy3H    002A R   |   0 enemy3W    002B R   |   0 enemy3X    0028 R
+  0 enemy3Y    0029 R   |   0 enemy3an   0031 R   |   0 enemy3an   0033 R
+  0 enemy3an   0035 R   |   0 enemy3an   0037 R   |   0 enemy3an   0039 R
+  0 enemy3sp   002C R   |   0 enemy3st   0030 R   |   0 enemy3ti   002F R
+  0 enemy3ve   002E R   |   0 enemy3vi   003B R   |   0 enemy4     003C GR
+  0 enemy4H    003E R   |   0 enemy4W    003F R   |   0 enemy4X    003C R
+  0 enemy4Y    003D R   |   0 enemy4an   0045 R   |   0 enemy4an   0047 R
+  0 enemy4an   0049 R   |   0 enemy4an   004B R   |   0 enemy4an   004D R
+  0 enemy4sp   0040 R   |   0 enemy4st   0044 R   |   0 enemy4ti   0043 R
+  0 enemy4ve   0042 R   |   0 enemy4vi   004F R   |   0 enemy5     0050 GR
+  0 enemy5H    0052 R   |   0 enemy5W    0053 R   |   0 enemy5X    0050 R
+  0 enemy5Y    0051 R   |   0 enemy5an   0059 R   |   0 enemy5an   005B R
+  0 enemy5an   005D R   |   0 enemy5an   005F R   |   0 enemy5an   0061 R
+  0 enemy5sp   0054 R   |   0 enemy5st   0058 R   |   0 enemy5ti   0057 R
+  0 enemy5ve   0056 R   |   0 enemy5vi   0063 R   |   0 enemyH     0002 R
+  0 enemyW     0003 R   |   0 enemyX     0000 R   |   0 enemyY     0001 R
+  0 enemyani   0009 R   |   0 enemyani   000B R   |   0 enemyani   000D R
+  0 enemyani   000F R   |   0 enemyani   0011 R   |   0 enemyspr   0004 R
+  0 enemysta   0008 R   |   0 enemytie   0007 R   |   0 enemyvel   0006 R
+  0 enemyviv   0013 R   |   0 erase_en   00FE GR  |   0 erase_en   0114 R
+  0 fin        007A R   |   0 finOlead   0066 GR  |   0 final      0177 R
+    frame1Al=  000A     |     frame1Ba=  0009     |     frame2Al=  000C 
+    frame2Ba=  000B     |     frame3Al=  000E     |     frame3Ba=  000D 
+    frame4Al=  0010     |     frame4Ba=  000F     |     frame5Al=  0012 
+    frame5Ba=  0011     |   0 frameExp   00B6 R   |   0 frameExp   00C4 R
+  0 frameExp   00D2 R   |   0 frameExp   00E0 R   |   0 frameExp   00EE R
+  0 masCiclo   01AF R   |   0 mayor47    0078 R   |   0 menorCua   0074 R
+  0 num_enem   0064 GR  |   0 oleada     0065 GR  |   0 otroAlie   0160 R
+  0 posXenem   01B3 GR  |   0 posYenem   01B8 GR  |   0 sigui_en   0105 R
+  0 sigui_en   0085 R   |   0 sigui_up   013A R   |     tamagno_=  0014 
+    temporiz=  0007     |   0 update_e   0133 GR  |   0 update_s   014F R
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-  0 update_s   014F R   |   0 update_t   0171 R   |   0 vuelve     01A7 R
+  0 update_t   0178 R   |   0 vuelve     01AE R
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE      size  1C2   flags    0
+   0 _CODE      size  1CD   flags    0
 

@@ -668,7 +668,7 @@ Hexadecimal [16-Bits]
    0024                       2    cpctm_setBorder_raw_asm \HW_WHITE ;; [28] Macro that does the job, but requires a number value to be passed
                               1    .globl cpct_setPALColour_asm
    4B3A 21 10 00      [10]    2    ld   hl, #0x010         ;; [3]  H=Hardware value of desired colour, L=Border INK (16)
-   4B3D CD 8B 55      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
+   4B3D CD 96 55      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
                               3    .radix d
    4B40 36 00         [10]   39     ld (hl), #0x0000
    4B42 C9            [10]   40     ret
