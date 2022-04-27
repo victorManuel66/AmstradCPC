@@ -116,9 +116,7 @@ principal:
       call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
       ld iy, #nivel1                                                 ;; Dirección donde se encuentra el mensaje
       call cpct_drawStringM0_asm
-      call XX                                                        ;;**************************************
-      jr .
-XX:   
+ 
    ld ix, #enemy
    call situaEnemigos
 

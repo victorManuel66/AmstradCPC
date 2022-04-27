@@ -210,26 +210,26 @@ Hexadecimal [16-Bits]
                              29 
    4C69                      30 _main::
                              31    ;; Disable firmware to prevent it from interfering with string drawing
-   4C69 CD 0C 60      [17]   32    call cpct_disableFirmware_asm
+   4C69 CD F1 5F      [17]   32    call cpct_disableFirmware_asm
                              33    ;; Cambiamos a modo de video 0
    4C6C 0E 00         [ 7]   34    ld  c, #0x00
-   4C6E CD D2 5F      [17]   35    call cpct_setVideoMode_asm
+   4C6E CD B7 5F      [17]   35    call cpct_setVideoMode_asm
                              36    ;; Asignamos colores a la paleta
    4C71 21 59 4C      [10]   37    ld hl, #paleta
    4C74 11 10 00      [10]   38    ld de, #0x10
-   4C77 CD 77 55      [17]   39    call cpct_setPalette_asm
+   4C77 CD 5C 55      [17]   39    call cpct_setPalette_asm
                              40    ;; Inicializar sonidos SFX
    4C7A 11 40 00      [10]   41    ld de, #_Newexplo
-   4C7D CD 38 5D      [17]   42    call cpct_akp_SFXInit_asm
+   4C7D CD 1D 5D      [17]   42    call cpct_akp_SFXInit_asm
    4C80 11 40 00      [10]   43    ld de, #_Newexplo
-   4C83 CD AC 5C      [17]   44    call cpct_akp_musicInit_asm
+   4C83 CD 91 5C      [17]   44    call cpct_akp_musicInit_asm
                              45 
-   4C86 CD 6A 50      [17]   46    call menu
+   4C86 CD 50 50      [17]   46    call menu
                              47 
    4C89                      48 newGame:
                              49    ;; Dibujar la pantalla
    4C89 21 66 48      [10]   50    ld hl, #_tileset
-   4C8C CD 7F 5F      [17]   51    call cpct_etm_setTileset2x4_asm
+   4C8C CD 64 5F      [17]   51    call cpct_etm_setTileset2x4_asm
    4C8F 21 00 40      [10]   52    ld hl, #_fondo
    4C92 E5            [11]   53    push hl
    4C93 21 00 C0      [10]   54    ld hl, #0xC000
@@ -237,42 +237,42 @@ Hexadecimal [16-Bits]
    4C97 01 00 00      [10]   56    ld bc, #0x0000
    4C9A 11 28 32      [10]   57    ld de, #0x3228
    4C9D 3E 28         [ 7]   58    ld  a, #0x28
-   4C9F CD F3 5E      [17]   59    call cpct_etm_drawTileBox2x4_asm
+   4C9F CD D8 5E      [17]   59    call cpct_etm_drawTileBox2x4_asm
                              60 
                              61    ;; Marcador
    4CA2 21 02 00      [10]   62    ld hl, #0x0002
-   4CA5 CD E1 60      [17]   63    call cpct_setDrawCharM0_asm                                    ;; Colores del texto
+   4CA5 CD C6 60      [17]   63    call cpct_setDrawCharM0_asm                                    ;; Colores del texto
                              64 
    4CA8 11 00 C0      [10]   65    ld de, #0xC000
    4CAB 01 3B 14      [10]   66    ld bc, #0x143B
-   4CAE CD 04 61      [17]   67    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
+   4CAE CD E9 60      [17]   67    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
 Hexadecimal [16-Bits]
 
 
 
    4CB1 FD 21 FD 4B   [14]   68    ld iy, #new
-   4CB5 CD C9 5D      [17]   69    call cpct_drawStringM0_asm
+   4CB5 CD AE 5D      [17]   69    call cpct_drawStringM0_asm
    4CB8 11 00 C0      [10]   70    ld de, #0xC000
    4CBB 01 37 1B      [10]   71    ld bc, #0x1B37
-   4CBE CD 04 61      [17]   72    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
+   4CBE CD E9 60      [17]   72    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
    4CC1 FD 21 01 4C   [14]   73    ld iy, #escore
-   4CC5 CD C9 5D      [17]   74    call cpct_drawStringM0_asm
+   4CC5 CD AE 5D      [17]   74    call cpct_drawStringM0_asm
    4CC8 11 00 C0      [10]   75    ld de, #0xC000
    4CCB 01 37 4E      [10]   76    ld bc, #0x4E37
-   4CCE CD 04 61      [17]   77    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
+   4CCE CD E9 60      [17]   77    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
    4CD1 FD 21 01 4C   [14]   78    ld iy, #escore
-   4CD5 CD C9 5D      [17]   79    call cpct_drawStringM0_asm
+   4CD5 CD AE 5D      [17]   79    call cpct_drawStringM0_asm
    4CD8 11 00 C0      [10]   80    ld de, #0xC000
    4CDB 01 37 8A      [10]   81    ld bc, #0x8A37
-   4CDE CD 04 61      [17]   82    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
+   4CDE CD E9 60      [17]   82    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
    4CE1 FD 21 07 4C   [14]   83    ld iy, #lives                                                  
-   4CE5 CD C9 5D      [17]   84    call cpct_drawStringM0_asm                                     ;; Escribe vidas
+   4CE5 CD AE 5D      [17]   84    call cpct_drawStringM0_asm                                     ;; Escribe vidas
    4CE8 11 00 C0      [10]   85    ld de, #0xC000
    4CEB 01 37 5C      [10]   86    ld bc, #0x5C37
-   4CEE CD 04 61      [17]   87    call cpct_getScreenPtr_asm
+   4CEE CD E9 60      [17]   87    call cpct_getScreenPtr_asm
    4CF1 FD 21 4C 4C   [14]   88    ld iy, #puntos
-   4CF5 CD C9 5D      [17]   89    call cpct_drawStringM0_asm                                    ;; Dibuja los puntos
+   4CF5 CD AE 5D      [17]   89    call cpct_drawStringM0_asm                                    ;; Dibuja los puntos
                              90 
                              91    ;; dibujar las naves en el marcador
    4CF8 01 37 A6      [10]   92    ld bc, #0xA637                                                 ;; En B coordenada Y en C coordenada X
@@ -281,11 +281,11 @@ Hexadecimal [16-Bits]
    4CFD F5            [11]   95    push af                                                        ;; Preservo A por que las llamadas a cpctelera lo corrompen
    4CFE C5            [11]   96    push bc                                                        ;; Lo mismo para BC
    4CFF 11 00 C0      [10]   97    ld de, #0xC000
-   4D02 CD 04 61      [17]   98    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
+   4D02 CD E9 60      [17]   98    call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
    4D05 EB            [ 4]   99    ex de, hl                                                      ;; Necesario por cpct_drawSprite
    4D06 21 5A 49      [10]  100    ld hl, #_spr                                                   ;; Dirección donde esta el sprite
    4D09 01 05 06      [10]  101    ld bc, #0x0605                                                 ;; B alto y C ancho del sprite
-   4D0C CD 53 5E      [17]  102    call cpct_drawSprite_asm                                       ;; dibuja el sprite
+   4D0C CD 38 5E      [17]  102    call cpct_drawSprite_asm                                       ;; dibuja el sprite
    4D0F C1            [10]  103    pop bc
    4D10 3E 07         [ 7]  104    ld  a, #0x07
    4D12 81            [ 4]  105    add a, c
@@ -296,95 +296,93 @@ Hexadecimal [16-Bits]
                             110 
    4D18                     111 principal:
    4D18 21 0E 00      [10]  112       ld hl, #0x000E
-   4D1B CD E1 60      [17]  113       call cpct_setDrawCharM0_asm
+   4D1B CD C6 60      [17]  113       call cpct_setDrawCharM0_asm
    4D1E 11 00 C0      [10]  114       ld de, #0xC000
    4D21 01 10 4E      [10]  115       ld bc, #0x4E10
-   4D24 CD 04 61      [17]  116       call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
+   4D24 CD E9 60      [17]  116       call cpct_getScreenPtr_asm                                     ;; Posición de pantalla donde escribir
    4D27 FD 21 52 4C   [14]  117       ld iy, #nivel1                                                 ;; Dirección donde se encuentra el mensaje
-   4D2B CD C9 5D      [17]  118       call cpct_drawStringM0_asm
-   4D2E CD 33 4D      [17]  119       call XX                                                        ;;**************************************
-   4D31 18 FE         [12]  120       jr .
-   4D33                     121 XX:   
-   4D33 DD 21 26 4E   [14]  122    ld ix, #enemy
+   4D2B CD AE 5D      [17]  118       call cpct_drawStringM0_asm
+                            119  
+   4D2E DD 21 21 4E   [14]  120    ld ix, #enemy
+   4D32 CD 18 4B      [17]  121    call situaEnemigos
+                            122 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 16.
 Hexadecimal [16-Bits]
 
 
 
-   4D37 CD 18 4B      [17]  123    call situaEnemigos
-                            124 
-   4D3A                     125    main_loop:
-   4D3A DD 21 88 49   [14]  126       ld ix, #Player                                     ;; IX contiene el inicio de los datos del Player    
-   4D3E CD FE 49      [17]  127       call erase_player                                  ;; Borra el sprite de la posición actual
-   4D41 DD 21 26 4E   [14]  128       ld ix, #enemy                                      ;; IX ahora apunta al inicio de los datos enemigo
-   4D45 CD 24 4F      [17]  129       call erase_enemy                                   ;; Borra al enemigo
-                            130 
-   4D48 DD 21 88 49   [14]  131       ld ix, #Player                                     ;; IX contiene el inicio de los datos del Player
-   4D4C CD 96 49      [17]  132       call update_player                                 ;; Calcula la nueva posición
-   4D4F DD 21 26 4E   [14]  133       ld ix, #enemy                                      ;; IX ahora apunta al inicio de los datos enemigo
-   4D53 CD 59 4F      [17]  134       call update_enemy                                  ;; Calcula la nueva posición del enemigo
-   4D56 DD 21 26 4E   [14]  135       ld ix, #enemy                                      ;; IX contiene el inicio de los datos del enemy
-   4D5A CD 34 4A      [17]  136       call colision_enemy                                ;; Ver si los enemigos colisionan
-                            137    
-                            138 
-   4D5D DD 21 88 49   [14]  139       ld ix, #Player                                     ;; IX contiene inicio de los datos del Player
-   4D61 CD DD 49      [17]  140       call draw_player                                   ;; Dibuja el sprite en la nueva posición
-   4D64 DD 21 26 4E   [14]  141       ld ix, #enemy                                      ;; IX ahora apunta al inicio de los datos del enemigo
-   4D68 CD A4 4E      [17]  142       call draw_enemy                                    ;; Dibuja al enemigo
-                            143   
-                            144 
-   4D6B CD 18 4A      [17]  145       call disparando                                    ;; Comprobar si esta disparando
-   4D6E 7E            [ 7]  146       ld  a, (hl)
-   4D6F FE 01         [ 7]  147       cp #0x01                                           ;; Si esta a uno es que tiene que disparar
-   4D71 20 10         [12]  148       jr nz, nodisparar
-                            149 
-   4D73 CD E7 4D      [17]  150       call erase_laser                                   ;; Borra el disparo
-   4D76 CD FF 4D      [17]  151       call update_laser                                  ;; Actualiza el disparo
-   4D79 CD CE 4D      [17]  152       call draw_laser                                    ;; Dibuja el disparo
-   4D7C DD 21 26 4E   [14]  153       ld ix, #enemy
-   4D80 CD F3 4F      [17]  154       call laser_colision                                ;; Ver si laser colision
-                            155 
-   4D83                     156 nodisparar::
-   4D83 CD DF 5F      [17]  157       call cpct_waitVSYNC_asm                            ;; Sincronización
-   4D86 21 2D 4B      [10]  158       ld hl, #reloj
-   4D89 CD 4F 55      [17]  159       call cpct_setInterruptHandler_asm
-   4D8C CD A2 55      [17]  160       call cpct_akp_musicPlay_asm                        ;; Tocar música para usar los efectos de sonido
-                            161 
-                            162 
-   4D8F DD 21 88 49   [14]  163       ld ix, #Player  
-   4D93 DD 7E 06      [19]  164       ld  a, 6(ix)                                       ;; El número de vidas restantes
-   4D96 FE 00         [ 7]  165       cp  #0x00                                          ;; Ver si estan a cero las vidas
-   4D98 20 A0         [12]  166       jr nz, main_loop                                   ;; Continua mientras haya vidas
-                            167 
-                            168 
-   4D9A 21 04 00      [10]  169       ld hl, #0x0004
-   4D9D CD E1 60      [17]  170       call cpct_setDrawCharM0_asm
-                            171 
-   4DA0 11 00 C0      [10]  172       ld de, #0xC000                                     ;; Inicio de la memoria de video
-   4DA3 01 0A 64      [10]  173       ld bc, #0x640A                                     ;; Coordenadas X y Y donde escribir
-   4DA6 CD 04 61      [17]  174       call cpct_getScreenPtr_asm                         ;; Obtener dirección de momoria de video
-                            175       
-   4DA9 FD 21 F3 4B   [14]  176       ld iy, #gameover
-   4DAD CD C9 5D      [17]  177       call cpct_drawStringM0_asm                         ;; Excribe el mensaje
+   4D35                     123    main_loop:
+   4D35 DD 21 88 49   [14]  124       ld ix, #Player                                     ;; IX contiene el inicio de los datos del Player    
+   4D39 CD FE 49      [17]  125       call erase_player                                  ;; Borra el sprite de la posición actual
+   4D3C DD 21 21 4E   [14]  126       ld ix, #enemy                                      ;; IX ahora apunta al inicio de los datos enemigo
+   4D40 CD 1F 4F      [17]  127       call erase_enemy                                   ;; Borra al enemigo
+                            128 
+   4D43 DD 21 88 49   [14]  129       ld ix, #Player                                     ;; IX contiene el inicio de los datos del Player
+   4D47 CD 96 49      [17]  130       call update_player                                 ;; Calcula la nueva posición
+   4D4A DD 21 21 4E   [14]  131       ld ix, #enemy                                      ;; IX ahora apunta al inicio de los datos enemigo
+   4D4E CD 54 4F      [17]  132       call update_enemy                                  ;; Calcula la nueva posición del enemigo
+   4D51 DD 21 21 4E   [14]  133       ld ix, #enemy                                      ;; IX contiene el inicio de los datos del enemy
+   4D55 CD 34 4A      [17]  134       call colision_enemy                                ;; Ver si los enemigos colisionan
+                            135    
+                            136 
+   4D58 DD 21 88 49   [14]  137       ld ix, #Player                                     ;; IX contiene inicio de los datos del Player
+   4D5C CD DD 49      [17]  138       call draw_player                                   ;; Dibuja el sprite en la nueva posición
+   4D5F DD 21 21 4E   [14]  139       ld ix, #enemy                                      ;; IX ahora apunta al inicio de los datos del enemigo
+   4D63 CD 9F 4E      [17]  140       call draw_enemy                                    ;; Dibuja al enemigo
+                            141   
+                            142 
+   4D66 CD 18 4A      [17]  143       call disparando                                    ;; Comprobar si esta disparando
+   4D69 7E            [ 7]  144       ld  a, (hl)
+   4D6A FE 01         [ 7]  145       cp #0x01                                           ;; Si esta a uno es que tiene que disparar
+   4D6C 20 10         [12]  146       jr nz, nodisparar
+                            147 
+   4D6E CD E2 4D      [17]  148       call erase_laser                                   ;; Borra el disparo
+   4D71 CD FA 4D      [17]  149       call update_laser                                  ;; Actualiza el disparo
+   4D74 CD C9 4D      [17]  150       call draw_laser                                    ;; Dibuja el disparo
+   4D77 DD 21 21 4E   [14]  151       ld ix, #enemy
+   4D7B CD D9 4F      [17]  152       call laser_colision                                ;; Ver si laser colision
+                            153 
+   4D7E                     154 nodisparar::
+   4D7E CD C4 5F      [17]  155       call cpct_waitVSYNC_asm                            ;; Sincronización
+   4D81 21 2D 4B      [10]  156       ld hl, #reloj
+   4D84 CD 35 55      [17]  157       call cpct_setInterruptHandler_asm
+   4D87 CD 87 55      [17]  158       call cpct_akp_musicPlay_asm                        ;; Tocar música para usar los efectos de sonido
+                            159 
+                            160 
+   4D8A DD 21 88 49   [14]  161       ld ix, #Player  
+   4D8E DD 7E 06      [19]  162       ld  a, 6(ix)                                       ;; El número de vidas restantes
+   4D91 FE 00         [ 7]  163       cp  #0x00                                          ;; Ver si estan a cero las vidas
+   4D93 20 A0         [12]  164       jr nz, main_loop                                   ;; Continua mientras haya vidas
+                            165 
+                            166 
+   4D95 21 04 00      [10]  167       ld hl, #0x0004
+   4D98 CD C6 60      [17]  168       call cpct_setDrawCharM0_asm
+                            169 
+   4D9B 11 00 C0      [10]  170       ld de, #0xC000                                     ;; Inicio de la memoria de video
+   4D9E 01 0A 64      [10]  171       ld bc, #0x640A                                     ;; Coordenadas X y Y donde escribir
+   4DA1 CD E9 60      [17]  172       call cpct_getScreenPtr_asm                         ;; Obtener dirección de momoria de video
+                            173       
+   4DA4 FD 21 F3 4B   [14]  174       ld iy, #gameover
+   4DA8 CD AE 5D      [17]  175       call cpct_drawStringM0_asm                         ;; Excribe el mensaje
+                            176 
+   4DAB CD EA 5C      [17]  177       call cpct_akp_stop_asm                             ;; Para el sonido
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 17.
 Hexadecimal [16-Bits]
 
 
 
                             178 
-   4DB0 CD 05 5D      [17]  179       call cpct_akp_stop_asm                             ;; Para el sonido
-                            180 
-   4DB3                     181 espera:
-   4DB3 CD 18 61      [17]  182       call cpct_scanKeyboard_asm                         ;; Escanear al teclado
-   4DB6 CD C5 5F      [17]  183       call cpct_isAnyKeyPressed_asm                      ;; Ver si se pulso una tecla
-   4DB9 FE 00         [ 7]  184       cp #0x00                                           ;; Si en A hay un cero es que no se pulso una tecla
-   4DBB 28 F6         [12]  185       jr  z, espera                                      ;; vuelve a espera hasta que se pulse una tecla
+   4DAE                     179 espera:
+   4DAE CD FB 60      [17]  180       call cpct_scanKeyboard_asm                         ;; Escanear al teclado
+   4DB1 CD AA 5F      [17]  181       call cpct_isAnyKeyPressed_asm                      ;; Ver si se pulso una tecla
+   4DB4 FE 00         [ 7]  182       cp #0x00                                           ;; Si en A hay un cero es que no se pulso una tecla
+   4DB6 28 F6         [12]  183       jr  z, espera                                      ;; vuelve a espera hasta que se pulse una tecla
+                            184 
+   4DB8 CD 50 50      [17]  185       call menu
                             186 
-   4DBD CD 6A 50      [17]  187       call menu
-                            188 
-   4DC0 DD 21 88 49   [14]  189       ld ix, #Player                                     ;; Puntero al inicio de datos del jugador
-   4DC4 DD 36 06 03   [19]  190       ld 6(ix), #0x03                                    ;; Número de vidas de nuevo a tre
-                            191 
+   4DBB DD 21 88 49   [14]  187       ld ix, #Player                                     ;; Puntero al inicio de datos del jugador
+   4DBF DD 36 06 03   [19]  188       ld 6(ix), #0x03                                    ;; Número de vidas de nuevo a tre
+                            189 
+                            190 
+   4DC3 C3 89 4C      [10]  191       jp newGame                                         ;; Jugar de nuevo
                             192 
-   4DC8 C3 89 4C      [10]  193       jp newGame                                         ;; Jugar de nuevo
-                            194 

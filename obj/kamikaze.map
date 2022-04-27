@@ -22,21 +22,21 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s___Newexplo                    
      00000000  s___Newexplo0                   
      000000C1  l___Newexplo0                   
-     00002159  l__CODE                         
+     0000213C  l__CODE                         
      00004000  s__CODE                         
-     00006159  s__DATA                         
-     00006159  s__GSFINAL                      
-     00006159  s__GSINIT                       
-     00006159  s__HOME                         
-     00006159  s__INITIALIZED                  
-     00006159  s__INITIALIZER                  
+     0000613C  s__DATA                         
+     0000613C  s__GSFINAL                      
+     0000613C  s__GSINIT                       
+     0000613C  s__HOME                         
+     0000613C  s__INITIALIZED                  
+     0000613C  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002159 =        8537. bytes (REL,CON)
+_CODE                               00004000    0000213C =        8508. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -95,7 +95,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002159 =        8537. bytes (REL,CON)
+_CODE                               00004000    0000213C =        8508. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -103,96 +103,96 @@ _CODE                               00004000    00002159 =        8537. bytes (R
      00004C4C  puntos                             
      00004C52  nivel1                             
      00004C69  _main                              main
-     00004D83  nodisparar                         main
-     00004DCE  draw_laser                         
-     00004DE7  erase_laser                        
-     00004DFF  update_laser                       
-     00004E1E  posXlaserPtr                       
-     00004E22  posYlaserPtr                       
-     00004E26  enemy                              enemy
-     00004E3A  enemy2                             enemy
-     00004E4E  enemy3                             enemy
-     00004E62  enemy4                             enemy
-     00004E76  enemy5                             enemy
-     00004E8A  num_enemigos                       enemy
-     00004E8B  oleada                             enemy
-     00004E8C  finOleada                          enemy
-     00004E8D  calXenemy                          enemy
-     00004EA4  draw_enemy                         enemy
-     00004F24  erase_enemy                        enemy
-     00004F59  update_enemy                       enemy
-     00004FD9  posXenemyPtr                       enemy
-     00004FDE  posYenemyPtr                       enemy
-     00004FF3  laser_colision                     
-     0000506A  menu                               cpct_keyboard
-     0000554F  _cpct_setInterruptHandler          cpct_firmware
-     0000554F  cpct_setInterruptHandler_asm       cpct_firmware
-     00005560  cpct_safeInterruptHandlerHook      cpct_firmware
-     00005577  cpct_setPalette_asm                cpct_video
-     0000558A  _cpct_isKeyPressed                 cpct_keyboard
-     0000558A  cpct_isKeyPressed_asm              cpct_keyboard
-     00005596  cpct_setPALColour_asm              cpct_video
-     000055A0  _cpct_akp_digidrumStatus           cpct_audio
-     000055A1  _cpct_akp_songLoopTimes            cpct_audio
-     000055A2  _cpct_akp_musicPlay                cpct_audio
-     000055A2  cpct_akp_musicPlay_asm             cpct_audio
-     00005CA5  _cpct_akp_musicInit                cpct_audio
-     00005CAC  cpct_akp_musicInit_asm             cpct_audio
-     00005D05  _cpct_akp_stop                     cpct_audio
-     00005D05  cpct_akp_stop_asm                  cpct_audio
-     00005D18  _cpct_akp_SFXGetInstrument         cpct_audio
-     00005D1D  cpct_akp_SFXGetInstrument_asm      cpct_audio
-     00005D31  _cpct_akp_SFXInit                  cpct_audio
-     00005D38  cpct_akp_SFXInit_asm               cpct_audio
-     00005D3F  _cpct_akp_SFXStopAll               cpct_audio
-     00005D3F  cpct_akp_SFXStopAll_asm            cpct_audio
-     00005D4C  _cpct_akp_SFXPlay                  cpct_audio
-     00005D5E  cpct_akp_SFXPlay_asm               cpct_audio
-     00005DAB  _cpct_akp_SFXStop                  cpct_audio
-     00005DB0  cpct_akp_SFXStop_asm               cpct_audio
+     00004D7E  nodisparar                         main
+     00004DC9  draw_laser                         
+     00004DE2  erase_laser                        
+     00004DFA  update_laser                       
+     00004E19  posXlaserPtr                       
+     00004E1D  posYlaserPtr                       
+     00004E21  enemy                              enemy
+     00004E35  enemy2                             enemy
+     00004E49  enemy3                             enemy
+     00004E5D  enemy4                             enemy
+     00004E71  enemy5                             enemy
+     00004E85  num_enemigos                       enemy
+     00004E86  oleada                             enemy
+     00004E87  finOleada                          enemy
+     00004E88  calXenemy                          enemy
+     00004E9F  draw_enemy                         enemy
+     00004F1F  erase_enemy                        enemy
+     00004F54  update_enemy                       enemy
+     00004FCF  posXenemyPtr                       enemy
+     00004FD4  posYenemyPtr                       enemy
+     00004FD9  laser_colision                     
+     00005050  menu                               cpct_keyboard
+     00005535  _cpct_setInterruptHandler          cpct_firmware
+     00005535  cpct_setInterruptHandler_asm       cpct_firmware
+     00005546  cpct_safeInterruptHandlerHook      cpct_firmware
+     0000555C  cpct_setPalette_asm                cpct_video
+     0000556F  _cpct_isKeyPressed                 cpct_keyboard
+     0000556F  cpct_isKeyPressed_asm              cpct_keyboard
+     0000557B  cpct_setPALColour_asm              cpct_video
+     00005585  _cpct_akp_digidrumStatus           cpct_audio
+     00005586  _cpct_akp_songLoopTimes            cpct_audio
+     00005587  _cpct_akp_musicPlay                cpct_audio
+     00005587  cpct_akp_musicPlay_asm             cpct_audio
+     00005C8A  _cpct_akp_musicInit                cpct_audio
+     00005C91  cpct_akp_musicInit_asm             cpct_audio
+     00005CEA  _cpct_akp_stop                     cpct_audio
+     00005CEA  cpct_akp_stop_asm                  cpct_audio
+     00005CFD  _cpct_akp_SFXGetInstrument         cpct_audio
+     00005D02  cpct_akp_SFXGetInstrument_asm      cpct_audio
+     00005D16  _cpct_akp_SFXInit                  cpct_audio
+     00005D1D  cpct_akp_SFXInit_asm               cpct_audio
+     00005D24  _cpct_akp_SFXStopAll               cpct_audio
+     00005D24  cpct_akp_SFXStopAll_asm            cpct_audio
+     00005D31  _cpct_akp_SFXPlay                  cpct_audio
+     00005D43  cpct_akp_SFXPlay_asm               cpct_audio
+     00005D90  _cpct_akp_SFXStop                  cpct_audio
+     00005D95  cpct_akp_SFXStop_asm               cpct_audio
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002159 =        8537. bytes (REL,CON)
+_CODE                               00004000    0000213C =        8508. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00005DC9  cpct_drawStringM0_asm              cpct_strings
-     00005DEF  cpct_drawCharM0_inner_asm          cpct_strings
-     00005E4F  dc_2pxtableM0                      cpct_strings
-     00005E53  cpct_drawSprite_asm                cpct_sprites
-     00005EF3  cpct_etm_drawTileBox2x4_asm        cpct_easytilemaps
-     00005F7F  _cpct_etm_setTileset2x4            cpct_easytilemaps
-     00005F7F  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
-     00005F83  cpct_drawCharM0_asm                cpct_strings
-     00005F9A  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00005FA4  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
-     00005FAB  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
-     00005FAD  dtr_restore_ptileset               cpct_easytilemaps
-     00005FC5  _cpct_isAnyKeyPressed              cpct_keyboard
-     00005FC5  cpct_isAnyKeyPressed_asm           cpct_keyboard
-     00005FD2  cpct_setVideoMode_asm              cpct_video
-     00005FDF  _cpct_waitVSYNC                    cpct_video
-     00005FDF  cpct_waitVSYNC_asm                 cpct_video
-     00005FE7  _cpct_getRandom_xsp40_u8           cpct_random
-     00005FE7  cpct_getRandom_xsp40_u8_asm        cpct_random
-     00005FEC  _cpct_seed1_xsp40_u8               cpct_random
-     00005FEF  _cpct_seed2_xsp40_u8               cpct_random
-     00006009  _cpct_seed3_xsp40_u8               cpct_random
-     0000600C  _cpct_disableFirmware              cpct_firmware
-     0000600C  _cpct_removeInterruptHandler       cpct_firmware
-     0000600C  cpct_disableFirmware_asm           cpct_firmware
-     0000600C  cpct_removeInterruptHandler_asm    cpct_firmware
-     0000601C  cpct_drawSolidBox_asm              cpct_sprites
-     000060BF  cpct_drawTileAligned2x4_f_asm      cpct_sprites
-     000060E0  _cpct_mode_rom_status              cpct_firmware
-     000060E1  cpct_setDrawCharM0_asm             cpct_strings
-     00006104  cpct_getScreenPtr_asm              cpct_video
-     00006118  _cpct_scanKeyboard                 cpct_keyboard
-     00006118  cpct_scanKeyboard_asm              cpct_keyboard
-     00006149  dc_mode0_ct                        cpct_strings
+     00005DAE  cpct_drawStringM0_asm              cpct_strings
+     00005DD4  cpct_drawCharM0_inner_asm          cpct_strings
+     00005E34  dc_2pxtableM0                      cpct_strings
+     00005E38  cpct_drawSprite_asm                cpct_sprites
+     00005ED8  cpct_etm_drawTileBox2x4_asm        cpct_easytilemaps
+     00005F64  _cpct_etm_setTileset2x4            cpct_easytilemaps
+     00005F64  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
+     00005F68  cpct_drawCharM0_asm                cpct_strings
+     00005F7F  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00005F89  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
+     00005F90  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
+     00005F92  dtr_restore_ptileset               cpct_easytilemaps
+     00005FAA  _cpct_isAnyKeyPressed              cpct_keyboard
+     00005FAA  cpct_isAnyKeyPressed_asm           cpct_keyboard
+     00005FB7  cpct_setVideoMode_asm              cpct_video
+     00005FC4  _cpct_waitVSYNC                    cpct_video
+     00005FC4  cpct_waitVSYNC_asm                 cpct_video
+     00005FCC  _cpct_getRandom_xsp40_u8           cpct_random
+     00005FCC  cpct_getRandom_xsp40_u8_asm        cpct_random
+     00005FD1  _cpct_seed1_xsp40_u8               cpct_random
+     00005FD4  _cpct_seed2_xsp40_u8               cpct_random
+     00005FEE  _cpct_seed3_xsp40_u8               cpct_random
+     00005FF1  _cpct_disableFirmware              cpct_firmware
+     00005FF1  _cpct_removeInterruptHandler       cpct_firmware
+     00005FF1  cpct_disableFirmware_asm           cpct_firmware
+     00005FF1  cpct_removeInterruptHandler_asm    cpct_firmware
+     00006001  cpct_drawSolidBox_asm              cpct_sprites
+     000060A4  cpct_drawTileAligned2x4_f_asm      cpct_sprites
+     000060C5  _cpct_mode_rom_status              cpct_firmware
+     000060C6  cpct_setDrawCharM0_asm             cpct_strings
+     000060E9  cpct_getScreenPtr_asm              cpct_video
+     000060FB  _cpct_scanKeyboard                 cpct_keyboard
+     000060FB  cpct_scanKeyboard_asm              cpct_keyboard
+     0000612C  dc_mode0_ct                        cpct_strings
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
@@ -255,55 +255,55 @@ obj/Fx/NuevosSonidos.rel                  [  ]
 
 Libraries Linked                          [ object file ]
 
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setInterruptHandler.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPalette_asmbindings.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPALColour_asmbindings.re ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ arkostracker.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM0_asmbindings.re ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM0_inner.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSprite_asmbindings.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_etm_drawTileBox2x4_asmbindi ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_etm_setTileset2x4.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM0_asmbindings.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ keyboard.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_etm_drawTileRow2x4.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isAnyKeyPressed.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode_asmbindings.re ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getRandom_xsp40_u8.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_asmbindings.re ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawTileAligned2x4_f_asmbin ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setDrawCharM0_asmbindings.r ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_asmbindings.re ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
-/home/victor/cpctelera/cpctelera/cpctelera.lib
+/home/victorpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode0_ct.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.

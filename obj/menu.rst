@@ -832,827 +832,827 @@ Hexadecimal [16-Bits]
                               9 
                              10 .globl _cpct_keyboardStatusBuffer           ;; Array que contiene el estado del teclado
                              11 
-   506A                      12 menu::
+   5050                      12 menu::
    0000                      13     cpctm_clearScreen_asm 0x00              ;; Borra la pantalla
-   506A 21 00 C0      [10]    1    ld    hl, #0xC000    ;; [3] HL Points to Start of Video Memory
-   506D 11 01 C0      [10]    2    ld    de, #0xC001    ;; [3] DE Points to the next byte
-   5070 01 FF 3F      [10]    3    ld    bc, #(0x4000-1);; [3] BC = 16383 bytes to be copied
-   5073 36 00         [10]    4    ld   (hl), #0x00      ;; [3] First Byte = given Colour
-   5075 ED B0         [21]    5    ldir                 ;; [98297] Perform the copy
+   5050 21 00 C0      [10]    1    ld    hl, #0xC000    ;; [3] HL Points to Start of Video Memory
+   5053 11 01 C0      [10]    2    ld    de, #0xC001    ;; [3] DE Points to the next byte
+   5056 01 FF 3F      [10]    3    ld    bc, #(0x4000-1);; [3] BC = 16383 bytes to be copied
+   5059 36 00         [10]    4    ld   (hl), #0x00      ;; [3] First Byte = given Colour
+   505B ED B0         [21]    5    ldir                 ;; [98297] Perform the copy
    000D                      14     cpctm_setBorder_asm HW_BLACK            ;; Borde de la pantalla a negro
                               1    .radix h
    000D                       2    cpctm_setBorder_raw_asm \HW_BLACK ;; [28] Macro that does the job, but requires a number value to be passed
                               1    .globl cpct_setPALColour_asm
-   5077 21 10 14      [10]    2    ld   hl, #0x1410         ;; [3]  H=Hardware value of desired colour, L=Border INK (16)
-   507A CD 96 55      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
+   505D 21 10 14      [10]    2    ld   hl, #0x1410         ;; [3]  H=Hardware value of desired colour, L=Border INK (16)
+   5060 CD 7B 55      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
                               3    .radix d
                              15 
-   507D 21 06 00      [10]   16     ld hl, #0x0006
-   5080 CD E1 60      [17]   17     call cpct_setDrawCharM0_asm             ;; Establecer color del fondo y de la pluma
+   5063 21 06 00      [10]   16     ld hl, #0x0006
+   5066 CD C6 60      [17]   17     call cpct_setDrawCharM0_asm             ;; Establecer color del fondo y de la pluma
                              18 
-   5083 11 00 C0      [10]   19     ld de, #0xC000
-   5086 01 0F 4C      [10]   20     ld bc, #0x4C0F                          ;; Coordenada Y en B, coordenada X en C
-   5089 CD 04 61      [17]   21     call cpct_getScreenPtr_asm
+   5069 11 00 C0      [10]   19     ld de, #0xC000
+   506C 01 0F 4C      [10]   20     ld bc, #0x4C0F                          ;; Coordenada Y en B, coordenada X en C
+   506F CD E9 60      [17]   21     call cpct_getScreenPtr_asm
                              22 
-   508C FD 21 0D 4C   [14]   23     ld iy, #writeMenu1                      ;; Dirección del texto
-   5090 CD C9 5D      [17]   24     call cpct_drawStringM0_asm              ;; Escribe
+   5072 FD 21 0D 4C   [14]   23     ld iy, #writeMenu1                      ;; Dirección del texto
+   5076 CD AE 5D      [17]   24     call cpct_drawStringM0_asm              ;; Escribe
                              25 
-   5093 11 00 C0      [10]   26     ld de, #0xC000
-   5096 01 0F 55      [10]   27     ld bc, #0x550F                          ;; Coordenada Y en B, coordenada X en C
-   5099 CD 04 61      [17]   28     call cpct_getScreenPtr_asm
+   5079 11 00 C0      [10]   26     ld de, #0xC000
+   507C 01 0F 55      [10]   27     ld bc, #0x550F                          ;; Coordenada Y en B, coordenada X en C
+   507F CD E9 60      [17]   28     call cpct_getScreenPtr_asm
                              29 
-   509C FD 21 16 4C   [14]   30     ld iy, #writeMenu2                      ;; Dirección del texto
-   50A0 CD C9 5D      [17]   31     call cpct_drawStringM0_asm              ;; Escribe
+   5082 FD 21 16 4C   [14]   30     ld iy, #writeMenu2                      ;; Dirección del texto
+   5086 CD AE 5D      [17]   31     call cpct_drawStringM0_asm              ;; Escribe
                              32 
-   50A3 11 00 C0      [10]   33     ld de, #0xC000
-   50A6 01 0F 5E      [10]   34     ld bc, #0x5E0F                          ;; Coordenada Y en B, coordenada X en C
-   50A9 CD 04 61      [17]   35     call cpct_getScreenPtr_asm
+   5089 11 00 C0      [10]   33     ld de, #0xC000
+   508C 01 0F 5E      [10]   34     ld bc, #0x5E0F                          ;; Coordenada Y en B, coordenada X en C
+   508F CD E9 60      [17]   35     call cpct_getScreenPtr_asm
                              36 
-   50AC FD 21 23 4C   [14]   37     ld iy, #writeMenu3                      ;; Dirección del texto
-   50B0 CD C9 5D      [17]   38     call cpct_drawStringM0_asm              ;; Escribe
+   5092 FD 21 23 4C   [14]   37     ld iy, #writeMenu3                      ;; Dirección del texto
+   5096 CD AE 5D      [17]   38     call cpct_drawStringM0_asm              ;; Escribe
                              39 
-   50B3                      40 cont:
-   50B3 CD 18 61      [17]   41     call cpct_scanKeyboard_asm              ;; Escanea el teclado
+   5099                      40 cont:
+   5099 CD FB 60      [17]   41     call cpct_scanKeyboard_asm              ;; Escanea el teclado
                              42 
-   50B6 21 08 01      [10]   43     ld hl, #Key_1
-   50B9 CD 8A 55      [17]   44     call cpct_isKeyPressed_asm
-   50BC 20 12         [12]   45     jr  nz, Pulsado1
-   50BE 21 08 02      [10]   46     ld hl, #Key_2
-   50C1 CD 8A 55      [17]   47     call cpct_isKeyPressed_asm
-   50C4 20 0D         [12]   48     jr  nz, Pulsado2
-   50C6 21 07 02      [10]   49     ld hl, #Key_3
-   50C9 CD 8A 55      [17]   50     call cpct_isKeyPressed_asm
-   50CC 20 0A         [12]   51     jr  nz, Pulsado3
-   50CE 18 E3         [12]   52     jr  cont
+   509C 21 08 01      [10]   43     ld hl, #Key_1
+   509F CD 6F 55      [17]   44     call cpct_isKeyPressed_asm
+   50A2 20 12         [12]   45     jr  nz, Pulsado1
+   50A4 21 08 02      [10]   46     ld hl, #Key_2
+   50A7 CD 6F 55      [17]   47     call cpct_isKeyPressed_asm
+   50AA 20 0D         [12]   48     jr  nz, Pulsado2
+   50AC 21 07 02      [10]   49     ld hl, #Key_3
+   50AF CD 6F 55      [17]   50     call cpct_isKeyPressed_asm
+   50B2 20 0A         [12]   51     jr  nz, Pulsado3
+   50B4 18 E3         [12]   52     jr  cont
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 20.
 Hexadecimal [16-Bits]
 
 
 
-   50D0                      53 Pulsado1:
-   50D0 3E 01         [ 7]   54     ld  a, #0x01
-   50D2 C9            [10]   55     ret
-   50D3                      56 Pulsado2:
-   50D3 CD 18 61      [17]   57     call cpct_scanKeyboard_asm                 ;; Para resetear el teclado
-   50D6 18 13         [12]   58     jr redefine
-   50D8                      59 Pulsado3:
+   50B6                      53 Pulsado1:
+   50B6 3E 01         [ 7]   54     ld  a, #0x01
+   50B8 C9            [10]   55     ret
+   50B9                      56 Pulsado2:
+   50B9 CD FB 60      [17]   57     call cpct_scanKeyboard_asm                 ;; Para resetear el teclado
+   50BC 18 13         [12]   58     jr redefine
+   50BE                      59 Pulsado3:
                              60     ;; Asignar izquierda
-   50D8 21 09 04      [10]   61     ld hl, #Joy0_Left
-   50DB 22 91 49      [16]   62     ld (TeclaIz), hl
-   50DE 21 09 08      [10]   63     ld hl, #Joy0_Right
-   50E1 22 8F 49      [16]   64     ld (TeclaDe), hl
-   50E4 21 09 10      [10]   65     ld hl, #Joy0_Fire1
-   50E7 22 93 49      [16]   66     ld (TeclaDi), hl
-   50EA C9            [10]   67     ret
+   50BE 21 09 04      [10]   61     ld hl, #Joy0_Left
+   50C1 22 91 49      [16]   62     ld (TeclaIz), hl
+   50C4 21 09 08      [10]   63     ld hl, #Joy0_Right
+   50C7 22 8F 49      [16]   64     ld (TeclaDe), hl
+   50CA 21 09 10      [10]   65     ld hl, #Joy0_Fire1
+   50CD 22 93 49      [16]   66     ld (TeclaDi), hl
+   50D0 C9            [10]   67     ret
                              68 
-   50EB                      69 redefine:
+   50D1                      69 redefine:
    0081                      70     cpctm_clearScreen_asm 0x00              ;; Borra la pantalla
-   50EB 21 00 C0      [10]    1    ld    hl, #0xC000    ;; [3] HL Points to Start of Video Memory
-   50EE 11 01 C0      [10]    2    ld    de, #0xC001    ;; [3] DE Points to the next byte
-   50F1 01 FF 3F      [10]    3    ld    bc, #(0x4000-1);; [3] BC = 16383 bytes to be copied
-   50F4 36 00         [10]    4    ld   (hl), #0x00      ;; [3] First Byte = given Colour
-   50F6 ED B0         [21]    5    ldir                 ;; [98297] Perform the copy
+   50D1 21 00 C0      [10]    1    ld    hl, #0xC000    ;; [3] HL Points to Start of Video Memory
+   50D4 11 01 C0      [10]    2    ld    de, #0xC001    ;; [3] DE Points to the next byte
+   50D7 01 FF 3F      [10]    3    ld    bc, #(0x4000-1);; [3] BC = 16383 bytes to be copied
+   50DA 36 00         [10]    4    ld   (hl), #0x00      ;; [3] First Byte = given Colour
+   50DC ED B0         [21]    5    ldir                 ;; [98297] Perform the copy
                              71 
-   50F8 11 00 C0      [10]   72     ld de, #0xC000
-   50FB 01 0A 4C      [10]   73     ld bc, #0x4C0A
-   50FE CD 04 61      [17]   74     call cpct_getScreenPtr_asm
+   50DE 11 00 C0      [10]   72     ld de, #0xC000
+   50E1 01 0A 4C      [10]   73     ld bc, #0x4C0A
+   50E4 CD E9 60      [17]   74     call cpct_getScreenPtr_asm
                              75 
-   5101 FD 21 30 4C   [14]   76     ld iy, #izqui                     ;; Dirección del texto
-   5105 CD C9 5D      [17]   77     call cpct_drawStringM0_asm        ;; Escribe
-   5108                      78 keyleft:
-   5108 CD 94 51      [17]   79     call delay
-   510B CD 18 61      [17]   80     call cpct_scanKeyboard_asm        ;; Escaneo el teclado
-   510E CD C5 5F      [17]   81     call cpct_isAnyKeyPressed_asm
-   5111 28 F5         [12]   82     jr z, keyleft
-   5113 CD 9A 51      [17]   83     call drawKey                      ;; Localiza la tecla que ha pulsado el usuario
-   5116 22 91 49      [16]   84     ld (TeclaIz), hl                  ;; HL contiene el cpct_keyID
-   5119 D5            [11]   85     push  de                          ;; Preservar el valor devuelto por drawKey
-   511A 11 00 C0      [10]   86     ld de, #0xC000
-   511D 01 26 4C      [10]   87     ld bc, #0x4C26
-   5120 CD 04 61      [17]   88     call cpct_getScreenPtr_asm        ;; Hace un locate 
-   5123 01 06 00      [10]   89     ld  bc, #0x0006
-   5126 D1            [10]   90     pop  de                           ;; Recuperar de la pila el caracter devuelto por drawKeyLeft
-   5127 CD 83 5F      [17]   91     call cpct_drawCharM0_asm          ;; Imprime la tecla
+   50E7 FD 21 30 4C   [14]   76     ld iy, #izqui                     ;; Dirección del texto
+   50EB CD AE 5D      [17]   77     call cpct_drawStringM0_asm        ;; Escribe
+   50EE                      78 keyleft:
+   50EE CD 7A 51      [17]   79     call delay
+   50F1 CD FB 60      [17]   80     call cpct_scanKeyboard_asm        ;; Escaneo el teclado
+   50F4 CD AA 5F      [17]   81     call cpct_isAnyKeyPressed_asm
+   50F7 28 F5         [12]   82     jr z, keyleft
+   50F9 CD 80 51      [17]   83     call drawKey                      ;; Localiza la tecla que ha pulsado el usuario
+   50FC 22 91 49      [16]   84     ld (TeclaIz), hl                  ;; HL contiene el cpct_keyID
+   50FF D5            [11]   85     push  de                          ;; Preservar el valor devuelto por drawKey
+   5100 11 00 C0      [10]   86     ld de, #0xC000
+   5103 01 26 4C      [10]   87     ld bc, #0x4C26
+   5106 CD E9 60      [17]   88     call cpct_getScreenPtr_asm        ;; Hace un locate 
+   5109 01 06 00      [10]   89     ld  bc, #0x0006
+   510C D1            [10]   90     pop  de                           ;; Recuperar de la pila el caracter devuelto por drawKeyLeft
+   510D CD 68 5F      [17]   91     call cpct_drawCharM0_asm          ;; Imprime la tecla
                              92 
                              93     
-   512A 11 00 C0      [10]   94     ld de, #0xC000
-   512D 01 0A 55      [10]   95     ld bc, #0x550A
-   5130 CD 04 61      [17]   96     call cpct_getScreenPtr_asm
-   5133 FD 21 3A 4C   [14]   97     ld iy, #dere                      ;; Dirección del texto
-   5137 CD C9 5D      [17]   98     call cpct_drawStringM0_asm        ;; Escribe
-   513A CD 94 51      [17]   99     call delay                        ;; Para que a scanKeyBoard no sea tan rápido
+   5110 11 00 C0      [10]   94     ld de, #0xC000
+   5113 01 0A 55      [10]   95     ld bc, #0x550A
+   5116 CD E9 60      [17]   96     call cpct_getScreenPtr_asm
+   5119 FD 21 3A 4C   [14]   97     ld iy, #dere                      ;; Dirección del texto
+   511D CD AE 5D      [17]   98     call cpct_drawStringM0_asm        ;; Escribe
+   5120 CD 7A 51      [17]   99     call delay                        ;; Para que a scanKeyBoard no sea tan rápido
                             100 
-   513D                     101 keyright:
-   513D CD 18 61      [17]  102     call cpct_scanKeyboard_asm        ;; Escaneo el teclado
+   5123                     101 keyright:
+   5123 CD FB 60      [17]  102     call cpct_scanKeyboard_asm        ;; Escaneo el teclado
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 21.
 Hexadecimal [16-Bits]
 
 
 
-   5140 CD C5 5F      [17]  103     call cpct_isAnyKeyPressed_asm
-   5143 28 F8         [12]  104     jr  z, keyright
-   5145 CD 9A 51      [17]  105     call drawKey                      ;; Localiza la tecla que ha pulsado el usuario
-   5148 22 8F 49      [16]  106     ld (TeclaDe), hl                  ;; HL contiene el cpct_keyID
-   514B D5            [11]  107     push de                           ;; Preservar el valor devuelto por drawKey
-   514C 11 00 C0      [10]  108     ld de, #0xC000
-   514F 01 26 54      [10]  109     ld bc, #0x5426
-   5152 CD 04 61      [17]  110     call cpct_getScreenPtr_asm        ;; Hace un locate 
-   5155 01 06 00      [10]  111     ld  bc, #0x0006
-   5158 D1            [10]  112     pop  de                           ;; Recuperar de la pila el caracter devuelto por drawKeyLeft
-   5159 CD 83 5F      [17]  113     call cpct_drawCharM0_asm          ;; Imprime la tecla
-   515C CD 94 51      [17]  114     call delay                        ;; Para que a scanKeyBoard no sea tan rápido
+   5126 CD AA 5F      [17]  103     call cpct_isAnyKeyPressed_asm
+   5129 28 F8         [12]  104     jr  z, keyright
+   512B CD 80 51      [17]  105     call drawKey                      ;; Localiza la tecla que ha pulsado el usuario
+   512E 22 8F 49      [16]  106     ld (TeclaDe), hl                  ;; HL contiene el cpct_keyID
+   5131 D5            [11]  107     push de                           ;; Preservar el valor devuelto por drawKey
+   5132 11 00 C0      [10]  108     ld de, #0xC000
+   5135 01 26 54      [10]  109     ld bc, #0x5426
+   5138 CD E9 60      [17]  110     call cpct_getScreenPtr_asm        ;; Hace un locate 
+   513B 01 06 00      [10]  111     ld  bc, #0x0006
+   513E D1            [10]  112     pop  de                           ;; Recuperar de la pila el caracter devuelto por drawKeyLeft
+   513F CD 68 5F      [17]  113     call cpct_drawCharM0_asm          ;; Imprime la tecla
+   5142 CD 7A 51      [17]  114     call delay                        ;; Para que a scanKeyBoard no sea tan rápido
                             115 
-   515F 11 00 C0      [10]  116     ld de, #0xC000
-   5162 01 0A 5E      [10]  117     ld bc, #0x5E0A
-   5165 CD 04 61      [17]  118     call cpct_getScreenPtr_asm
-   5168 FD 21 43 4C   [14]  119     ld iy, #fue                       ;; Dirección del texto
-   516C CD C9 5D      [17]  120     call cpct_drawStringM0_asm        ;; Escribe
-   516F                     121 keyfire:
+   5145 11 00 C0      [10]  116     ld de, #0xC000
+   5148 01 0A 5E      [10]  117     ld bc, #0x5E0A
+   514B CD E9 60      [17]  118     call cpct_getScreenPtr_asm
+   514E FD 21 43 4C   [14]  119     ld iy, #fue                       ;; Dirección del texto
+   5152 CD AE 5D      [17]  120     call cpct_drawStringM0_asm        ;; Escribe
+   5155                     121 keyfire:
                             122     ;call delay                        ;; Para que a scanKeyBoard no sea tan rápido
-   516F CD 18 61      [17]  123     call cpct_scanKeyboard_asm        ;; Escaneo el teclado
-   5172 CD C5 5F      [17]  124     call cpct_isAnyKeyPressed_asm
-   5175 28 F8         [12]  125     jr  z, keyfire
-   5177 CD 9A 51      [17]  126     call drawKey                      ;; Localiza la tecla que ha pulsado el usuario
-   517A 22 93 49      [16]  127     ld (TeclaDi), hl                  ;; HL contiene el cpct_keyID
-   517D D5            [11]  128     push de                           ;; Preservar el valor devuelto por drawKey
-   517E 11 00 C0      [10]  129     ld de, #0xC000
-   5181 01 26 5C      [10]  130     ld bc, #0x5C26
-   5184 CD 04 61      [17]  131     call cpct_getScreenPtr_asm        ;; Hace un locate 
-   5187 01 06 00      [10]  132     ld  bc, #0x0006
-   518A D1            [10]  133     pop  de                           ;; Recuperar de la pila el caracter devuelto por drawKeyLeft
-   518B CD 83 5F      [17]  134     call cpct_drawCharM0_asm          ;; Imprime la tecla
+   5155 CD FB 60      [17]  123     call cpct_scanKeyboard_asm        ;; Escaneo el teclado
+   5158 CD AA 5F      [17]  124     call cpct_isAnyKeyPressed_asm
+   515B 28 F8         [12]  125     jr  z, keyfire
+   515D CD 80 51      [17]  126     call drawKey                      ;; Localiza la tecla que ha pulsado el usuario
+   5160 22 93 49      [16]  127     ld (TeclaDi), hl                  ;; HL contiene el cpct_keyID
+   5163 D5            [11]  128     push de                           ;; Preservar el valor devuelto por drawKey
+   5164 11 00 C0      [10]  129     ld de, #0xC000
+   5167 01 26 5C      [10]  130     ld bc, #0x5C26
+   516A CD E9 60      [17]  131     call cpct_getScreenPtr_asm        ;; Hace un locate 
+   516D 01 06 00      [10]  132     ld  bc, #0x0006
+   5170 D1            [10]  133     pop  de                           ;; Recuperar de la pila el caracter devuelto por drawKeyLeft
+   5171 CD 68 5F      [17]  134     call cpct_drawCharM0_asm          ;; Imprime la tecla
                             135 
-   518E CD 94 51      [17]  136     call delay                        ;; Para que a scanKeyBoard no sea tan rápido
+   5174 CD 7A 51      [17]  136     call delay                        ;; Para que a scanKeyBoard no sea tan rápido
                             137 
-   5191 C3 6A 50      [10]  138     jp menu
+   5177 C3 50 50      [10]  138     jp menu
                             139 
-   5194                     140 delay:
-   5194 06 96         [ 7]  141     ld  b, #0x96
-   5196                     142 espera:
-   5196 76            [ 4]  143     halt
-   5197 10 FD         [13]  144     djnz espera
-   5199 C9            [10]  145     ret
+   517A                     140 delay:
+   517A 06 96         [ 7]  141     ld  b, #0x96
+   517C                     142 espera:
+   517C 76            [ 4]  143     halt
+   517D 10 FD         [13]  144     djnz espera
+   517F C9            [10]  145     ret
                             146 
-   519A                     147 drawKey:
-   519A 21 9A 5F      [10]  148     ld hl, #_cpct_keyboardStatusBuffer
+   5180                     147 drawKey:
+   5180 21 7F 5F      [10]  148     ld hl, #_cpct_keyboardStatusBuffer
                             149 
-   519D 06 00         [ 7]  150     ld  b, #0x00                     ;; Contador de los bytes del array
-   519F                     151 otraLinea:                           ;; Primero hay que encontrar la línea
-   519F 7E            [ 7]  152     ld   a, (hl)                     ;; El byte al acumulador
-   51A0 23            [ 6]  153     inc hl                           ;; Apunta al siguiente elemento de la tabla
-   51A1 04            [ 4]  154     inc  b                           ;; Para que B conozca el indice del array
-   51A2 FE FF         [ 7]  155     cp  #0xFF                        ;; Ver si se pulso la tecla de esa línea
-   51A4 28 F9         [12]  156     jr  z, otraLinea
-   51A6 CD AA 51      [17]  157     call whoKey                      ;; Ahora hay que buscar la tecla
+   5183 06 00         [ 7]  150     ld  b, #0x00                     ;; Contador de los bytes del array
+   5185                     151 otraLinea:                           ;; Primero hay que encontrar la línea
+   5185 7E            [ 7]  152     ld   a, (hl)                     ;; El byte al acumulador
+   5186 23            [ 6]  153     inc hl                           ;; Apunta al siguiente elemento de la tabla
+   5187 04            [ 4]  154     inc  b                           ;; Para que B conozca el indice del array
+   5188 FE FF         [ 7]  155     cp  #0xFF                        ;; Ver si se pulso la tecla de esa línea
+   518A 28 F9         [12]  156     jr  z, otraLinea
+   518C CD 90 51      [17]  157     call whoKey                      ;; Ahora hay que buscar la tecla
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 22.
 Hexadecimal [16-Bits]
 
 
 
                             158 
-   51A9 C9            [10]  159     ret
+   518F C9            [10]  159     ret
                             160 
-   51AA                     161 whoKey:
-   51AA F5            [11]  162     push af                          ;; Guardar tecla pulsada
-   51AB 78            [ 4]  163     ld  a, b                         ;; Llevamos la fila al acumulador
-   51AC FE 0A         [ 7]  164     cp  #0x0A                        ;; Última fila
-   51AE CA DE 51      [10]  165     jp  z, _49
-   51B1 FE 09         [ 7]  166     cp  #0x09
-   51B3 CA 36 52      [10]  167     jp  z, _48
-   51B6 FE 08         [ 7]  168     cp  #0x08
-   51B8 CA 8E 52      [10]  169     jp  z, _47
-   51BB FE 07         [ 7]  170     cp  #0x07
-   51BD CA E6 52      [10]  171     jp  z, _46
-   51C0 FE 06         [ 7]  172     cp  #0x06
-   51C2 CA 3F 53      [10]  173     jp  z, _45
-   51C5 FE 05         [ 7]  174     cp  #0x05
-   51C7 CA 97 53      [10]  175     jp  z, _44
-   51CA FE 04         [ 7]  176     cp  #0x04
-   51CC CA EF 53      [10]  177     jp  z, _43
-   51CF FE 03         [ 7]  178     cp  #0x03
-   51D1 CA 47 54      [10]  179     jp  z, _42
-   51D4 FE 02         [ 7]  180     cp  #0x02
-   51D6 CA 9F 54      [10]  181     jp  z, _41
-   51D9 FE 01         [ 7]  182     cp  #0x01
-   51DB CA F7 54      [10]  183     jp  z, _40
-   51DE                     184 _49:
-   51DE F1            [10]  185     pop af                          ;; Recupero tecla pulsada
-   51DF 06 7F         [ 7]  186     ld  b, #0x7F                    
-   51E1 B8            [ 4]  187     cp  b
-   51E2 20 06         [12]  188     jr  nz, bit6
-   51E4 1E FE         [ 7]  189     ld  e, #254
-   51E6 21 09 80      [10]  190     ld  hl, #Key_Del
-   51E9 C9            [10]  191     ret
-   51EA                     192 bit6:
-   51EA CB 08         [ 8]  193     rrc b
-   51EC B8            [ 4]  194     cp  b
-   51ED 20 06         [12]  195     jr nz, bit5
-   51EF 1E FF         [ 7]  196     ld  e, #255
-   51F1 21 09 40      [10]  197     ld  hl, #Joy0_Fire3
-   51F4 C9            [10]  198     ret
-   51F5                     199 bit5:
-   51F5 CB 08         [ 8]  200     rrc b
-   51F7 B8            [ 4]  201     cp  b
-   51F8 20 06         [12]  202     jr nz, bit4
-   51FA 1E FD         [ 7]  203     ld  e, #253
-   51FC 21 09 20      [10]  204     ld  hl, #Joy0_Fire2
-   51FF C9            [10]  205     ret
-   5200                     206 bit4:
-   5200 CB 08         [ 8]  207     rrc b
-   5202 B8            [ 4]  208     cp  b
-   5203 20 06         [12]  209     jr nz, bit3
-   5205 1E FC         [ 7]  210     ld  e, #252
-   5207 21 09 10      [10]  211     ld  hl, #Joy0_Fire1
-   520A C9            [10]  212     ret
+   5190                     161 whoKey:
+   5190 F5            [11]  162     push af                          ;; Guardar tecla pulsada
+   5191 78            [ 4]  163     ld  a, b                         ;; Llevamos la fila al acumulador
+   5192 FE 0A         [ 7]  164     cp  #0x0A                        ;; Última fila
+   5194 CA C4 51      [10]  165     jp  z, _49
+   5197 FE 09         [ 7]  166     cp  #0x09
+   5199 CA 1C 52      [10]  167     jp  z, _48
+   519C FE 08         [ 7]  168     cp  #0x08
+   519E CA 74 52      [10]  169     jp  z, _47
+   51A1 FE 07         [ 7]  170     cp  #0x07
+   51A3 CA CC 52      [10]  171     jp  z, _46
+   51A6 FE 06         [ 7]  172     cp  #0x06
+   51A8 CA 25 53      [10]  173     jp  z, _45
+   51AB FE 05         [ 7]  174     cp  #0x05
+   51AD CA 7D 53      [10]  175     jp  z, _44
+   51B0 FE 04         [ 7]  176     cp  #0x04
+   51B2 CA D5 53      [10]  177     jp  z, _43
+   51B5 FE 03         [ 7]  178     cp  #0x03
+   51B7 CA 2D 54      [10]  179     jp  z, _42
+   51BA FE 02         [ 7]  180     cp  #0x02
+   51BC CA 85 54      [10]  181     jp  z, _41
+   51BF FE 01         [ 7]  182     cp  #0x01
+   51C1 CA DD 54      [10]  183     jp  z, _40
+   51C4                     184 _49:
+   51C4 F1            [10]  185     pop af                          ;; Recupero tecla pulsada
+   51C5 06 7F         [ 7]  186     ld  b, #0x7F                    
+   51C7 B8            [ 4]  187     cp  b
+   51C8 20 06         [12]  188     jr  nz, bit6
+   51CA 1E FE         [ 7]  189     ld  e, #254
+   51CC 21 09 80      [10]  190     ld  hl, #Key_Del
+   51CF C9            [10]  191     ret
+   51D0                     192 bit6:
+   51D0 CB 08         [ 8]  193     rrc b
+   51D2 B8            [ 4]  194     cp  b
+   51D3 20 06         [12]  195     jr nz, bit5
+   51D5 1E FF         [ 7]  196     ld  e, #255
+   51D7 21 09 40      [10]  197     ld  hl, #Joy0_Fire3
+   51DA C9            [10]  198     ret
+   51DB                     199 bit5:
+   51DB CB 08         [ 8]  200     rrc b
+   51DD B8            [ 4]  201     cp  b
+   51DE 20 06         [12]  202     jr nz, bit4
+   51E0 1E FD         [ 7]  203     ld  e, #253
+   51E2 21 09 20      [10]  204     ld  hl, #Joy0_Fire2
+   51E5 C9            [10]  205     ret
+   51E6                     206 bit4:
+   51E6 CB 08         [ 8]  207     rrc b
+   51E8 B8            [ 4]  208     cp  b
+   51E9 20 06         [12]  209     jr nz, bit3
+   51EB 1E FC         [ 7]  210     ld  e, #252
+   51ED 21 09 10      [10]  211     ld  hl, #Joy0_Fire1
+   51F0 C9            [10]  212     ret
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 23.
 Hexadecimal [16-Bits]
 
 
 
-   520B                     213 bit3:
-   520B CB 08         [ 8]  214     rrc b
-   520D B8            [ 4]  215     cp  b
-   520E 20 06         [12]  216     jr nz, bit2
-   5210 1E F3         [ 7]  217     ld  e, #243
-   5212 21 09 08      [10]  218     ld  hl, #Joy0_Right
-   5215 C9            [10]  219     ret
-   5216                     220 bit2:
-   5216 CB 08         [ 8]  221     rrc b
-   5218 B8            [ 4]  222     cp  b
-   5219 20 06         [12]  223     jr nz, bit1
-   521B 1E F2         [ 7]  224     ld  e, #242
-   521D 21 09 04      [10]  225     ld  hl, #Joy0_Left
-   5220 C9            [10]  226     ret
-   5221                     227 bit1:
-   5221 CB 08         [ 8]  228     rrc b
-   5223 B8            [ 4]  229     cp  b
-   5224 20 06         [12]  230     jr nz, bit0
-   5226 1E F1         [ 7]  231     ld  e, #241
-   5228 21 09 02      [10]  232     ld  hl, #Joy0_Down
-   522B C9            [10]  233     ret
-   522C                     234 bit0:
-   522C CB 08         [ 8]  235     rrc b
-   522E B8            [ 4]  236     cp  b
-   522F C0            [11]  237     ret nz
-   5230 1E F0         [ 7]  238     ld  e, #240
-   5232 21 09 01      [10]  239     ld  hl, #Joy0_Up
-   5235 C9            [10]  240     ret
+   51F1                     213 bit3:
+   51F1 CB 08         [ 8]  214     rrc b
+   51F3 B8            [ 4]  215     cp  b
+   51F4 20 06         [12]  216     jr nz, bit2
+   51F6 1E F3         [ 7]  217     ld  e, #243
+   51F8 21 09 08      [10]  218     ld  hl, #Joy0_Right
+   51FB C9            [10]  219     ret
+   51FC                     220 bit2:
+   51FC CB 08         [ 8]  221     rrc b
+   51FE B8            [ 4]  222     cp  b
+   51FF 20 06         [12]  223     jr nz, bit1
+   5201 1E F2         [ 7]  224     ld  e, #242
+   5203 21 09 04      [10]  225     ld  hl, #Joy0_Left
+   5206 C9            [10]  226     ret
+   5207                     227 bit1:
+   5207 CB 08         [ 8]  228     rrc b
+   5209 B8            [ 4]  229     cp  b
+   520A 20 06         [12]  230     jr nz, bit0
+   520C 1E F1         [ 7]  231     ld  e, #241
+   520E 21 09 02      [10]  232     ld  hl, #Joy0_Down
+   5211 C9            [10]  233     ret
+   5212                     234 bit0:
+   5212 CB 08         [ 8]  235     rrc b
+   5214 B8            [ 4]  236     cp  b
+   5215 C0            [11]  237     ret nz
+   5216 1E F0         [ 7]  238     ld  e, #240
+   5218 21 09 01      [10]  239     ld  hl, #Joy0_Up
+   521B C9            [10]  240     ret
                             241 
-   5236                     242 _48:
-   5236 F1            [10]  243     pop af                          ;; Recupero tecla pulsada
-   5237 06 7F         [ 7]  244     ld  b, #0x7F                    
-   5239 B8            [ 4]  245     cp  b
-   523A 20 06         [12]  246     jr  nz, _48bit6
-   523C 1E 5A         [ 7]  247     ld  e, #90
-   523E 21 08 80      [10]  248     ld  hl, #Key_Z
-   5241 C9            [10]  249     ret
-   5242                     250 _48bit6:
-   5242 CB 08         [ 8]  251     rrc b
-   5244 B8            [ 4]  252     cp  b
-   5245 20 06         [12]  253     jr nz, _48bit5
-   5247 1E E9         [ 7]  254     ld  e, #233
-   5249 21 08 40      [10]  255     ld  hl, #Key_CapsLock
-   524C C9            [10]  256     ret
-   524D                     257 _48bit5:
-   524D CB 08         [ 8]  258     rrc b
-   524F B8            [ 4]  259     cp  b
-   5250 20 06         [12]  260     jr nz, _48bit4
-   5252 1E 41         [ 7]  261     ld  e, #65
-   5254 21 08 20      [10]  262     ld  hl, #Key_A
-   5257 C9            [10]  263     ret
-   5258                     264 _48bit4:
-   5258 CB 08         [ 8]  265     rrc b
-   525A B8            [ 4]  266     cp  b
-   525B 20 06         [12]  267     jr nz, _48bit3
+   521C                     242 _48:
+   521C F1            [10]  243     pop af                          ;; Recupero tecla pulsada
+   521D 06 7F         [ 7]  244     ld  b, #0x7F                    
+   521F B8            [ 4]  245     cp  b
+   5220 20 06         [12]  246     jr  nz, _48bit6
+   5222 1E 5A         [ 7]  247     ld  e, #90
+   5224 21 08 80      [10]  248     ld  hl, #Key_Z
+   5227 C9            [10]  249     ret
+   5228                     250 _48bit6:
+   5228 CB 08         [ 8]  251     rrc b
+   522A B8            [ 4]  252     cp  b
+   522B 20 06         [12]  253     jr nz, _48bit5
+   522D 1E E9         [ 7]  254     ld  e, #233
+   522F 21 08 40      [10]  255     ld  hl, #Key_CapsLock
+   5232 C9            [10]  256     ret
+   5233                     257 _48bit5:
+   5233 CB 08         [ 8]  258     rrc b
+   5235 B8            [ 4]  259     cp  b
+   5236 20 06         [12]  260     jr nz, _48bit4
+   5238 1E 41         [ 7]  261     ld  e, #65
+   523A 21 08 20      [10]  262     ld  hl, #Key_A
+   523D C9            [10]  263     ret
+   523E                     264 _48bit4:
+   523E CB 08         [ 8]  265     rrc b
+   5240 B8            [ 4]  266     cp  b
+   5241 20 06         [12]  267     jr nz, _48bit3
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 24.
 Hexadecimal [16-Bits]
 
 
 
-   525D 1E 3E         [ 7]  268     ld  e, #62
-   525F 21 08 10      [10]  269     ld  hl, #Key_Tab
-   5262 C9            [10]  270     ret
-   5263                     271 _48bit3:
-   5263 CB 08         [ 8]  272     rrc b
-   5265 B8            [ 4]  273     cp  b
-   5266 20 06         [12]  274     jr nz, _48bit2
-   5268 1E 51         [ 7]  275     ld  e, #81
-   526A 21 08 08      [10]  276     ld  hl, #Key_Q
-   526D C9            [10]  277     ret
-   526E                     278 _48bit2:
-   526E CB 08         [ 8]  279     rrc b
-   5270 B8            [ 4]  280     cp  b
-   5271 20 06         [12]  281     jr nz, _48bit1
-   5273 1E 7F         [ 7]  282     ld  e, #127
-   5275 21 08 04      [10]  283     ld  hl, #Key_Esc
-   5278 C9            [10]  284     ret
-   5279                     285 _48bit1:
-   5279 CB 08         [ 8]  286     rrc b
-   527B B8            [ 4]  287     cp  b
-   527C 20 06         [12]  288     jr nz, _48bit0
-   527E 1E 32         [ 7]  289     ld  e, #50
-   5280 21 08 02      [10]  290     ld  hl, #Key_2
-   5283 C9            [10]  291     ret
-   5284                     292 _48bit0:
-   5284 CB 08         [ 8]  293     rrc b
-   5286 B8            [ 4]  294     cp  b
-   5287 C0            [11]  295     ret nz
-   5288 1E 31         [ 7]  296     ld  e, #49
-   528A 21 08 01      [10]  297     ld  hl, #Key_1
-   528D C9            [10]  298     ret
-   528E                     299 _47:
-   528E F1            [10]  300     pop af                          ;; Recupero tecla pulsada
-   528F 06 7F         [ 7]  301     ld  b, #0x7F                    
-   5291 B8            [ 4]  302     cp  b
-   5292 20 06         [12]  303     jr  nz, _47bit6
-   5294 1E 58         [ 7]  304     ld  e, #88
-   5296 21 07 80      [10]  305     ld  hl, #Key_X
-   5299 C9            [10]  306     ret
-   529A                     307 _47bit6:
-   529A CB 08         [ 8]  308     rrc b
-   529C B8            [ 4]  309     cp  b
-   529D 20 06         [12]  310     jr nz, _47bit5
-   529F 1E 43         [ 7]  311     ld  e, #67
-   52A1 21 07 40      [10]  312     ld  hl, #Key_C
-   52A4 C9            [10]  313     ret
-   52A5                     314 _47bit5:
-   52A5 CB 08         [ 8]  315     rrc b
-   52A7 B8            [ 4]  316     cp  b
-   52A8 20 06         [12]  317     jr nz, _47bit4
-   52AA 1E 44         [ 7]  318     ld  e, #68
-   52AC 21 07 20      [10]  319     ld  hl, #Key_D
-   52AF C9            [10]  320     ret
-   52B0                     321 _47bit4:
-   52B0 CB 08         [ 8]  322     rrc b
+   5243 1E 3E         [ 7]  268     ld  e, #62
+   5245 21 08 10      [10]  269     ld  hl, #Key_Tab
+   5248 C9            [10]  270     ret
+   5249                     271 _48bit3:
+   5249 CB 08         [ 8]  272     rrc b
+   524B B8            [ 4]  273     cp  b
+   524C 20 06         [12]  274     jr nz, _48bit2
+   524E 1E 51         [ 7]  275     ld  e, #81
+   5250 21 08 08      [10]  276     ld  hl, #Key_Q
+   5253 C9            [10]  277     ret
+   5254                     278 _48bit2:
+   5254 CB 08         [ 8]  279     rrc b
+   5256 B8            [ 4]  280     cp  b
+   5257 20 06         [12]  281     jr nz, _48bit1
+   5259 1E 7F         [ 7]  282     ld  e, #127
+   525B 21 08 04      [10]  283     ld  hl, #Key_Esc
+   525E C9            [10]  284     ret
+   525F                     285 _48bit1:
+   525F CB 08         [ 8]  286     rrc b
+   5261 B8            [ 4]  287     cp  b
+   5262 20 06         [12]  288     jr nz, _48bit0
+   5264 1E 32         [ 7]  289     ld  e, #50
+   5266 21 08 02      [10]  290     ld  hl, #Key_2
+   5269 C9            [10]  291     ret
+   526A                     292 _48bit0:
+   526A CB 08         [ 8]  293     rrc b
+   526C B8            [ 4]  294     cp  b
+   526D C0            [11]  295     ret nz
+   526E 1E 31         [ 7]  296     ld  e, #49
+   5270 21 08 01      [10]  297     ld  hl, #Key_1
+   5273 C9            [10]  298     ret
+   5274                     299 _47:
+   5274 F1            [10]  300     pop af                          ;; Recupero tecla pulsada
+   5275 06 7F         [ 7]  301     ld  b, #0x7F                    
+   5277 B8            [ 4]  302     cp  b
+   5278 20 06         [12]  303     jr  nz, _47bit6
+   527A 1E 58         [ 7]  304     ld  e, #88
+   527C 21 07 80      [10]  305     ld  hl, #Key_X
+   527F C9            [10]  306     ret
+   5280                     307 _47bit6:
+   5280 CB 08         [ 8]  308     rrc b
+   5282 B8            [ 4]  309     cp  b
+   5283 20 06         [12]  310     jr nz, _47bit5
+   5285 1E 43         [ 7]  311     ld  e, #67
+   5287 21 07 40      [10]  312     ld  hl, #Key_C
+   528A C9            [10]  313     ret
+   528B                     314 _47bit5:
+   528B CB 08         [ 8]  315     rrc b
+   528D B8            [ 4]  316     cp  b
+   528E 20 06         [12]  317     jr nz, _47bit4
+   5290 1E 44         [ 7]  318     ld  e, #68
+   5292 21 07 20      [10]  319     ld  hl, #Key_D
+   5295 C9            [10]  320     ret
+   5296                     321 _47bit4:
+   5296 CB 08         [ 8]  322     rrc b
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 25.
 Hexadecimal [16-Bits]
 
 
 
-   52B2 B8            [ 4]  323     cp  b
-   52B3 20 06         [12]  324     jr nz, _47bit3
-   52B5 1E 53         [ 7]  325     ld  e, #83
-   52B7 21 07 10      [10]  326     ld  hl, #Key_S
-   52BA C9            [10]  327     ret
-   52BB                     328 _47bit3:
-   52BB CB 08         [ 8]  329     rrc b
-   52BD B8            [ 4]  330     cp  b
-   52BE 20 06         [12]  331     jr nz, _47bit2
-   52C0 1E 57         [ 7]  332     ld  e, #87
-   52C2 21 07 08      [10]  333     ld  hl, #Key_W
-   52C5 C9            [10]  334     ret
-   52C6                     335 _47bit2:
-   52C6 CB 08         [ 8]  336     rrc b
-   52C8 B8            [ 4]  337     cp  b
-   52C9 20 06         [12]  338     jr nz, _47bit1
-   52CB 1E 45         [ 7]  339     ld  e, #69
-   52CD 21 07 04      [10]  340     ld  hl, #Key_E
-   52D0 C9            [10]  341     ret
-   52D1                     342 _47bit1:
-   52D1 CB 08         [ 8]  343     rrc b
-   52D3 B8            [ 4]  344     cp  b
-   52D4 20 06         [12]  345     jr nz, _47bit0
-   52D6 1E 33         [ 7]  346     ld  e, #51
-   52D8 21 07 02      [10]  347     ld  hl, #Key_3
-   52DB C9            [10]  348     ret
-   52DC                     349 _47bit0:
-   52DC CB 08         [ 8]  350     rrc b
-   52DE B8            [ 4]  351     cp  b
-   52DF C0            [11]  352     ret nz
-   52E0 1E 34         [ 7]  353     ld  e, #52
-   52E2 21 07 01      [10]  354     ld  hl, #Key_4
-   52E5 C9            [10]  355     ret
-   52E6                     356 _46:
-   52E6 F1            [10]  357     pop af                          ;; Recupero tecla pulsada
-   52E7 06 7F         [ 7]  358     ld  b, #0x7F                    
-   52E9 B8            [ 4]  359     cp  b
-   52EA 20 06         [12]  360     jr  nz, _46bit6
-   52EC 1E 56         [ 7]  361     ld  e, #86
-   52EE 21 06 80      [10]  362     ld  hl, #Key_V
-   52F1 C9            [10]  363     ret
-   52F2                     364 _46bit6:
-   52F2 CB 08         [ 8]  365     rrc b
-   52F4 B8            [ 4]  366     cp  b
-   52F5 20 06         [12]  367     jr nz, _46bit5
-   52F7 1E 42         [ 7]  368     ld  e, #66
-   52F9 21 06 40      [10]  369     ld  hl, #Key_B
-   52FC C9            [10]  370     ret
-   52FD                     371 _46bit5:
-   52FD CB 08         [ 8]  372     rrc b
-   52FF B8            [ 4]  373     cp  b
-   5300 20 06         [12]  374     jr nz, _46bit4
-   5302 1E 46         [ 7]  375     ld  e, #70
-   5304 21 06 20      [10]  376     ld  hl, #Key_F
-   5307 C9            [10]  377     ret
+   5298 B8            [ 4]  323     cp  b
+   5299 20 06         [12]  324     jr nz, _47bit3
+   529B 1E 53         [ 7]  325     ld  e, #83
+   529D 21 07 10      [10]  326     ld  hl, #Key_S
+   52A0 C9            [10]  327     ret
+   52A1                     328 _47bit3:
+   52A1 CB 08         [ 8]  329     rrc b
+   52A3 B8            [ 4]  330     cp  b
+   52A4 20 06         [12]  331     jr nz, _47bit2
+   52A6 1E 57         [ 7]  332     ld  e, #87
+   52A8 21 07 08      [10]  333     ld  hl, #Key_W
+   52AB C9            [10]  334     ret
+   52AC                     335 _47bit2:
+   52AC CB 08         [ 8]  336     rrc b
+   52AE B8            [ 4]  337     cp  b
+   52AF 20 06         [12]  338     jr nz, _47bit1
+   52B1 1E 45         [ 7]  339     ld  e, #69
+   52B3 21 07 04      [10]  340     ld  hl, #Key_E
+   52B6 C9            [10]  341     ret
+   52B7                     342 _47bit1:
+   52B7 CB 08         [ 8]  343     rrc b
+   52B9 B8            [ 4]  344     cp  b
+   52BA 20 06         [12]  345     jr nz, _47bit0
+   52BC 1E 33         [ 7]  346     ld  e, #51
+   52BE 21 07 02      [10]  347     ld  hl, #Key_3
+   52C1 C9            [10]  348     ret
+   52C2                     349 _47bit0:
+   52C2 CB 08         [ 8]  350     rrc b
+   52C4 B8            [ 4]  351     cp  b
+   52C5 C0            [11]  352     ret nz
+   52C6 1E 34         [ 7]  353     ld  e, #52
+   52C8 21 07 01      [10]  354     ld  hl, #Key_4
+   52CB C9            [10]  355     ret
+   52CC                     356 _46:
+   52CC F1            [10]  357     pop af                          ;; Recupero tecla pulsada
+   52CD 06 7F         [ 7]  358     ld  b, #0x7F                    
+   52CF B8            [ 4]  359     cp  b
+   52D0 20 06         [12]  360     jr  nz, _46bit6
+   52D2 1E 56         [ 7]  361     ld  e, #86
+   52D4 21 06 80      [10]  362     ld  hl, #Key_V
+   52D7 C9            [10]  363     ret
+   52D8                     364 _46bit6:
+   52D8 CB 08         [ 8]  365     rrc b
+   52DA B8            [ 4]  366     cp  b
+   52DB 20 06         [12]  367     jr nz, _46bit5
+   52DD 1E 42         [ 7]  368     ld  e, #66
+   52DF 21 06 40      [10]  369     ld  hl, #Key_B
+   52E2 C9            [10]  370     ret
+   52E3                     371 _46bit5:
+   52E3 CB 08         [ 8]  372     rrc b
+   52E5 B8            [ 4]  373     cp  b
+   52E6 20 06         [12]  374     jr nz, _46bit4
+   52E8 1E 46         [ 7]  375     ld  e, #70
+   52EA 21 06 20      [10]  376     ld  hl, #Key_F
+   52ED C9            [10]  377     ret
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 26.
 Hexadecimal [16-Bits]
 
 
 
-   5308                     378 _46bit4:
-   5308 CB 08         [ 8]  379     rrc b
-   530A B8            [ 4]  380     cp  b
-   530B 20 06         [12]  381     jr nz, _46bit3
-   530D 1E 47         [ 7]  382     ld  e, #71
-   530F 21 06 10      [10]  383     ld  hl, #Key_G
-   5312 C9            [10]  384     ret
-   5313                     385 _46bit3:
-   5313 CB 08         [ 8]  386     rrc b
-   5315 B8            [ 4]  387     cp  b
-   5316 C2 1F 53      [10]  388     jp nz, _46bit2
-   5319 1E 54         [ 7]  389     ld  e, #84
-   531B 21 06 08      [10]  390     ld  hl, #Key_T
-   531E C9            [10]  391     ret
-   531F                     392 _46bit2:
-   531F CB 08         [ 8]  393     rrc b
-   5321 B8            [ 4]  394     cp  b
-   5322 20 06         [12]  395     jr nz, _46bit1
-   5324 1E 52         [ 7]  396     ld  e, #82
-   5326 21 06 04      [10]  397     ld  hl, #Key_R
-   5329 C9            [10]  398     ret
-   532A                     399 _46bit1:
-   532A CB 08         [ 8]  400     rrc b
-   532C B8            [ 4]  401     cp  b
-   532D 20 06         [12]  402     jr nz, _46bit0
-   532F 1E 35         [ 7]  403     ld  e, #53
-   5331 21 06 02      [10]  404     ld  hl, #Key_5
-   5334 C9            [10]  405     ret
-   5335                     406 _46bit0:
-   5335 CB 08         [ 8]  407     rrc b
-   5337 B8            [ 4]  408     cp  b
-   5338 C0            [11]  409     ret nz
-   5339 1E 36         [ 7]  410     ld  e, #54
-   533B 21 06 01      [10]  411     ld  hl, #Key_6
-   533E C9            [10]  412     ret
-   533F                     413 _45:
-   533F F1            [10]  414     pop af                          ;; Recupero tecla pulsada
-   5340 06 7F         [ 7]  415     ld  b, #0x7F                    
-   5342 B8            [ 4]  416     cp  b
-   5343 20 06         [12]  417     jr  nz, _45bit6
-   5345 1E 7F         [ 7]  418     ld  e, #127
-   5347 21 05 80      [10]  419     ld  hl, #Key_Space
-   534A C9            [10]  420     ret
-   534B                     421 _45bit6:
-   534B CB 08         [ 8]  422     rrc b
-   534D B8            [ 4]  423     cp  b
-   534E 20 06         [12]  424     jr nz, _45bit5
-   5350 1E 4E         [ 7]  425     ld  e, #78
-   5352 21 05 40      [10]  426     ld  hl, #Key_N
-   5355 C9            [10]  427     ret
-   5356                     428 _45bit5:
-   5356 CB 08         [ 8]  429     rrc b
-   5358 B8            [ 4]  430     cp  b
-   5359 20 06         [12]  431     jr nz, _45bit4
-   535B 1E 4A         [ 7]  432     ld  e, #74
+   52EE                     378 _46bit4:
+   52EE CB 08         [ 8]  379     rrc b
+   52F0 B8            [ 4]  380     cp  b
+   52F1 20 06         [12]  381     jr nz, _46bit3
+   52F3 1E 47         [ 7]  382     ld  e, #71
+   52F5 21 06 10      [10]  383     ld  hl, #Key_G
+   52F8 C9            [10]  384     ret
+   52F9                     385 _46bit3:
+   52F9 CB 08         [ 8]  386     rrc b
+   52FB B8            [ 4]  387     cp  b
+   52FC C2 05 53      [10]  388     jp nz, _46bit2
+   52FF 1E 54         [ 7]  389     ld  e, #84
+   5301 21 06 08      [10]  390     ld  hl, #Key_T
+   5304 C9            [10]  391     ret
+   5305                     392 _46bit2:
+   5305 CB 08         [ 8]  393     rrc b
+   5307 B8            [ 4]  394     cp  b
+   5308 20 06         [12]  395     jr nz, _46bit1
+   530A 1E 52         [ 7]  396     ld  e, #82
+   530C 21 06 04      [10]  397     ld  hl, #Key_R
+   530F C9            [10]  398     ret
+   5310                     399 _46bit1:
+   5310 CB 08         [ 8]  400     rrc b
+   5312 B8            [ 4]  401     cp  b
+   5313 20 06         [12]  402     jr nz, _46bit0
+   5315 1E 35         [ 7]  403     ld  e, #53
+   5317 21 06 02      [10]  404     ld  hl, #Key_5
+   531A C9            [10]  405     ret
+   531B                     406 _46bit0:
+   531B CB 08         [ 8]  407     rrc b
+   531D B8            [ 4]  408     cp  b
+   531E C0            [11]  409     ret nz
+   531F 1E 36         [ 7]  410     ld  e, #54
+   5321 21 06 01      [10]  411     ld  hl, #Key_6
+   5324 C9            [10]  412     ret
+   5325                     413 _45:
+   5325 F1            [10]  414     pop af                          ;; Recupero tecla pulsada
+   5326 06 7F         [ 7]  415     ld  b, #0x7F                    
+   5328 B8            [ 4]  416     cp  b
+   5329 20 06         [12]  417     jr  nz, _45bit6
+   532B 1E 7F         [ 7]  418     ld  e, #127
+   532D 21 05 80      [10]  419     ld  hl, #Key_Space
+   5330 C9            [10]  420     ret
+   5331                     421 _45bit6:
+   5331 CB 08         [ 8]  422     rrc b
+   5333 B8            [ 4]  423     cp  b
+   5334 20 06         [12]  424     jr nz, _45bit5
+   5336 1E 4E         [ 7]  425     ld  e, #78
+   5338 21 05 40      [10]  426     ld  hl, #Key_N
+   533B C9            [10]  427     ret
+   533C                     428 _45bit5:
+   533C CB 08         [ 8]  429     rrc b
+   533E B8            [ 4]  430     cp  b
+   533F 20 06         [12]  431     jr nz, _45bit4
+   5341 1E 4A         [ 7]  432     ld  e, #74
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 27.
 Hexadecimal [16-Bits]
 
 
 
-   535D 21 05 20      [10]  433     ld  hl, #Key_J
-   5360 C9            [10]  434     ret
-   5361                     435 _45bit4:
-   5361 CB 08         [ 8]  436     rrc b
-   5363 B8            [ 4]  437     cp  b
-   5364 20 06         [12]  438     jr nz, _45bit3
-   5366 1E 48         [ 7]  439     ld  e, #72
-   5368 21 05 10      [10]  440     ld  hl, #Key_H
-   536B C9            [10]  441     ret
-   536C                     442 _45bit3:
-   536C CB 08         [ 8]  443     rrc b
-   536E B8            [ 4]  444     cp  b
-   536F 20 06         [12]  445     jr nz, _45bit2
-   5371 1E 59         [ 7]  446     ld  e, #89
-   5373 21 05 08      [10]  447     ld  hl, #Key_Y
-   5376 C9            [10]  448     ret
-   5377                     449 _45bit2:
-   5377 CB 08         [ 8]  450     rrc b
-   5379 B8            [ 4]  451     cp  b
-   537A 20 06         [12]  452     jr nz, _45bit1
-   537C 1E 55         [ 7]  453     ld  e, #85
-   537E 21 05 04      [10]  454     ld  hl, #Key_U
-   5381 C9            [10]  455     ret
-   5382                     456 _45bit1:
-   5382 CB 08         [ 8]  457     rrc b
-   5384 B8            [ 4]  458     cp  b
-   5385 20 06         [12]  459     jr nz, _45bit0
-   5387 1E 37         [ 7]  460     ld  e, #55
-   5389 21 05 02      [10]  461     ld  hl, #Key_7
-   538C C9            [10]  462     ret
-   538D                     463 _45bit0:
-   538D CB 08         [ 8]  464     rrc b
-   538F B8            [ 4]  465     cp  b
-   5390 C0            [11]  466     ret nz
-   5391 1E 38         [ 7]  467     ld  e, #56
-   5393 21 05 01      [10]  468     ld  hl, #Key_8
-   5396 C9            [10]  469     ret
-   5397                     470 _44:
-   5397 F1            [10]  471     pop af                          ;; Recupero tecla pulsada
-   5398 06 7F         [ 7]  472     ld  b, #0x7F                    
-   539A B8            [ 4]  473     cp  b
-   539B 20 06         [12]  474     jr  nz, _44bit6
-   539D 1E 2C         [ 7]  475     ld  e, #44
-   539F 21 04 80      [10]  476     ld  hl, #Key_Comma
-   53A2 C9            [10]  477     ret
-   53A3                     478 _44bit6:
-   53A3 CB 08         [ 8]  479     rrc b
-   53A5 B8            [ 4]  480     cp  b
-   53A6 20 06         [12]  481     jr nz, _44bit5
-   53A8 1E 4D         [ 7]  482     ld  e, #77
-   53AA 21 04 40      [10]  483     ld  hl, #Key_M
-   53AD C9            [10]  484     ret
-   53AE                     485 _44bit5:
-   53AE CB 08         [ 8]  486     rrc b
-   53B0 B8            [ 4]  487     cp  b
+   5343 21 05 20      [10]  433     ld  hl, #Key_J
+   5346 C9            [10]  434     ret
+   5347                     435 _45bit4:
+   5347 CB 08         [ 8]  436     rrc b
+   5349 B8            [ 4]  437     cp  b
+   534A 20 06         [12]  438     jr nz, _45bit3
+   534C 1E 48         [ 7]  439     ld  e, #72
+   534E 21 05 10      [10]  440     ld  hl, #Key_H
+   5351 C9            [10]  441     ret
+   5352                     442 _45bit3:
+   5352 CB 08         [ 8]  443     rrc b
+   5354 B8            [ 4]  444     cp  b
+   5355 20 06         [12]  445     jr nz, _45bit2
+   5357 1E 59         [ 7]  446     ld  e, #89
+   5359 21 05 08      [10]  447     ld  hl, #Key_Y
+   535C C9            [10]  448     ret
+   535D                     449 _45bit2:
+   535D CB 08         [ 8]  450     rrc b
+   535F B8            [ 4]  451     cp  b
+   5360 20 06         [12]  452     jr nz, _45bit1
+   5362 1E 55         [ 7]  453     ld  e, #85
+   5364 21 05 04      [10]  454     ld  hl, #Key_U
+   5367 C9            [10]  455     ret
+   5368                     456 _45bit1:
+   5368 CB 08         [ 8]  457     rrc b
+   536A B8            [ 4]  458     cp  b
+   536B 20 06         [12]  459     jr nz, _45bit0
+   536D 1E 37         [ 7]  460     ld  e, #55
+   536F 21 05 02      [10]  461     ld  hl, #Key_7
+   5372 C9            [10]  462     ret
+   5373                     463 _45bit0:
+   5373 CB 08         [ 8]  464     rrc b
+   5375 B8            [ 4]  465     cp  b
+   5376 C0            [11]  466     ret nz
+   5377 1E 38         [ 7]  467     ld  e, #56
+   5379 21 05 01      [10]  468     ld  hl, #Key_8
+   537C C9            [10]  469     ret
+   537D                     470 _44:
+   537D F1            [10]  471     pop af                          ;; Recupero tecla pulsada
+   537E 06 7F         [ 7]  472     ld  b, #0x7F                    
+   5380 B8            [ 4]  473     cp  b
+   5381 20 06         [12]  474     jr  nz, _44bit6
+   5383 1E 2C         [ 7]  475     ld  e, #44
+   5385 21 04 80      [10]  476     ld  hl, #Key_Comma
+   5388 C9            [10]  477     ret
+   5389                     478 _44bit6:
+   5389 CB 08         [ 8]  479     rrc b
+   538B B8            [ 4]  480     cp  b
+   538C 20 06         [12]  481     jr nz, _44bit5
+   538E 1E 4D         [ 7]  482     ld  e, #77
+   5390 21 04 40      [10]  483     ld  hl, #Key_M
+   5393 C9            [10]  484     ret
+   5394                     485 _44bit5:
+   5394 CB 08         [ 8]  486     rrc b
+   5396 B8            [ 4]  487     cp  b
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 28.
 Hexadecimal [16-Bits]
 
 
 
-   53B1 20 06         [12]  488     jr nz, _44bit4
-   53B3 1E 4B         [ 7]  489     ld  e, #75
-   53B5 21 04 20      [10]  490     ld  hl, #Key_K
-   53B8 C9            [10]  491     ret
-   53B9                     492 _44bit4:
-   53B9 CB 08         [ 8]  493     rrc b
-   53BB B8            [ 4]  494     cp  b
-   53BC 20 06         [12]  495     jr nz, _44bit3
-   53BE 1E 4C         [ 7]  496     ld  e, #76
-   53C0 21 04 10      [10]  497     ld  hl, #Key_L
-   53C3 C9            [10]  498     ret
-   53C4                     499 _44bit3:
-   53C4 CB 08         [ 8]  500     rrc b
-   53C6 B8            [ 4]  501     cp  b
-   53C7 20 06         [12]  502     jr nz, _44bit2
-   53C9 1E 49         [ 7]  503     ld  e, #73
-   53CB 21 04 08      [10]  504     ld  hl, #Key_I
-   53CE C9            [10]  505     ret
-   53CF                     506 _44bit2:
-   53CF CB 08         [ 8]  507     rrc b
-   53D1 B8            [ 4]  508     cp  b
-   53D2 20 06         [12]  509     jr nz, _44bit1
-   53D4 1E 4F         [ 7]  510     ld  e, #79
-   53D6 21 04 04      [10]  511     ld  hl, #Key_O
-   53D9 C9            [10]  512     ret
-   53DA                     513 _44bit1:
-   53DA CB 08         [ 8]  514     rrc b
-   53DC B8            [ 4]  515     cp  b
-   53DD 20 06         [12]  516     jr nz, _44bit0
-   53DF 1E 39         [ 7]  517     ld  e, #57
-   53E1 21 04 02      [10]  518     ld  hl, #Key_9
-   53E4 C9            [10]  519     ret
-   53E5                     520 _44bit0:
-   53E5 CB 08         [ 8]  521     rrc b
-   53E7 B8            [ 4]  522     cp  b
-   53E8 C0            [11]  523     ret nz
-   53E9 1E 30         [ 7]  524     ld  e, #48
-   53EB 21 04 01      [10]  525     ld  hl, #Key_0
-   53EE C9            [10]  526     ret
-   53EF                     527 _43:
-   53EF F1            [10]  528     pop af                          ;; Recupero tecla pulsada
-   53F0 06 7F         [ 7]  529     ld  b, #0x7F                    
-   53F2 B8            [ 4]  530     cp  b
-   53F3 20 06         [12]  531     jr  nz, _43bit6
-   53F5 1E 2E         [ 7]  532     ld  e, #46
-   53F7 21 03 80      [10]  533     ld  hl, #Key_Dot
-   53FA C9            [10]  534     ret
-   53FB                     535 _43bit6:
-   53FB CB 08         [ 8]  536     rrc b
-   53FD B8            [ 4]  537     cp  b
-   53FE 20 06         [12]  538     jr nz, _43bit5
-   5400 1E 2F         [ 7]  539     ld  e, #47
-   5402 21 03 40      [10]  540     ld  hl, #Key_Slash
-   5405 C9            [10]  541     ret
-   5406                     542 _43bit5:
+   5397 20 06         [12]  488     jr nz, _44bit4
+   5399 1E 4B         [ 7]  489     ld  e, #75
+   539B 21 04 20      [10]  490     ld  hl, #Key_K
+   539E C9            [10]  491     ret
+   539F                     492 _44bit4:
+   539F CB 08         [ 8]  493     rrc b
+   53A1 B8            [ 4]  494     cp  b
+   53A2 20 06         [12]  495     jr nz, _44bit3
+   53A4 1E 4C         [ 7]  496     ld  e, #76
+   53A6 21 04 10      [10]  497     ld  hl, #Key_L
+   53A9 C9            [10]  498     ret
+   53AA                     499 _44bit3:
+   53AA CB 08         [ 8]  500     rrc b
+   53AC B8            [ 4]  501     cp  b
+   53AD 20 06         [12]  502     jr nz, _44bit2
+   53AF 1E 49         [ 7]  503     ld  e, #73
+   53B1 21 04 08      [10]  504     ld  hl, #Key_I
+   53B4 C9            [10]  505     ret
+   53B5                     506 _44bit2:
+   53B5 CB 08         [ 8]  507     rrc b
+   53B7 B8            [ 4]  508     cp  b
+   53B8 20 06         [12]  509     jr nz, _44bit1
+   53BA 1E 4F         [ 7]  510     ld  e, #79
+   53BC 21 04 04      [10]  511     ld  hl, #Key_O
+   53BF C9            [10]  512     ret
+   53C0                     513 _44bit1:
+   53C0 CB 08         [ 8]  514     rrc b
+   53C2 B8            [ 4]  515     cp  b
+   53C3 20 06         [12]  516     jr nz, _44bit0
+   53C5 1E 39         [ 7]  517     ld  e, #57
+   53C7 21 04 02      [10]  518     ld  hl, #Key_9
+   53CA C9            [10]  519     ret
+   53CB                     520 _44bit0:
+   53CB CB 08         [ 8]  521     rrc b
+   53CD B8            [ 4]  522     cp  b
+   53CE C0            [11]  523     ret nz
+   53CF 1E 30         [ 7]  524     ld  e, #48
+   53D1 21 04 01      [10]  525     ld  hl, #Key_0
+   53D4 C9            [10]  526     ret
+   53D5                     527 _43:
+   53D5 F1            [10]  528     pop af                          ;; Recupero tecla pulsada
+   53D6 06 7F         [ 7]  529     ld  b, #0x7F                    
+   53D8 B8            [ 4]  530     cp  b
+   53D9 20 06         [12]  531     jr  nz, _43bit6
+   53DB 1E 2E         [ 7]  532     ld  e, #46
+   53DD 21 03 80      [10]  533     ld  hl, #Key_Dot
+   53E0 C9            [10]  534     ret
+   53E1                     535 _43bit6:
+   53E1 CB 08         [ 8]  536     rrc b
+   53E3 B8            [ 4]  537     cp  b
+   53E4 20 06         [12]  538     jr nz, _43bit5
+   53E6 1E 2F         [ 7]  539     ld  e, #47
+   53E8 21 03 40      [10]  540     ld  hl, #Key_Slash
+   53EB C9            [10]  541     ret
+   53EC                     542 _43bit5:
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 29.
 Hexadecimal [16-Bits]
 
 
 
-   5406 CB 08         [ 8]  543     rrc b
-   5408 B8            [ 4]  544     cp  b
-   5409 20 06         [12]  545     jr nz, _43bit4
-   540B 1E 3A         [ 7]  546     ld  e, #58
-   540D 21 03 20      [10]  547     ld  hl, #Key_Colon
-   5410 C9            [10]  548     ret
-   5411                     549 _43bit4:
-   5411 CB 08         [ 8]  550     rrc b
-   5413 B8            [ 4]  551     cp  b
-   5414 20 06         [12]  552     jr nz, _43bit3
-   5416 1E 3B         [ 7]  553     ld  e, #59
-   5418 21 03 10      [10]  554     ld  hl, #Key_SemiColon
-   541B C9            [10]  555     ret
-   541C                     556 _43bit3:
-   541C CB 08         [ 8]  557     rrc b
-   541E B8            [ 4]  558     cp  b
-   541F 20 06         [12]  559     jr nz, _43bit2
-   5421 1E 50         [ 7]  560     ld  e, #80
-   5423 21 03 08      [10]  561     ld  hl, #Key_P
-   5426 C9            [10]  562     ret
-   5427                     563 _43bit2:
-   5427 CB 08         [ 8]  564     rrc b
-   5429 B8            [ 4]  565     cp  b
-   542A 20 06         [12]  566     jr nz, _43bit1
-   542C 1E 40         [ 7]  567     ld  e, #64
-   542E 21 03 04      [10]  568     ld  hl, #Key_At
-   5431 C9            [10]  569     ret
-   5432                     570 _43bit1:
-   5432 CB 08         [ 8]  571     rrc b
-   5434 B8            [ 4]  572     cp  b
-   5435 20 06         [12]  573     jr nz, _43bit0
-   5437 1E 2D         [ 7]  574     ld  e, #45
-   5439 21 03 02      [10]  575     ld  hl, #Key_Hyphen
-   543C C9            [10]  576     ret
-   543D                     577 _43bit0:
-   543D CB 08         [ 8]  578     rrc b
-   543F B8            [ 4]  579     cp  b
-   5440 C0            [11]  580     ret nz
-   5441 1E A0         [ 7]  581     ld  e, #160
-   5443 21 03 01      [10]  582     ld  hl, #Key_Caret
-   5446 C9            [10]  583     ret
-   5447                     584 _42:
-   5447 F1            [10]  585     pop af                          ;; Recupero tecla pulsada
-   5448 06 7F         [ 7]  586     ld  b, #0x7F                    
-   544A B8            [ 4]  587     cp  b
-   544B 20 06         [12]  588     jr  nz, _42bit6
-   544D 1E 7F         [ 7]  589     ld  e, #127
-   544F 21 02 80      [10]  590     ld  hl, #Key_Control
-   5452 C9            [10]  591     ret
-   5453                     592 _42bit6:
-   5453 CB 08         [ 8]  593     rrc b
-   5455 B8            [ 4]  594     cp  b
-   5456 20 06         [12]  595     jr nz, _42bit5
-   5458 1E 5C         [ 7]  596     ld  e, #92
-   545A 21 02 40      [10]  597     ld  hl, #Key_BackSlash
+   53EC CB 08         [ 8]  543     rrc b
+   53EE B8            [ 4]  544     cp  b
+   53EF 20 06         [12]  545     jr nz, _43bit4
+   53F1 1E 3A         [ 7]  546     ld  e, #58
+   53F3 21 03 20      [10]  547     ld  hl, #Key_Colon
+   53F6 C9            [10]  548     ret
+   53F7                     549 _43bit4:
+   53F7 CB 08         [ 8]  550     rrc b
+   53F9 B8            [ 4]  551     cp  b
+   53FA 20 06         [12]  552     jr nz, _43bit3
+   53FC 1E 3B         [ 7]  553     ld  e, #59
+   53FE 21 03 10      [10]  554     ld  hl, #Key_SemiColon
+   5401 C9            [10]  555     ret
+   5402                     556 _43bit3:
+   5402 CB 08         [ 8]  557     rrc b
+   5404 B8            [ 4]  558     cp  b
+   5405 20 06         [12]  559     jr nz, _43bit2
+   5407 1E 50         [ 7]  560     ld  e, #80
+   5409 21 03 08      [10]  561     ld  hl, #Key_P
+   540C C9            [10]  562     ret
+   540D                     563 _43bit2:
+   540D CB 08         [ 8]  564     rrc b
+   540F B8            [ 4]  565     cp  b
+   5410 20 06         [12]  566     jr nz, _43bit1
+   5412 1E 40         [ 7]  567     ld  e, #64
+   5414 21 03 04      [10]  568     ld  hl, #Key_At
+   5417 C9            [10]  569     ret
+   5418                     570 _43bit1:
+   5418 CB 08         [ 8]  571     rrc b
+   541A B8            [ 4]  572     cp  b
+   541B 20 06         [12]  573     jr nz, _43bit0
+   541D 1E 2D         [ 7]  574     ld  e, #45
+   541F 21 03 02      [10]  575     ld  hl, #Key_Hyphen
+   5422 C9            [10]  576     ret
+   5423                     577 _43bit0:
+   5423 CB 08         [ 8]  578     rrc b
+   5425 B8            [ 4]  579     cp  b
+   5426 C0            [11]  580     ret nz
+   5427 1E A0         [ 7]  581     ld  e, #160
+   5429 21 03 01      [10]  582     ld  hl, #Key_Caret
+   542C C9            [10]  583     ret
+   542D                     584 _42:
+   542D F1            [10]  585     pop af                          ;; Recupero tecla pulsada
+   542E 06 7F         [ 7]  586     ld  b, #0x7F                    
+   5430 B8            [ 4]  587     cp  b
+   5431 20 06         [12]  588     jr  nz, _42bit6
+   5433 1E 7F         [ 7]  589     ld  e, #127
+   5435 21 02 80      [10]  590     ld  hl, #Key_Control
+   5438 C9            [10]  591     ret
+   5439                     592 _42bit6:
+   5439 CB 08         [ 8]  593     rrc b
+   543B B8            [ 4]  594     cp  b
+   543C 20 06         [12]  595     jr nz, _42bit5
+   543E 1E 5C         [ 7]  596     ld  e, #92
+   5440 21 02 40      [10]  597     ld  hl, #Key_BackSlash
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 30.
 Hexadecimal [16-Bits]
 
 
 
-   545D C9            [10]  598     ret
-   545E                     599 _42bit5:
-   545E CB 08         [ 8]  600     rrc b
-   5460 B8            [ 4]  601     cp  b
-   5461 20 06         [12]  602     jr nz, _42bit4
-   5463 1E 86         [ 7]  603     ld  e, #134
-   5465 21 02 20      [10]  604     ld  hl, #Key_Shift
-   5468 C9            [10]  605     ret
-   5469                     606 _42bit4:
-   5469 CB 08         [ 8]  607     rrc b
-   546B B8            [ 4]  608     cp  b
-   546C 20 06         [12]  609     jr nz, _42bit3
-   546E 1E 83         [ 7]  610     ld  e, #131
-   5470 21 02 10      [10]  611     ld  hl, #Key_F4
-   5473 C9            [10]  612     ret
-   5474                     613 _42bit3:
-   5474 CB 08         [ 8]  614     rrc b
-   5476 B8            [ 4]  615     cp  b
-   5477 20 06         [12]  616     jr nz, _42bit2
-   5479 1E 5D         [ 7]  617     ld  e, #93
-   547B 21 02 08      [10]  618     ld  hl, #Key_CloseBracket
-   547E C9            [10]  619     ret
-   547F                     620 _42bit2:
-   547F CB 08         [ 8]  621     rrc b
-   5481 B8            [ 4]  622     cp  b
-   5482 20 06         [12]  623     jr nz, _42bit1
-   5484 1E 60         [ 7]  624     ld  e, #96
-   5486 21 02 04      [10]  625     ld  hl, #Key_Return
-   5489 C9            [10]  626     ret
-   548A                     627 _42bit1:
-   548A CB 08         [ 8]  628     rrc b
-   548C B8            [ 4]  629     cp  b
-   548D 20 06         [12]  630     jr nz, _42bit0
-   548F 1E 5B         [ 7]  631     ld  e, #91
-   5491 21 02 02      [10]  632     ld  hl, #Key_OpenBracket
-   5494 C9            [10]  633     ret
-   5495                     634 _42bit0:
-   5495 CB 08         [ 8]  635     rrc b
-   5497 B8            [ 4]  636     cp  b
-   5498 C0            [11]  637     ret nz
-   5499 1E FD         [ 7]  638     ld  e, #253
-   549B 21 02 01      [10]  639     ld  hl, #Key_Clr
-   549E C9            [10]  640     ret
-   549F                     641 _41:
-   549F F1            [10]  642     pop af                          ;; Recupero tecla pulsada
-   54A0 06 7F         [ 7]  643     ld  b, #0x7F                    
-   54A2 B8            [ 4]  644     cp  b
-   54A3 20 06         [12]  645     jr  nz, _41bit6
-   54A5 1E 82         [ 7]  646     ld  e, #130
-   54A7 21 01 80      [10]  647     ld  hl, #Key_F0
-   54AA C9            [10]  648     ret
-   54AB                     649 _41bit6:
-   54AB CB 08         [ 8]  650     rrc b
-   54AD B8            [ 4]  651     cp  b
-   54AE 20 06         [12]  652     jr nz, _41bit5
+   5443 C9            [10]  598     ret
+   5444                     599 _42bit5:
+   5444 CB 08         [ 8]  600     rrc b
+   5446 B8            [ 4]  601     cp  b
+   5447 20 06         [12]  602     jr nz, _42bit4
+   5449 1E 86         [ 7]  603     ld  e, #134
+   544B 21 02 20      [10]  604     ld  hl, #Key_Shift
+   544E C9            [10]  605     ret
+   544F                     606 _42bit4:
+   544F CB 08         [ 8]  607     rrc b
+   5451 B8            [ 4]  608     cp  b
+   5452 20 06         [12]  609     jr nz, _42bit3
+   5454 1E 83         [ 7]  610     ld  e, #131
+   5456 21 02 10      [10]  611     ld  hl, #Key_F4
+   5459 C9            [10]  612     ret
+   545A                     613 _42bit3:
+   545A CB 08         [ 8]  614     rrc b
+   545C B8            [ 4]  615     cp  b
+   545D 20 06         [12]  616     jr nz, _42bit2
+   545F 1E 5D         [ 7]  617     ld  e, #93
+   5461 21 02 08      [10]  618     ld  hl, #Key_CloseBracket
+   5464 C9            [10]  619     ret
+   5465                     620 _42bit2:
+   5465 CB 08         [ 8]  621     rrc b
+   5467 B8            [ 4]  622     cp  b
+   5468 20 06         [12]  623     jr nz, _42bit1
+   546A 1E 60         [ 7]  624     ld  e, #96
+   546C 21 02 04      [10]  625     ld  hl, #Key_Return
+   546F C9            [10]  626     ret
+   5470                     627 _42bit1:
+   5470 CB 08         [ 8]  628     rrc b
+   5472 B8            [ 4]  629     cp  b
+   5473 20 06         [12]  630     jr nz, _42bit0
+   5475 1E 5B         [ 7]  631     ld  e, #91
+   5477 21 02 02      [10]  632     ld  hl, #Key_OpenBracket
+   547A C9            [10]  633     ret
+   547B                     634 _42bit0:
+   547B CB 08         [ 8]  635     rrc b
+   547D B8            [ 4]  636     cp  b
+   547E C0            [11]  637     ret nz
+   547F 1E FD         [ 7]  638     ld  e, #253
+   5481 21 02 01      [10]  639     ld  hl, #Key_Clr
+   5484 C9            [10]  640     ret
+   5485                     641 _41:
+   5485 F1            [10]  642     pop af                          ;; Recupero tecla pulsada
+   5486 06 7F         [ 7]  643     ld  b, #0x7F                    
+   5488 B8            [ 4]  644     cp  b
+   5489 20 06         [12]  645     jr  nz, _41bit6
+   548B 1E 82         [ 7]  646     ld  e, #130
+   548D 21 01 80      [10]  647     ld  hl, #Key_F0
+   5490 C9            [10]  648     ret
+   5491                     649 _41bit6:
+   5491 CB 08         [ 8]  650     rrc b
+   5493 B8            [ 4]  651     cp  b
+   5494 20 06         [12]  652     jr nz, _41bit5
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 31.
 Hexadecimal [16-Bits]
 
 
 
-   54B0 1E 84         [ 7]  653     ld  e, #132
-   54B2 21 01 40      [10]  654     ld  hl, #Key_F2
-   54B5 C9            [10]  655     ret
-   54B6                     656 _41bit5:
-   54B6 CB 08         [ 8]  657     rrc b
-   54B8 B8            [ 4]  658     cp  b
-   54B9 20 06         [12]  659     jr nz, _41bit4
-   54BB 1E 83         [ 7]  660     ld  e, #131
-   54BD 21 01 20      [10]  661     ld  hl, #Key_F1
-   54C0 C9            [10]  662     ret
-   54C1                     663 _41bit4:
-   54C1 CB 08         [ 8]  664     rrc b
-   54C3 B8            [ 4]  665     cp  b
-   54C4 20 06         [12]  666     jr nz, _41bit3
-   54C6 1E 87         [ 7]  667     ld  e, #135
-   54C8 21 01 10      [10]  668     ld  hl, #Key_F5
-   54CB C9            [10]  669     ret
-   54CC                     670 _41bit3:
-   54CC CB 08         [ 8]  671     rrc b
-   54CE B8            [ 4]  672     cp  b
-   54CF 20 06         [12]  673     jr nz, _41bit2
-   54D1 1E 8A         [ 7]  674     ld  e, #138
-   54D3 21 01 08      [10]  675     ld  hl, #Key_F8
-   54D6 C9            [10]  676     ret
-   54D7                     677 _41bit2:
-   54D7 CB 08         [ 8]  678     rrc b
-   54D9 B8            [ 4]  679     cp  b
-   54DA 20 06         [12]  680     jr nz, _41bit1
-   54DC 1E 89         [ 7]  681     ld  e, #137
-   54DE 21 01 04      [10]  682     ld  hl, #Key_F7
-   54E1 C9            [10]  683     ret
-   54E2                     684 _41bit1:
-   54E2 CB 08         [ 8]  685     rrc b
-   54E4 B8            [ 4]  686     cp  b
-   54E5 20 06         [12]  687     jr nz, _41bit0
-   54E7 1E 93         [ 7]  688     ld  e, #147
-   54E9 21 01 02      [10]  689     ld  hl, #Key_Copy
-   54EC C9            [10]  690     ret
-   54ED                     691 _41bit0:
-   54ED CB 08         [ 8]  692     rrc b
-   54EF B8            [ 4]  693     cp  b
-   54F0 C0            [11]  694     ret nz
-   54F1 1E F2         [ 7]  695     ld  e, #242
-   54F3 21 01 01      [10]  696     ld  hl, #Key_CursorLeft
-   54F6 C9            [10]  697     ret
-   54F7                     698 _40:
-   54F7 F1            [10]  699     pop af                          ;; Recupero tecla pulsada
-   54F8 06 7F         [ 7]  700     ld  b, #0x7F                    
-   54FA B8            [ 4]  701     cp  b
-   54FB 20 06         [12]  702     jr  nz, _40bit6
-   54FD 1E 90         [ 7]  703     ld  e, #144
-   54FF 21 00 80      [10]  704     ld  hl, #Key_FDot
-   5502 C9            [10]  705     ret
-   5503                     706 _40bit6:
-   5503 CB 08         [ 8]  707     rrc b
+   5496 1E 84         [ 7]  653     ld  e, #132
+   5498 21 01 40      [10]  654     ld  hl, #Key_F2
+   549B C9            [10]  655     ret
+   549C                     656 _41bit5:
+   549C CB 08         [ 8]  657     rrc b
+   549E B8            [ 4]  658     cp  b
+   549F 20 06         [12]  659     jr nz, _41bit4
+   54A1 1E 83         [ 7]  660     ld  e, #131
+   54A3 21 01 20      [10]  661     ld  hl, #Key_F1
+   54A6 C9            [10]  662     ret
+   54A7                     663 _41bit4:
+   54A7 CB 08         [ 8]  664     rrc b
+   54A9 B8            [ 4]  665     cp  b
+   54AA 20 06         [12]  666     jr nz, _41bit3
+   54AC 1E 87         [ 7]  667     ld  e, #135
+   54AE 21 01 10      [10]  668     ld  hl, #Key_F5
+   54B1 C9            [10]  669     ret
+   54B2                     670 _41bit3:
+   54B2 CB 08         [ 8]  671     rrc b
+   54B4 B8            [ 4]  672     cp  b
+   54B5 20 06         [12]  673     jr nz, _41bit2
+   54B7 1E 8A         [ 7]  674     ld  e, #138
+   54B9 21 01 08      [10]  675     ld  hl, #Key_F8
+   54BC C9            [10]  676     ret
+   54BD                     677 _41bit2:
+   54BD CB 08         [ 8]  678     rrc b
+   54BF B8            [ 4]  679     cp  b
+   54C0 20 06         [12]  680     jr nz, _41bit1
+   54C2 1E 89         [ 7]  681     ld  e, #137
+   54C4 21 01 04      [10]  682     ld  hl, #Key_F7
+   54C7 C9            [10]  683     ret
+   54C8                     684 _41bit1:
+   54C8 CB 08         [ 8]  685     rrc b
+   54CA B8            [ 4]  686     cp  b
+   54CB 20 06         [12]  687     jr nz, _41bit0
+   54CD 1E 93         [ 7]  688     ld  e, #147
+   54CF 21 01 02      [10]  689     ld  hl, #Key_Copy
+   54D2 C9            [10]  690     ret
+   54D3                     691 _41bit0:
+   54D3 CB 08         [ 8]  692     rrc b
+   54D5 B8            [ 4]  693     cp  b
+   54D6 C0            [11]  694     ret nz
+   54D7 1E F2         [ 7]  695     ld  e, #242
+   54D9 21 01 01      [10]  696     ld  hl, #Key_CursorLeft
+   54DC C9            [10]  697     ret
+   54DD                     698 _40:
+   54DD F1            [10]  699     pop af                          ;; Recupero tecla pulsada
+   54DE 06 7F         [ 7]  700     ld  b, #0x7F                    
+   54E0 B8            [ 4]  701     cp  b
+   54E1 20 06         [12]  702     jr  nz, _40bit6
+   54E3 1E 90         [ 7]  703     ld  e, #144
+   54E5 21 00 80      [10]  704     ld  hl, #Key_FDot
+   54E8 C9            [10]  705     ret
+   54E9                     706 _40bit6:
+   54E9 CB 08         [ 8]  707     rrc b
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 32.
 Hexadecimal [16-Bits]
 
 
 
-   5505 B8            [ 4]  708     cp  b
-   5506 20 06         [12]  709     jr nz, _40bit5
-   5508 1E E9         [ 7]  710     ld  e, #233
-   550A 21 00 40      [10]  711     ld  hl, #Key_Enter
-   550D C9            [10]  712     ret
-   550E                     713 _40bit5:
-   550E CB 08         [ 8]  714     rrc b
-   5510 B8            [ 4]  715     cp  b
-   5511 20 06         [12]  716     jr nz, _40bit4
-   5513 1E 85         [ 7]  717     ld  e, #133
-   5515 21 00 20      [10]  718     ld  hl, #Key_F3
-   5518 C9            [10]  719     ret
-   5519                     720 _40bit4:
-   5519 CB 08         [ 8]  721     rrc b
-   551B B8            [ 4]  722     cp  b
-   551C 20 06         [12]  723     jr nz, _40bit3
-   551E 1E 88         [ 7]  724     ld  e, #136
-   5520 21 00 10      [10]  725     ld  hl, #Key_F6
-   5523 C9            [10]  726     ret
-   5524                     727 _40bit3:
-   5524 CB 08         [ 8]  728     rrc b
-   5526 B8            [ 4]  729     cp  b
-   5527 20 06         [12]  730     jr nz, _40bit2
-   5529 1E 8B         [ 7]  731     ld  e, #139
-   552B 21 00 08      [10]  732     ld  hl, #Key_F9
-   552E C9            [10]  733     ret
-   552F                     734 _40bit2:
-   552F CB 08         [ 8]  735     rrc b
-   5531 B8            [ 4]  736     cp  b
-   5532 20 06         [12]  737     jr nz, _40bit1
-   5534 1E F1         [ 7]  738     ld  e, #241
-   5536 21 00 04      [10]  739     ld  hl, #Key_CursorDown
-   5539 C9            [10]  740     ret
-   553A                     741 _40bit1:
-   553A CB 08         [ 8]  742     rrc b
-   553C B8            [ 4]  743     cp  b
-   553D 20 06         [12]  744     jr nz, _40bit0
-   553F 1E F3         [ 7]  745     ld  e, #243
-   5541 21 00 02      [10]  746     ld  hl, #Key_CursorRight
-   5544 C9            [10]  747     ret
-   5545                     748 _40bit0:
-   5545 CB 08         [ 8]  749     rrc b
-   5547 B8            [ 4]  750     cp  b
-   5548 C0            [11]  751     ret nz
-   5549 1E F0         [ 7]  752     ld  e, #240
-   554B 21 00 01      [10]  753     ld  hl, #Key_CursorUp
-   554E C9            [10]  754     ret
+   54EB B8            [ 4]  708     cp  b
+   54EC 20 06         [12]  709     jr nz, _40bit5
+   54EE 1E E9         [ 7]  710     ld  e, #233
+   54F0 21 00 40      [10]  711     ld  hl, #Key_Enter
+   54F3 C9            [10]  712     ret
+   54F4                     713 _40bit5:
+   54F4 CB 08         [ 8]  714     rrc b
+   54F6 B8            [ 4]  715     cp  b
+   54F7 20 06         [12]  716     jr nz, _40bit4
+   54F9 1E 85         [ 7]  717     ld  e, #133
+   54FB 21 00 20      [10]  718     ld  hl, #Key_F3
+   54FE C9            [10]  719     ret
+   54FF                     720 _40bit4:
+   54FF CB 08         [ 8]  721     rrc b
+   5501 B8            [ 4]  722     cp  b
+   5502 20 06         [12]  723     jr nz, _40bit3
+   5504 1E 88         [ 7]  724     ld  e, #136
+   5506 21 00 10      [10]  725     ld  hl, #Key_F6
+   5509 C9            [10]  726     ret
+   550A                     727 _40bit3:
+   550A CB 08         [ 8]  728     rrc b
+   550C B8            [ 4]  729     cp  b
+   550D 20 06         [12]  730     jr nz, _40bit2
+   550F 1E 8B         [ 7]  731     ld  e, #139
+   5511 21 00 08      [10]  732     ld  hl, #Key_F9
+   5514 C9            [10]  733     ret
+   5515                     734 _40bit2:
+   5515 CB 08         [ 8]  735     rrc b
+   5517 B8            [ 4]  736     cp  b
+   5518 20 06         [12]  737     jr nz, _40bit1
+   551A 1E F1         [ 7]  738     ld  e, #241
+   551C 21 00 04      [10]  739     ld  hl, #Key_CursorDown
+   551F C9            [10]  740     ret
+   5520                     741 _40bit1:
+   5520 CB 08         [ 8]  742     rrc b
+   5522 B8            [ 4]  743     cp  b
+   5523 20 06         [12]  744     jr nz, _40bit0
+   5525 1E F3         [ 7]  745     ld  e, #243
+   5527 21 00 02      [10]  746     ld  hl, #Key_CursorRight
+   552A C9            [10]  747     ret
+   552B                     748 _40bit0:
+   552B CB 08         [ 8]  749     rrc b
+   552D B8            [ 4]  750     cp  b
+   552E C0            [11]  751     ret nz
+   552F 1E F0         [ 7]  752     ld  e, #240
+   5531 21 00 01      [10]  753     ld  hl, #Key_CursorUp
+   5534 C9            [10]  754     ret

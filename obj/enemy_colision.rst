@@ -140,7 +140,7 @@ Hexadecimal [16-Bits]
                              13 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                              14 
    4A34                      15 colision_enemy::
-   4A34 FD 21 8A 4E   [14]   16     ld iy, #num_enemigos
+   4A34 FD 21 85 4E   [14]   16     ld iy, #num_enemigos
    4A38 FD 5E 00      [19]   17     ld  e, 0(iy)                         
    4A3B                      18 sigui_enemy:
    4A3B D5            [11]   19     push de                                        ;; Preservo E 

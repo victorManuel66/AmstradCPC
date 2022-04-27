@@ -640,7 +640,7 @@ Hexadecimal [16-Bits]
                              12 ;; ;;;;;;; EN IX DIRECCIÓN ENEMIGO ;;;;;;;;;;;;;;;
                              13 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    4B18                      14 situaEnemigos::
-   4B18 3A 8A 4E      [13]   15     ld  a, (num_enemigos)
+   4B18 3A 85 4E      [13]   15     ld  a, (num_enemigos)
    4B1B                      16 next:
    4B1B CD 27 4B      [17]   17     call pideX
    4B1E 3D            [ 4]   18     dec a
@@ -651,7 +651,7 @@ Hexadecimal [16-Bits]
                              23 
    4B27                      24 pideX:
    4B27 F5            [11]   25     push af                                                ;; Preservar A por que calXenemy lo modifica
-   4B28 CD 8D 4E      [17]   26     call calXenemy
+   4B28 CD 88 4E      [17]   26     call calXenemy
    4B2B F1            [10]   27     pop  af                                                ;; Se recupera el antiguo valor de A
    4B2C C9            [10]   28     ret
                              29 
@@ -668,7 +668,7 @@ Hexadecimal [16-Bits]
    0024                       2    cpctm_setBorder_raw_asm \HW_WHITE ;; [28] Macro that does the job, but requires a number value to be passed
                               1    .globl cpct_setPALColour_asm
    4B3A 21 10 00      [10]    2    ld   hl, #0x010         ;; [3]  H=Hardware value of desired colour, L=Border INK (16)
-   4B3D CD 96 55      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
+   4B3D CD 7B 55      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
                               3    .radix d
    4B40 36 00         [10]   39     ld (hl), #0x0000
    4B42 C9            [10]   40     ret

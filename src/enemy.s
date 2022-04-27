@@ -165,7 +165,6 @@ sigui_update:
     push de                                           ;; Preservo E
     call update_spr_enemy                             ;; Actualiza posición X e Y de los enemigos
     call update_tempo_enemy                           ;; Actualiza el tiempo que se ve el fotograma
-    call contadorEnemigos                             ;; Actualizar el contador de enemigos aparecidos**************
     pop  de                                           ;; Recupero número de entidades enemigas
     dec e                                             ;; Resta uno al total de entidades enemigas
     ret z                                             ;; Si no quedan enemigos vuelve
@@ -186,7 +185,7 @@ update_spr_enemy:
 otroAlien:
     ld  a, (finOleada)                                ;; ***** Ver si el final de la oleada ****
     cp  #0x01                                         ;; ***************************************
-    jr  z, final                                     ;; ***** Si esta a uno no dibujes más enemigos **********
+    jr  z, final                                      ;; ***** Si esta a uno no dibujes más enemigos **********
     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
     ld  enemiY(ix), a                                 ;; Se guarda
     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
@@ -218,12 +217,8 @@ update_tempo_enemy:
     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
-    jr vuelve                                         ;; 
-;acaba:                                                ;; 
-    ;ld conVida(ix), #0x00                            ;;  *****El enemigo esta muerto
-    
-vuelve:
     ret
+    
 masCiclos:
     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
     ret
@@ -236,15 +231,3 @@ posYenemyPtr::
     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
     ret
 
-contadorEnemigos:
-    ld hl, #oleada                                    ;; ******* La dirección con el número de enemigos abatidos *******
-    ld  a, (hl)
-    cp #0x00                                         
-    ret nz                                            ;; ******* Si no ha llegado a cero es que todavia quedan enemigos por abatir *******
-    ;ld conVida(ix), #0x00
-    ld hl, #finOleada
-    ld  a, (hl)
-    cp  #0x01
-    ret z
-    inc (hl)                                          ;; ******* Indicamos que ya se acabo la oleada ****************
-    ret

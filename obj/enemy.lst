@@ -341,93 +341,78 @@ Hexadecimal [16-Bits]
    0137 FD 5E 00      [19]  163     ld  e, 0(iy)                                      ;; En E el números de enemigos          
    013A                     164 sigui_update:   
    013A D5            [11]  165     push de                                           ;; Preservo E
-   013B CD 4F 01      [17]  166     call update_spr_enemy                             ;; Actualiza posición X e Y de los enemigos
-   013E CD 78 01      [17]  167     call update_tempo_enemy                           ;; Actualiza el tiempo que se ve el fotograma
-   0141 CD BD 01      [17]  168     call contadorEnemigos                             ;; Actualizar el contador de enemigos aparecidos**************
-   0144 D1            [10]  169     pop  de                                           ;; Recupero número de entidades enemigas
-   0145 1D            [ 4]  170     dec e                                             ;; Resta uno al total de entidades enemigas
-   0146 C8            [11]  171     ret z                                             ;; Si no quedan enemigos vuelve
-   0147 01 14 00      [10]  172     ld bc, #tamagno_enemy                             ;; El tamaño de los datos de un enemigo
-   014A DD 09         [15]  173     add ix,bc                                         ;; Se suma a IX para deslazar el puntero
-   014C 18 EC         [12]  174     jr sigui_update                                   ;; Siguiente enemigo a actualizar posición
-   014E C9            [10]  175     ret
-                            176 
-   014F                     177 update_spr_enemy:
-   014F DD 7E 01      [19]  178     ld  a, enemiY(ix)                                 ;; En el acumulador la coordenada Y del enemigo
-   0152 DD 46 06      [19]  179     ld  b, enemiVelo(ix)                              ;; El valor de la velocidad del enemigo
-   0155 80            [ 4]  180     add a, b                                          ;; Se suma resultado en A
-   0156 FE C8         [ 7]  181     cp  #200
-   0158 28 06         [12]  182     jr z, otroAlien                                   ;; Si A == 0
-   015A 30 04         [12]  183     jr nc, otroAlien                                  ;; || A > 200 que se cree otro alien
-   015C DD 77 01      [19]  184     ld enemiY(ix), a                                  ;; Se guarda la nueva posición Y del enemigo
-   015F C9            [10]  185     ret
-   0160                     186 otroAlien:
-   0160 3A 66 00      [13]  187     ld  a, (finOleada)                                ;; ***** Ver si el final de la oleada ****
-   0163 FE 01         [ 7]  188     cp  #0x01                                         ;; ***************************************
-   0165 28 10         [12]  189     jr  z, final                                     ;; ***** Si esta a uno no dibujes más enemigos **********
-   0167 3E 09         [ 7]  190     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
-   0169 DD 77 01      [19]  191     ld  enemiY(ix), a                                 ;; Se guarda
-   016C CD 67 00      [17]  192     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
-   016F 21 65 00      [10]  193     ld hl, #oleada                                    ;; ****** Número total de enemigos dibujados
-   0172 AF            [ 4]  194     xor  a                                            ;; ****** Acumulador a cero
-   0173 BE            [ 7]  195     cp (hl)                                           ;; ****** Ver si ha llegado a cero el número total de enemigos dibujados
-   0174 28 01         [12]  196     jr z, final                                       ;; ****** Si no es cero
-   0176 35            [11]  197     dec (hl)                                          ;; ****** decrementa
-   0177                     198 final:
-   0177 C9            [10]  199     ret
-                            200 
-   0178                     201 update_tempo_enemy:
-   0178 DD 7E 08      [19]  202     ld  a, StatusAni(ix)                              ;;  Comprobar el estado de la animación
-   017B FE 00         [ 7]  203     cp #0x00                                          ;;  Si es cero, no esta explotando 
-   017D C8            [11]  204     ret z                                             ;;  Por lo tanto vuelve 
-   017E DD 7E 07      [19]  205     ld  a, temporiza(ix)                              ;;  Valor actual del temporizador
+   013B CD 4C 01      [17]  166     call update_spr_enemy                             ;; Actualiza posición X e Y de los enemigos
+   013E CD 75 01      [17]  167     call update_tempo_enemy                           ;; Actualiza el tiempo que se ve el fotograma
+   0141 D1            [10]  168     pop  de                                           ;; Recupero número de entidades enemigas
+   0142 1D            [ 4]  169     dec e                                             ;; Resta uno al total de entidades enemigas
+   0143 C8            [11]  170     ret z                                             ;; Si no quedan enemigos vuelve
+   0144 01 14 00      [10]  171     ld bc, #tamagno_enemy                             ;; El tamaño de los datos de un enemigo
+   0147 DD 09         [15]  172     add ix,bc                                         ;; Se suma a IX para deslazar el puntero
+   0149 18 EF         [12]  173     jr sigui_update                                   ;; Siguiente enemigo a actualizar posición
+   014B C9            [10]  174     ret
+                            175 
+   014C                     176 update_spr_enemy:
+   014C DD 7E 01      [19]  177     ld  a, enemiY(ix)                                 ;; En el acumulador la coordenada Y del enemigo
+   014F DD 46 06      [19]  178     ld  b, enemiVelo(ix)                              ;; El valor de la velocidad del enemigo
+   0152 80            [ 4]  179     add a, b                                          ;; Se suma resultado en A
+   0153 FE C8         [ 7]  180     cp  #200
+   0155 28 06         [12]  181     jr z, otroAlien                                   ;; Si A == 0
+   0157 30 04         [12]  182     jr nc, otroAlien                                  ;; || A > 200 que se cree otro alien
+   0159 DD 77 01      [19]  183     ld enemiY(ix), a                                  ;; Se guarda la nueva posición Y del enemigo
+   015C C9            [10]  184     ret
+   015D                     185 otroAlien:
+   015D 3A 66 00      [13]  186     ld  a, (finOleada)                                ;; ***** Ver si el final de la oleada ****
+   0160 FE 01         [ 7]  187     cp  #0x01                                         ;; ***************************************
+   0162 28 10         [12]  188     jr  z, final                                      ;; ***** Si esta a uno no dibujes más enemigos **********
+   0164 3E 09         [ 7]  189     ld  a, #0x09                                      ;; Reset de la coordenada Y del enemigo
+   0166 DD 77 01      [19]  190     ld  enemiY(ix), a                                 ;; Se guarda
+   0169 CD 67 00      [17]  191     call calXenemy                                    ;; Calcula de forma aleatoria otra coordenada X
+   016C 21 65 00      [10]  192     ld hl, #oleada                                    ;; ****** Número total de enemigos dibujados
+   016F AF            [ 4]  193     xor  a                                            ;; ****** Acumulador a cero
+   0170 BE            [ 7]  194     cp (hl)                                           ;; ****** Ver si ha llegado a cero el número total de enemigos dibujados
+   0171 28 01         [12]  195     jr z, final                                       ;; ****** Si no es cero
+   0173 35            [11]  196     dec (hl)                                          ;; ****** decrementa
+   0174                     197 final:
+   0174 C9            [10]  198     ret
+                            199 
+   0175                     200 update_tempo_enemy:
+   0175 DD 7E 08      [19]  201     ld  a, StatusAni(ix)                              ;;  Comprobar el estado de la animación
+   0178 FE 00         [ 7]  202     cp #0x00                                          ;;  Si es cero, no esta explotando 
+   017A C8            [11]  203     ret z                                             ;;  Por lo tanto vuelve 
+   017B DD 7E 07      [19]  204     ld  a, temporiza(ix)                              ;;  Valor actual del temporizador
+   017E FE 02         [ 7]  205     cp  #0x02                                         ;;  Ver si han pasado el número de ciclosa
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
 Hexadecimal [16-Bits]
 
 
 
-   0181 FE 02         [ 7]  206     cp  #0x02                                         ;;  Ver si han pasado el número de ciclosa
-   0183 20 2A         [12]  207     jr nz, masCiclos                                  ;;  Si no ha llegado sigue sumando ciclos
-   0185 DD 36 07 00   [19]  208     ld  temporiza(ix), #0x00                          ;;  El temporizador a cero
-   0189 DD 34 08      [23]  209     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
-   018C DD 7E 08      [19]  210     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
-   018F FE 05         [ 7]  211     cp #0x05                                          ;;  Ver si es la 6 animación
-   0191 20 1B         [12]  212     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
-   0193 11 00 C0      [10]  213     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
-   0196 DD 46 01      [19]  214     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
-   0199 3E 09         [ 7]  215     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
-   019B DD 77 01      [19]  216     ld  enemiY(ix), a                                 ;;  Se guarda en la coordenada Y del enemigo
-   019E CD 67 00      [17]  217     call calXenemy                                    ;;  Nueva coordenada X aleatoria para el enemigo
-   01A1 CD 00 00      [17]  218     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
-   01A4 DD 36 08 00   [19]  219     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
-   01A8 DD 36 06 01   [19]  220     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
-   01AC 18 00         [12]  221     jr vuelve                                         ;; 
-                            222 ;acaba:                                                ;; 
-                            223     ;ld conVida(ix), #0x00                            ;;  *****El enemigo esta muerto
-                            224     
-   01AE                     225 vuelve:
-   01AE C9            [10]  226     ret
-   01AF                     227 masCiclos:
-   01AF DD 34 07      [23]  228     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
-   01B2 C9            [10]  229     ret
-                            230 
-   01B3                     231 posXenemyPtr::
-   01B3 DD 21 00 00   [14]  232     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
-   01B7 C9            [10]  233     ret
-                            234 
-   01B8                     235 posYenemyPtr::
-   01B8 DD 21 01 00   [14]  236     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
-   01BC C9            [10]  237     ret
-                            238 
-   01BD                     239 contadorEnemigos:
-   01BD 21 65 00      [10]  240     ld hl, #oleada                                    ;; ******* La dirección con el número de enemigos abatidos *******
-   01C0 7E            [ 7]  241     ld  a, (hl)
-   01C1 FE 00         [ 7]  242     cp #0x00                                         
-   01C3 C0            [11]  243     ret nz                                            ;; ******* Si no ha llegado a cero es que todavia quedan enemigos por abatir *******
-                            244     ;ld conVida(ix), #0x00
-   01C4 21 66 00      [10]  245     ld hl, #finOleada
-   01C7 7E            [ 7]  246     ld  a, (hl)
-   01C8 FE 01         [ 7]  247     cp  #0x01
-   01CA C8            [11]  248     ret z
-   01CB 34            [11]  249     inc (hl)                                          ;; ******* Indicamos que ya se acabo la oleada ****************
-   01CC C9            [10]  250     ret
+   0180 20 28         [12]  206     jr nz, masCiclos                                  ;;  Si no ha llegado sigue sumando ciclos
+   0182 DD 36 07 00   [19]  207     ld  temporiza(ix), #0x00                          ;;  El temporizador a cero
+   0186 DD 34 08      [23]  208     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
+   0189 DD 7E 08      [19]  209     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
+   018C FE 05         [ 7]  210     cp #0x05                                          ;;  Ver si es la 6 animación
+   018E 20 19         [12]  211     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
+   0190 11 00 C0      [10]  212     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
+   0193 DD 46 01      [19]  213     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
+   0196 3E 09         [ 7]  214     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
+   0198 DD 77 01      [19]  215     ld  enemiY(ix), a                                 ;;  Se guarda en la coordenada Y del enemigo
+   019B CD 67 00      [17]  216     call calXenemy                                    ;;  Nueva coordenada X aleatoria para el enemigo
+   019E CD 00 00      [17]  217     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
+   01A1 DD 36 08 00   [19]  218     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
+   01A5 DD 36 06 01   [19]  219     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
+                            220     ;jr vuelve                                         ;; 
+                            221 
+   01A9                     222 vuelve:
+   01A9 C9            [10]  223     ret
+   01AA                     224 masCiclos:
+   01AA DD 34 07      [23]  225     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
+   01AD C9            [10]  226     ret
+                            227 
+   01AE                     228 posXenemyPtr::
+   01AE DD 21 00 00   [14]  229     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
+   01B2 C9            [10]  230     ret
+                            231 
+   01B3                     232 posYenemyPtr::
+   01B3 DD 21 01 00   [14]  233     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
+   01B7 C9            [10]  234     ret
+                            235 
