@@ -391,7 +391,7 @@ Hexadecimal [16-Bits]
    0186 DD 34 08      [23]  208     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
    0189 DD 7E 08      [19]  209     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
    018C FE 05         [ 7]  210     cp #0x05                                          ;;  Ver si es la 6 animación
-   018E 20 19         [12]  211     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
+   018E 20 19         [12]  211     jr nz, vuelve                                        ;;  Si no lo es siguiente animación
    0190 11 00 C0      [10]  212     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
    0193 DD 46 01      [19]  213     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
    0196 3E 09         [ 7]  214     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
@@ -400,19 +400,18 @@ Hexadecimal [16-Bits]
    019E CD 00 00      [17]  217     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
    01A1 DD 36 08 00   [19]  218     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
    01A5 DD 36 06 01   [19]  219     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
-                            220     ;jr vuelve                                         ;; 
-                            221 
-   01A9                     222 vuelve:
-   01A9 C9            [10]  223     ret
-   01AA                     224 masCiclos:
-   01AA DD 34 07      [23]  225     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
-   01AD C9            [10]  226     ret
-                            227 
-   01AE                     228 posXenemyPtr::
-   01AE DD 21 00 00   [14]  229     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
-   01B2 C9            [10]  230     ret
-                            231 
-   01B3                     232 posYenemyPtr::
-   01B3 DD 21 01 00   [14]  233     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
-   01B7 C9            [10]  234     ret
-                            235 
+   01A9                     220 vuelve:
+   01A9 C9            [10]  221     ret
+                            222     
+   01AA                     223 masCiclos:
+   01AA DD 34 07      [23]  224     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
+   01AD C9            [10]  225     ret
+                            226 
+   01AE                     227 posXenemyPtr::
+   01AE DD 21 00 00   [14]  228     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
+   01B2 C9            [10]  229     ret
+                            230 
+   01B3                     231 posYenemyPtr::
+   01B3 DD 21 01 00   [14]  232     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
+   01B7 C9            [10]  233     ret
+                            234 

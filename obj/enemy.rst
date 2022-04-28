@@ -391,7 +391,7 @@ Hexadecimal [16-Bits]
    4FA7 DD 34 08      [23]  208     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
    4FAA DD 7E 08      [19]  209     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
    4FAD FE 05         [ 7]  210     cp #0x05                                          ;;  Ver si es la 6 animación
-   4FAF 20 19         [12]  211     jr nz, vuelve                                     ;;  Si no lo es siguiente animación
+   4FAF 20 19         [12]  211     jr nz, vuelve                                        ;;  Si no lo es siguiente animación
    4FB1 11 00 C0      [10]  212     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
    4FB4 DD 46 01      [19]  213     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
    4FB7 3E 09         [ 7]  214     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
@@ -400,19 +400,18 @@ Hexadecimal [16-Bits]
    4FBF CD E9 60      [17]  217     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
    4FC2 DD 36 08 00   [19]  218     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
    4FC6 DD 36 06 01   [19]  219     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
-                            220     ;jr vuelve                                         ;; 
-                            221 
-   4FCA                     222 vuelve:
-   4FCA C9            [10]  223     ret
-   4FCB                     224 masCiclos:
-   4FCB DD 34 07      [23]  225     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
-   4FCE C9            [10]  226     ret
-                            227 
-   4FCF                     228 posXenemyPtr::
-   4FCF DD 21 21 4E   [14]  229     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
-   4FD3 C9            [10]  230     ret
-                            231 
-   4FD4                     232 posYenemyPtr::
-   4FD4 DD 21 22 4E   [14]  233     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
-   4FD8 C9            [10]  234     ret
-                            235 
+   4FCA                     220 vuelve:
+   4FCA C9            [10]  221     ret
+                            222     
+   4FCB                     223 masCiclos:
+   4FCB DD 34 07      [23]  224     inc temporiza(ix)                                 ;; Aumenta en uno el temporizador
+   4FCE C9            [10]  225     ret
+                            226 
+   4FCF                     227 posXenemyPtr::
+   4FCF DD 21 21 4E   [14]  228     ld ix, #enemyX                                     ;; Devuelve en HL la dirección de enemyX  
+   4FD3 C9            [10]  229     ret
+                            230 
+   4FD4                     231 posYenemyPtr::
+   4FD4 DD 21 22 4E   [14]  232     ld ix, #enemyY                                    ;; Devuelve en HL la dirección de enemyY
+   4FD8 C9            [10]  233     ret
+                            234 

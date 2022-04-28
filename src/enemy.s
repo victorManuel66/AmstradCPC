@@ -208,7 +208,7 @@ update_tempo_enemy:
     inc StatusAni(ix)                                 ;;  El siguiente fotograma de la animación 
     ld a, StatusAni(ix)                               ;;  El estado de la animación al acumulador
     cp #0x05                                          ;;  Ver si es la 6 animación
-    jr nz, vuelve                                     ;;  Si no lo es siguiente animación
+    jr nz, vuelve                                        ;;  Si no lo es siguiente animación
     ld de, #0xC000                                    ;;  Inicio de la memoria de video                          
     ld  b, enemiY(ix)                                 ;;  En B la coordenada Y del sprite
     ld  a, #0x09                                      ;;  Reset de la coordenada Y del enemigo
@@ -217,6 +217,7 @@ update_tempo_enemy:
     call cpct_getScreenPtr_asm                        ;;  Borra el último sprite de la animación
     ld StatusAni(ix), #0x00                           ;;  Vuelta al fotograma cero
     ld enemiVelo(ix), #0x01                           ;;  Activar la velocidad del enemigo
+vuelve:
     ret
     
 masCiclos:
